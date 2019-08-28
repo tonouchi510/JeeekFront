@@ -6,7 +6,7 @@ module.exports = {
 
   entry: './src/App.tsx',
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}/public`,
     filename: 'bundle.js'
   },
   module: {
@@ -17,16 +17,8 @@ module.exports = {
         // 静的チェックからのコンパイル
         use: [
           // 下から順に処理される
-          { loader: "babel-loader" },
-          { loader: "ts-loader" },
-          {
-            loader: 'tslint-loader',
-            options: {
-              typeCheck: true,
-              fix: true,
-              emitErrors: true
-            },
-          },
+          { loader: 'babel-loader' },
+          { loader: 'ts-loader' },
         ],
         exclude: /node_modules/
       }
@@ -37,7 +29,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.json']
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: `${__dirname}/public`,
     watchContentBase: true,
     historyApiFallback: true, // 開発時はroot以外のurlも直接指定したいので
     inline: true,
