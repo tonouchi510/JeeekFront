@@ -25,5 +25,8 @@
     "max-len": ["error", {"code": 100}],
     "react/jsx-filename-extension": ["off"],
     "react/prop-types": ["off"]
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
