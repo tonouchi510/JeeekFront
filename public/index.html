@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Jeeek</title>
+</head>
+<body>
+<div id="root">
+    loading...
+</div>
+<script>
+  const devServerScript = document.createElement('script')
+  devServerScript.src = 'http://localhost:5000/webpack-dev-server.js'
+  document.body.appendChild(devServerScript)
+  const appScript = document.createElement('script')
+  appScript.src = '/bundle.js'
+  document.body.appendChild(appScript)
+</script>
+</body>
+</html>
