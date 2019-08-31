@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import firebase from 'firebase/app'
-
+import 'semantic-ui-css/semantic.min.css'
 import reducer from './reducers'
 import AuthHandle from './containers/AuthHandleContainer'
 
