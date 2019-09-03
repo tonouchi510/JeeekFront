@@ -1,13 +1,11 @@
 import * as React from 'react'
-import { Grid, Image } from 'semantic-ui-react'
 
 export interface UserHomeProps {
   UserName: string | null
   UserIcon: string | null
   Category: boolean
-  SubCategory: boolean
-  SubsubCategory: boolean
-  InputURL: string | null
+  PostContent: string | null
+  Tag: string | null
   LikeCount: number
 }
 
@@ -15,13 +13,19 @@ const UserHome = ({
   UserName = null,
   UserIcon = null,
   Category = false,
-  SubCategory = false,
-  SubsubCategory = false,
-  InputURL = null,
+  PostContent = null,
+  Tag = false,
   LikeCount = 0,
 }) => (
-  <div className="container">
-    <h2>UserHome page</h2>
+  <div className="ui feed">
+    <h1 className="ui header">HOME</h1>
+    <div className="event">
+      <div className="ui card">
+        <div className="content">
+          <p>かず</p>
+        </div>
+      </div>
+    </div>
   </div>
 )
 
