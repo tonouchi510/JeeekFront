@@ -26,7 +26,7 @@ module.exports = {
   },
   // import文で.tsや.tsxファイルを解決するため
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json', '.css']
+    extensions: ['.ts', '.tsx', '.js', '.json']
   },
   devServer: {
     contentBase: `${__dirname}/public`,
