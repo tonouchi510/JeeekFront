@@ -1,7 +1,7 @@
 # JeeekFront
 エンジニアのための自己実現SNSアプリ
 
-フロントエンド開発およびUI設計についてのドキュメントはWikiをご覧ください。
+フロントエンド開発およびUI設計についてのドキュメントは[Wiki](https://github.com/tonouchi510/JeeekFront/wiki)をご覧ください。
 
 ## クイックスタート
 - nodebrewでnodeをインストール＆適用
