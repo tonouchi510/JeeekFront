@@ -2,8 +2,11 @@ import React, { FC } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase/app'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './saga/post'
+import * as serviceWorker from './services'
 
 import reducer from './reducers'
 import AuthHandle from './containers/AuthHandleContainer'
@@ -20,7 +23,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
-const store = createStore(reducer)
+const sagaMiddleWare = createSagaMiddleware()
+const store = createStore(reducer, applyMiddleware(sagaMiddleWare))
 
 const App: FC = () => (
   <Provider store={store}>
@@ -33,3 +37,6 @@ const App: FC = () => (
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
+
+serviceWorker.unregister()
+sagaMiddleWare.run(rootSaga)
