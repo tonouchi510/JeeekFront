@@ -1,15 +1,17 @@
 import { User } from 'firebase'
 import { AxiosError } from 'axios'
+import * as PostActionType from './postConstants'
+import {any, string} from "prop-types";
 
-export enum PostActionType {
-  POST_START = 'POST_START',
-  POST_SUCCEED = 'POST_SUCCEED',
-  POST_FAIL = 'POST_FAIL',
-}
+// declare interface Post {
+  // type: string,
+  // payload?: any,
+// }
+
 
 // 現段階の理解では、以下のアクションをするユーザがどういったパラメータを持って以下のアクションに入ってくるのかということを書く
 interface PostParams {
-  userId: string | null
+  userId?: string | null
 }
 
 // ここはAPIのレスポンス内容によって修正すべき箇所。今後変えていく。
@@ -19,30 +21,26 @@ interface PostParams {
 // 投稿が成功した時に表示する（変更・追加するという意味）プロパティをここに書く
 // 例えば、このUser配列みたいにpostContentみたいな配列にして表示させるのが良いかも
 interface PostResult {
-  type: PostActionType
-  payload?: {
-    users: User[]
-  }
+  users?: User[]
 }
 
-export const Post = {
+const Post = {
   start: (params: PostParams) => ({
-    type: PostActionType.POST_START,
-    payload: {
-      params,
-    },
+    type: PostActionType.POST_START as typeof PostActionType.POST_START,
+    payload: params,
   }),
 
   succeed: (params: PostParams, result: PostResult) => ({
-    type: PostActionType.POST_SUCCEED,
+    type: PostActionType.POST_SUCCEED as typeof PostActionType.POST_SUCCEED,
     payload: {
       params,
       result,
     },
   }),
   fail: (params: PostParams, error: AxiosError) => ({
-    type: PostActionType.POST_FAIL,
+    type: PostActionType.POST_FAIL as typeof PostActionType.POST_FAIL,
     payload: {
+      params,
       error,
     },
     error: true,
@@ -80,3 +78,5 @@ export type PostAction =
   | ReturnType<typeof Post.start>
   | ReturnType<typeof Post.succeed>
   | ReturnType<typeof Post.fail>
+
+export default Post
