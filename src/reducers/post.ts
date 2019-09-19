@@ -1,20 +1,28 @@
 import { Reducer } from 'redux'
 import { AxiosError } from 'axios'
 import { User } from 'firebase'
-import { PostAction, PostActionType } from '../actions/post'
+// import { string } from 'prop-types'
+import { PostAction } from '../actions/post'
+import * as PostActionType from '../actions/postConstants'
 
-// ここはアウトプット（マッピングするときの）なので、postContent配列が入ってくると思う
+// ここの一つ目のプロパティ（今はusers:User[]のところ）は、アウトプット（マッピングするときの）なので、postContent配列が入ってくると思う
 // モック的に一時的にUser配列を書いている、その一つずつを取り出したものをアウトプットしている
 export interface PostState {
-  users: User[]
-  error: boolean
+  users?: User[]
+  error?: AxiosError | null
 }
 
 const initialState: PostState = {
   users: [],
-  error: false,
+  error: null,
 }
 
+// アウトプットのインターフェース(PostState)とその根拠（何のアクションでそのアウトプットをするか）となるアクション(PostAction)
+// Reducer< , > = (ここがstate初期値とトリガーのアクション):(ここがアウトプットPostState) => {}
+// ...stateはもともとあったstateをそのままマッピングしている。
+// action.というのは、アウトプットであるPostStateのプロパティをactionのプロパティで表現してる。
+// これはactionファイルにインターフェース型が定義してある。
+// これが、「actionを発行・実行しているのがreducerである」という部分。
 const postReducer: Reducer<PostState, PostAction> = (
   state: PostState = initialState,
   action: PostAction,
