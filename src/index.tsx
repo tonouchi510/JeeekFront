@@ -10,7 +10,7 @@ import App from './App'
 import firebaseConfig from './config/firebaseConfig'
 import reducer from './reducers'
 
-const sagaMiddleWare = createSagaMiddleware();
+const sagaMiddleWare = createSagaMiddleware()
 
 const store = createStore(
   reducer,
