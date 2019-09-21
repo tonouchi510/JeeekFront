@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase/app'
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from './saga/post'
-import * as serviceWorker from './services/postApi'
+//  import rootSaga from './saga/post'
+// import * as serviceWorker from './services/postApi'
 
 import reducer from './reducers'
 import AuthHandle from './containers/AuthHandleContainer'
@@ -39,4 +39,4 @@ const App: FC = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 
 // serviceWorker.unregister()
-sagaMiddleWare.run(rootSaga)
+// sagaMiddleWare.run(rootSaga)
