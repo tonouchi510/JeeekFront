@@ -1,13 +1,11 @@
 import { User } from 'firebase'
 import { AxiosError } from 'axios'
 import * as PostActionType from './postConstants'
-import {any, string} from "prop-types";
 
 // declare interface Post {
-  // type: string,
-  // payload?: any,
+// type: string,
+// payload?: any,
 // }
-
 
 // 現段階の理解では、以下のアクションをするユーザがどういったパラメータを持って以下のアクションに入ってくるのかということを書く
 interface PostParams {
@@ -21,7 +19,7 @@ interface PostParams {
 // 投稿が成功した時に表示する（変更・追加するという意味）プロパティをここに書く
 // 例えば、このUser配列みたいにpostContentみたいな配列にして表示させるのが良いかも
 interface PostResult {
-  users?: User[]
+  users: User[]
 }
 
 const Post = {
