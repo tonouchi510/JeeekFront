@@ -7,7 +7,7 @@ interface AuthHandleProps {
 }
 
 const AuthHandle: FC<AuthHandleProps> = ({ isSignedIn = false }) => (
-  <>{isSignedIn ? <Top /> : <UserHome />}</>
+  <>{isSignedIn ? <UserHome /> : <Top />}</>
 )
 
 export default AuthHandle

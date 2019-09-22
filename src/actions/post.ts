@@ -12,6 +12,7 @@ interface PostParams {
 // 例えば投稿内容だったらfirestoreからpostContentみたいな配列を持ってくる？
 // 投稿が成功した時に表示する（変更・追加するという意味）プロパティをここに書く
 // 例えば、このUser配列みたいにpostContentみたいな配列にして表示させるのが良いかも
+// postContent: PostContent[]に変える
 interface PostResult {
   users: User[]
 }
@@ -19,7 +20,6 @@ interface PostResult {
 // 投稿アクションを開始するに当たってその権限的なアクション
 // このstartがきたらトリガーにしてSagaはアクションを遂行する
 const Post = {
-
   start: (params: PostParams) => ({
     type: PostActionType.POST_START as typeof PostActionType.POST_START,
     payload: params,

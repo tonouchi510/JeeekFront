@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-//  import rootSaga from './saga/post'
-// import * as serviceWorker from './services/postApi'
+import * as firebase from 'firebase/app'
 import AuthHandle from './containers/AuthHandleContainer'
+import firebaseConfig from './config/firebaseConfig'
+
+firebase.initializeApp(firebaseConfig)
 
 const App: FC = () => (
   <BrowserRouter>
@@ -16,6 +15,3 @@ const App: FC = () => (
 )
 
 export default App
-
-// serviceWorker.unregister()
-// sagaMiddleWare.run(rootSaga)
