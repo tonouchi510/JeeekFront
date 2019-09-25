@@ -23,6 +23,6 @@ export const loginOk = (user: User): AuthAction => ({
   },
 })
 
-export const logOut = () => ({
+export const logOut = (): {} => ({
   type: AuthActionType.LOGOUT,
 })

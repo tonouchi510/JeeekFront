@@ -1,6 +1,5 @@
 import { Reducer } from 'redux'
 import { AxiosError } from 'axios'
-import { User } from 'firebase'
 import { PostAction } from '../actions/post'
 import * as PostActionType from '../actions/postConstants'
 

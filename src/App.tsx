@@ -7,8 +7,8 @@ import firebase from 'firebase/app'
 
 import reducer from './reducers'
 import AuthHandle from './containers/AuthHandleContainer'
-
 import { firebaseConfig } from './firebase-config'
+
 firebase.initializeApp(firebaseConfig)
 
 const store = createStore(reducer)

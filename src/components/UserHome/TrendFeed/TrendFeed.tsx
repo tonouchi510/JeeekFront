@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import PostCard from '../PostCard'
 
-const TrendFeed = (
+const TrendFeed: FC = () => (
   <>
     <div style={{ height: 30 }} className="label">
       <h2
