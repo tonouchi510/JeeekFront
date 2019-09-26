@@ -24,9 +24,9 @@ const authReducer: Reducer<AuthState, AuthAction> = (
       return {
         ...state,
         isSignedIn: true,
-        displayName: action.payload!.displayName,
-        email: action.payload!.email,
-        uid: action.payload!.uid,
+        displayName: action.payload.displayName,
+        email: action.payload.email,
+        uid: action.payload.uid,
       }
     }
 

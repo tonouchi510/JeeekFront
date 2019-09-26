@@ -1,17 +1,26 @@
 import React, { FC } from 'react'
+import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import * as firebase from 'firebase/app'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import firebase from 'firebase/app'
+
+import reducer from './reducers'
 import AuthHandle from './containers/AuthHandleContainer'
-import firebaseConfig from './config/firebaseConfig'
+import { firebaseConfig } from './firebase-config'
 
 firebase.initializeApp(firebaseConfig)
 
+const store = createStore(reducer)
+
 const App: FC = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={AuthHandle} />
-    </Switch>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={AuthHandle} />
+      </Switch>
+    </BrowserRouter>
+  </Provider>
 )
 
-export default App
+ReactDOM.render(<App />, document.getElementById('root'))

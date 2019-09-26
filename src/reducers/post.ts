@@ -1,8 +1,5 @@
 import { Reducer } from 'redux'
-import { AxiosError } from 'axios'
-import { User } from 'firebase'
-import { PostAction } from '../actions/post'
-import * as PostActionType from '../actions/postConstants'
+import { PostAction, PostActionType } from '../actions/post'
 
 // ここの一つ目のプロパティ（今はusers:User[]のところ）は、アウトプット（マッピングするときの）なので、postContent配列が入ってくると思う
 // モック的に一時的にUser配列を書いている、その一つずつを取り出したものをアウトプットしている
@@ -10,7 +7,6 @@ import * as PostActionType from '../actions/postConstants'
 // ここのプロパティはactionのpayloadの値を入れてる？（Authを参考にした感じそうだった）
 export interface PostState {
   IsPost?: boolean
-  error?: AxiosError | null
   params?: boolean
   result?: boolean
   PostTime?: string | null
@@ -25,7 +21,6 @@ export interface PostState {
 
 const initialState: PostState = {
   IsPost: false,
-  error: null,
   params: false,
   result: false,
   PostTime: null,
@@ -69,7 +64,6 @@ const postReducer: Reducer<PostState, PostAction> = (
     case PostActionType.POST_FAIL:
       return {
         ...state,
-        error: action.payload.error,
       }
     default: {
       return state
