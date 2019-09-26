@@ -10,9 +10,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "incremental": true
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "functions"
   ]
 }
