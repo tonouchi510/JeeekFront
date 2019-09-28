@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 import PostCard from '../PostCard'
 
-const HomeFeed = (
+const HomeFeed: FC = () => (
   <div className="ui container">
     <div style={{ height: 30 }} className="label">
       <h2
