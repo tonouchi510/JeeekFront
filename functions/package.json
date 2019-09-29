@@ -11,7 +11,13 @@
     "start": "npm run shell",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dbreset": "firebase firestore:delete --all-collections",
-    "dbseed:feeds": "node lib/functions/src/commands/dbseed.js feeds seeds/jeeek_dev_feeds.csv"
+    "dbreset:feeds": "firebase firestore:delete -y --shallow feeds",
+    "dbreset:follows": "firebase firestore:delete -y --shallow follows",
+    "dbseed": "npm run dbseed:users & npm run dbseed:categories & npm run dbseed:feeds",
+    "dbseed:categories": "node lib/functions/src/commands/dbseed.js categories",
+    "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
+    "dbseed:follows": "node lib/functions/src/commands/dbseed.js follows",
+    "dbseed:feeds": "node lib/functions/src/commands/dbseed.js feeds"
   },
   "author": "tonouchi510",
   "license": "ISC",
