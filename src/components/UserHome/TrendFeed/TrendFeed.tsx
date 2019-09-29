@@ -3,7 +3,7 @@ import PostCard from '../PostCard'
 
 const TrendFeed: FC = () => (
   <>
-    <div style={{ height: 30 }} className="label">
+    <div style={{ height: 30, width: 420 }} className="label">
       <h2
         style={{
           marginTop: 20,
@@ -18,11 +18,18 @@ const TrendFeed: FC = () => (
       </h2>
     </div>
     <div
-      style={{ float: 'left', backgroundColor: '#FFFFFF', width: 550, height: 1800 }}
+      style={{
+        backgroundColor: '#FFFFFF',
+        width: 420,
+        height: 700,
+        overflow: 'auto',
+      }}
       className="ui feed"
     >
-      <div style={{ margin: 1, width: 550, backgroundColor: '#FFFFFF' }} className="ui cards">
-        <PostCard />
+      <div style={{ margin: 1, width: 400, backgroundColor: '#FFFFFF' }} className="ui cards">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
+          <PostCard />
+        ))}
       </div>
     </div>
   </>
