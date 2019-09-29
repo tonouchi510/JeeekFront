@@ -8,7 +8,7 @@ export interface PostCardMockProps {
   PostContent?: string | null
   SubContent?: string | null
   Tag?: string | null
-  Rate?: string | null
+  Value?: string | null
 }
 
 const PostCard: FC<PostCardMockProps> = ({
@@ -16,19 +16,26 @@ const PostCard: FC<PostCardMockProps> = ({
   UserName = 'かず',
   UserIcon = '',
   Category = '開発',
-  PostContent = '『Jeeek』リリース',
-  SubContent = 'リリースしたぞおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおお',
+  PostContent = 'Jeeek',
+  SubContent = 'サービスリリースしました！',
   Tag = 'React',
-  Rate = 'S',
+  Value = 'S',
 }) => (
   <div
-    style={{ width: 1200, height: 250, margin: 10, backgroundColor: '#FFFFFF' }}
+    style={{ width: 400, height: 170, margin: 10, backgroundColor: '#FFFFFF' }}
     className="ui card"
   >
     <div className="event">
       <div className="content">
         <div
-          style={{ margin: 10, float: 'left', width: 50, height: 50, backgroundColor: '#FFFFFF' }}
+          style={{
+            float: 'left',
+            position: 'absolute',
+            margin: 10,
+            width: 50,
+            height: 50,
+            backgroundColor: '#FFFFFF',
+          }}
           className="ui icon button"
         >
           <i className="user icon" />
@@ -39,18 +46,32 @@ const PostCard: FC<PostCardMockProps> = ({
           className="ui label"
           style={{
             float: 'right',
-            width: 130,
-            height: 200,
+            position: 'absolute',
+            top: 5,
+            bottom: 5,
+            right: 5,
+            width: 60,
             margin: 10,
             backgroundColor: '#DDDDDD',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          {Rate}
+          <p style={{ fontSize: 30, color: '#000000' }}>{Value}</p>
         </div>
       </div>
       <div className="content">
         <div
-          style={{ margin: 10, fontSize: 13, height: 50, backgroundColor: 'Transparent' }}
+          style={{
+            position: 'relative',
+            marginLeft: 70,
+            marginTop: 10,
+            fontSize: 13,
+            textAlign: 'left',
+            height: 35,
+            backgroundColor: 'Transparent',
+          }}
           className="ui button"
         >
           {UserName}
@@ -92,19 +113,21 @@ const PostCard: FC<PostCardMockProps> = ({
       <div
         className="ui icon button"
         style={{
-          margin: 8,
           float: 'left',
           width: 10,
-          position: 'relative',
-          bottom: 5,
-          left: 5,
+          position: 'absolute',
+          bottom: 8,
+          left: 80,
           backgroundColor: '#FFFFFF',
         }}
       >
         <i
           style={{
-            margin: 8,
+            float: 'left',
             width: 10,
+            position: 'absolute',
+            bottom: 8,
+            left: 0,
             backgroundColor: '#FFFFFF',
           }}
           className="reply icon"
