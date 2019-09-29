@@ -1,0 +1,44 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "for npm-script",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint 'src/**/*.{js,ts}' --fix",
+    "build": "npm run lint && tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dbreset": "firebase firestore:delete --all-collections",
+    "dbreset:feeds": "firebase firestore:delete -y --shallow feeds",
+    "dbreset:follows": "firebase firestore:delete -y --shallow follows",
+    "dbseed": "npm run dbseed:users & npm run dbseed:categories & npm run dbseed:feeds",
+    "dbseed:categories": "node lib/functions/src/commands/dbseed.js categories",
+    "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
+    "dbseed:follows": "node lib/functions/src/commands/dbseed.js follows",
+    "dbseed:feeds": "node lib/functions/src/commands/dbseed.js feeds"
+  },
+  "author": "tonouchi510",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/eslint": "^6.1.1",
+    "@types/eslint-plugin-prettier": "^2.2.0",
+    "@types/prettier": "^1.18.2",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prefer-arrow": "^1.1.6",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "commander": "^3.0.2",
+    "csvtojson": "^2.0.10",
+    "firebase-admin": "^8.6.0"
+  },
+  "private": true
+}

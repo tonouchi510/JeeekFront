@@ -1,6 +1,13 @@
 # node関連
 node_modules/
 package-lock.json
+public/bundle.js*
+lib/
+
+# シークレット
+firebase-service-key-dev.json
 
 # その他
+seeds/
 .idea/
+.DS_Store

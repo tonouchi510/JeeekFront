@@ -7,12 +7,23 @@
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "incremental": true,
+    "types": ["jest", "node"]
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "functions"
   ]
 }
