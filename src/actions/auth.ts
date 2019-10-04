@@ -15,9 +15,7 @@ export interface AuthAction {
 }
 
 interface AuthParams {
-  displayName: string | null
-  email: string | null
-  uid: string
+  user: User
 }
 
 export const signin = {
@@ -27,9 +25,7 @@ export const signin = {
   ok: (user: User): AuthAction => ({
     type: AuthActionType.SIGNIN_OK,
     payload: {
-      displayName: user.displayName,
-      email: user.email,
-      uid: user.uid,
+      user,
     },
   }),
   fail: (): AuthAction => ({
