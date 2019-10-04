@@ -1,13 +1,21 @@
 import React, { FC } from 'react'
+import ReduxSagaFirebase from 'redux-saga-firebase'
 import Top from './Top'
 import UserHome from './UserHome'
 
-interface AuthHandleProps {
-  isSignedIn: boolean
+export interface AuthHandleProps {
+  rsf?: ReduxSagaFirebase
+  isSignedIn?: boolean
+  signinStart?: () => void
+  signoutStart?: () => void
 }
 
-const AuthHandle: FC<AuthHandleProps> = ({ isSignedIn = false }) => (
-  <>{isSignedIn ? <UserHome /> : <Top />}</>
+const AuthHandle: FC<AuthHandleProps> = ({
+  isSignedIn = false,
+  signinStart = () => {},
+  signoutStart = () => {},
+}) => (
+  <>{isSignedIn ? <UserHome /> : <Top signinStart={signinStart} signoutStart={signoutStart} />}</>
 )
 
 export default AuthHandle

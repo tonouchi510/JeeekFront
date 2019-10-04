@@ -4,6 +4,11 @@ import postReducer, { PostState } from './post'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
+export const initialState: CombinedState = {
+  auth: null,
+  post: null,
+}
+
 interface CombinedState {
   auth: AuthState
   post: PostState
