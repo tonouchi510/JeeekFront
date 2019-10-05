@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import HomeFeed from './HomeFeed'
-import TrendFeed from './TrendFeed'
+import HomeFeed from '../../containers/UserHome/HomeFeed'
+import TrendFeed from '../../containers/UserHome/TrendFeed'
 
 const UserHome: FC = () => (
   <div className="ui container">
