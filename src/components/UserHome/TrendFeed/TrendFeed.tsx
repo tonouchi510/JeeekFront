@@ -1,38 +1,68 @@
+/** @jsx jsx */
 import React, { FC } from 'react'
+import { css, jsx } from '@emotion/core'
 import PostCard from '../PostCard'
 
+const headerBackground = css`
+  height: 30px;
+  width: 380px;
+  background-image: url(image/background.png);
+`
+const searchBar = css`
+  width: 380px;
+  height: 50px;
+  background-color: #dddddd;
+`
+const feed = css`
+  background-color: #ffffff;
+  width: 390px;
+  height: 700px;
+  overflow: auto;
+`
+const uiCard = css`
+  width: 380px;
+  background-color: #ffffff;
+`
+
 const TrendFeed: FC = () => (
-  <>
-    <div style={{ height: 30, width: 420 }} className="label">
+  <div className="ui container">
+    <div className="content" style={{ position: 'relative', top: 30 }} css={headerBackground}>
       <h2
-        style={{
-          marginTop: 20,
-          height: 30,
-          textAlign: 'center',
-          color: '#FFFFFF',
-          backgroundColor: '#336666',
-        }}
         className="ui header"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}
       >
         TREND
       </h2>
     </div>
     <div
+      className="ui search"
       style={{
-        backgroundColor: '#FFFFFF',
-        width: 420,
-        height: 700,
-        overflow: 'auto',
+        position: 'relative',
+        top: 40,
+        display: 'flex',
+        alignItems: 'center',
+        justifyItems: 'center',
       }}
-      className="ui feed"
+      css={searchBar}
     >
-      <div style={{ margin: 1, width: 400, backgroundColor: '#FFFFFF' }} className="ui cards">
+      <div className="ui icon input">
+        <input
+          className="prompt"
+          type="text"
+          placeholder="Common passwords..."
+          style={{ width: 380 }}
+        />
+        <i className="search icon"> </i>
+      </div>
+    </div>
+    <div className="ui feed" style={{ position: 'relative', top: 40 }} css={feed}>
+      <div className="ui cards" style={{ margin: 1 }} css={uiCard}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
           <PostCard />
         ))}
       </div>
     </div>
-  </>
+  </div>
 )
 
 export default TrendFeed
