@@ -1,17 +1,51 @@
+/** @jsx jsx */
 import React, { FC } from 'react'
+import { css, jsx } from '@emotion/core'
 import PostCard from '../PostCard'
+
+const headerBackground = css`
+  height: 30px;
+  width: 380px;
+  background-image: url(image/background.png);
+`
+
+const button = css`
+  width: 50px;
+  height: 50px;
+  background-image: url(image/headerBackGround.png);
+`
+
+const subHeader = css`
+  width: 270px;
+  height: 50px;
+  block-size: 50px;
+  font-size: 8px;
+  color: #333333;
+  background-image: url(image/headerBackGround.png);
+`
+const editButton = css`
+  width: 50px;
+  height: 50px;
+  background-color: #115666;
+`
+
+const feed = css`
+  background-color: #ffffff;
+  width: 380px;
+  height: 700px;
+  overflow: auto;
+`
 
 const HomeFeed: FC = () => (
   <div className="ui container">
-    <div style={{ height: 30, background: '#b5bdc8', width: 420 }} className="label">
+    <div
+      className="content"
+      style={{ position: 'relative', top: 30, left: 10 }}
+      css={headerBackground}
+    >
       <h2
-        style={{
-          marginTop: 20,
-          height: 30,
-          textAlign: 'center',
-          color: '#FFFFFF',
-        }}
         className="ui header"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}
       >
         HOME
       </h2>
@@ -19,39 +53,52 @@ const HomeFeed: FC = () => (
     <div
       className="ui icon button"
       style={{
-        float: 'right',
-        blockSize: 50,
-        marginTop: 5,
-        marginBottom: 5,
-        marginRight: 60,
-        width: 50,
-        height: 50,
-        bottom: 8,
-        right: 10,
-        backgroundColor: '#EEEEEE',
+        float: 'left',
+        position: 'relative',
+        top: 40,
+        left: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
+      css={button}
     >
-      <i
-        className="edit icon"
-        style={{
-          width: 30,
-          backgroundColor: '#EEEEEE',
-        }}
-      />
+      <i className="user icon" style={{ position: 'absolute' }} css={button} />
     </div>
     <div
+      className="ui header"
       style={{
-        backgroundColor: '#FFFFFF',
-        width: 420,
-        height: 700,
-        overflow: 'auto',
+        float: 'left',
+        position: 'relative',
+        top: 14,
+        left: 12,
+        right: 5,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 10,
       }}
-      className="ui feed"
+      css={subHeader}
     >
-      <div style={{ width: 400, backgroundColor: '#FFFFFF', margin: 1 }} className="ui cards">
+      あなたの実績を残していますか？
+    </div>
+    <div
+      className="ui icon button"
+      style={{
+        float: 'right',
+        position: 'relative',
+        top: 40,
+        right: 85,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      css={editButton}
+    >
+      <i className="edit icon" style={{ position: 'absolute', float: 'right' }} />
+    </div>
+    <div className="ui feed" style={{ position: 'relative', top: 15, left: 10 }} css={feed}>
+      <div className="ui cards" style={{ margin: 1 }}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
           <PostCard />
         ))}
