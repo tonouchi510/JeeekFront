@@ -57,8 +57,8 @@ const TrendFeed: FC = () => (
     </div>
     <div className="ui feed" style={{ position: 'relative', top: 40 }} css={feed}>
       <div className="ui cards" style={{ margin: 1 }} css={uiCard}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
-          <PostCard />
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
+          <PostCard key={i} />
         ))}
       </div>
     </div>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import PostCard from '../PostCard'
+import { Feed } from '../../../services/models/feeds'
 
 const headerBackground = css`
   height: 30px;
@@ -23,6 +23,7 @@ const subHeader = css`
   color: #333333;
   background-image: url(image/headerBackGround.png);
 `
+
 const editButton = css`
   width: 50px;
   height: 50px;
@@ -36,7 +37,12 @@ const feed = css`
   overflow: auto;
 `
 
-const HomeFeed: FC = () => (
+export interface HomeFeedProps {
+  feeds?: Feed[]
+  isLoading?: boolean
+}
+
+const HomeFeed: FC<HomeFeedProps> = ({ feeds = null, isLoading = true }) => (
   <div className="ui container">
     <div
       className="content"
@@ -98,11 +104,17 @@ const HomeFeed: FC = () => (
       <i className="edit icon" style={{ position: 'absolute', float: 'right' }} />
     </div>
     <div className="ui feed" style={{ position: 'relative', top: 15, left: 10 }} css={feed}>
-      <div className="ui cards" style={{ margin: 1 }}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(() => (
-          <PostCard />
-        ))}
-      </div>
+      {isLoading ? (
+        <p>isLoading...</p>
+      ) : (
+        <div style={{ width: 400, backgroundColor: '#FFFFFF', margin: 1 }} className="ui cards">
+          {feeds.map((feed: Feed) => (
+            <div key={feed.id}>
+              <li>{feed.content}</li>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 )
