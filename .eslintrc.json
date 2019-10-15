@@ -8,25 +8,56 @@
     "project": "./tsconfig.json",
     "useJSXTextNode": true
   },
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "jest",
+    "jsx-a11y",
+    "prefer-arrow",
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
   "extends": [
     "airbnb",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:jest/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "prettier",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "prettier/react",
+    "prettier/standard"
   ],
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
   "rules": {
     "prettier/prettier": "error",
     "max-len": ["error", {"code": 100}],
     "react/jsx-filename-extension": ["off"],
-    "react/prop-types": ["off"]
+    "react/prop-types": ["off"],
+    "import/prefer-default-export": ["off"],
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "@typescript-eslint/no-unused-vars": [ "error",
+      {
+        "varsIgnorePattern": "[Rr]eact"
+      }
+    ]
   },
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": "webpack"
   }
 }
