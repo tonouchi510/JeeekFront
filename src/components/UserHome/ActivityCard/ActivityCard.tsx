@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
+import { Activity } from '../../../services/models/activities'
 
 // 現時点ではあまりemotionのメリットがない（少し見やすいだけ）ので、
 // Sprint3で洗練したい感ある
@@ -66,30 +67,13 @@ const values = css`
 `
 
 export interface ActivityCardProps {
-  PostTime?: string | null
-  UserName?: string | null
-  UserIcon?: string | null
-  Category?: string | null
-  PostContent?: string | null
-  SubContent?: string | null
-  Tag?: string | null
-  Value?: string | null
-  getFollowsStart?: () => void
+  activity: Activity
 }
 
 // 投稿文が長い想定。
 // 長くなるとカードが伸びてダサくなるから投稿文のフィールドの横幅を長くして、
 // カードの伸びを極力無くそうとしている。
-const ActivityCard: FC<ActivityCardProps> = ({
-  PostTime = '1 minute ago',
-  UserName = 'かず',
-  UserIcon = '',
-  Category = '開発',
-  PostContent = 'Jeeek',
-  SubContent = 'サービスリリースしました！あああああああああああああああああああああああああああああああああああああ',
-  Tag = 'React',
-  Value = 'S',
-}) => (
+const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
   <div className="content" css={content}>
     <div
       className="ui card"
@@ -126,7 +110,7 @@ const ActivityCard: FC<ActivityCardProps> = ({
           }}
           css={valueLabel}
         >
-          <p css={value}>{Value}</p>
+          <p css={value}>{activity.rank}</p>
         </div>
         <div className="content">
           <div
@@ -149,16 +133,16 @@ const ActivityCard: FC<ActivityCardProps> = ({
               }}
               css={userNameField}
             >
-              {UserName}
+              {activity.user.name}
             </div>
           </div>
         </div>
         <div className="content">
           <div className="meta" style={{ marginLeft: 60 }} css={postTime}>
-            {PostTime}
+            {activity.updatedAt.toDate().toDateString()}
           </div>
         </div>
-        <div className="content">{UserIcon}</div>
+        <div className="content">{activity.user.photo_url}</div>
         <div className="content">
           <div
             className="ui left floated label"
@@ -172,20 +156,20 @@ const ActivityCard: FC<ActivityCardProps> = ({
             }}
             css={category}
           >
-            {Category}
+            {activity.category}
           </div>
         </div>
         <div className="content">
           <div className="description" style={{ marginLeft: 60, marginTop: 5 }} css={postContent}>
-            {PostContent}
+            {activity.content.subject}
           </div>
           <div className="description" style={{ marginLeft: 60, marginTop: 5 }} css={postContent}>
-            {SubContent}
+            {activity.content.comment}
           </div>
         </div>
         <div className="content">
           <div className="label" style={{ marginLeft: 60, marginTop: 5 }} css={postContent}>
-            {Tag}
+            {activity.tags.toString()}
           </div>
         </div>
         <div

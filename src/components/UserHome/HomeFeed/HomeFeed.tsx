@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { Feed } from '../../../services/models/feeds'
+import { Activity } from '../../../services/models/activities'
+import ActivityCard from '../ActivityCard'
 
 const headerBackground = css`
   height: 30px;
@@ -38,7 +39,7 @@ const feed = css`
 `
 
 export interface HomeFeedProps {
-  feeds?: Feed[]
+  feeds?: Activity[]
   isLoading?: boolean
 }
 
@@ -108,10 +109,8 @@ const HomeFeed: FC<HomeFeedProps> = ({ feeds = null, isLoading = true }) => (
         <p>isLoading...</p>
       ) : (
         <div style={{ width: 400, backgroundColor: '#FFFFFF', margin: 1 }} className="ui cards">
-          {feeds.map((feed: Feed) => (
-            <div key={feed.id}>
-              <li>{feed.content}</li>
-            </div>
+          {feeds.map((activity: Activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
           ))}
         </div>
       )}

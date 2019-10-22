@@ -1,9 +1,9 @@
 import { Reducer } from 'redux'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { Feed } from '../services/models/feeds'
+import { Activity } from '../services/models/activities'
 
 export interface FeedsState {
-  feeds: Feed[]
+  feeds: Activity[]
   isLoading: boolean
 }
 

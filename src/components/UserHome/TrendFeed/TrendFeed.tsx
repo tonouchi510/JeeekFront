@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import PostCard from '../PostCard'
+import { Activity } from '../../../services/models/activities'
+import ActivityCard from '../ActivityCard'
 
 const headerBackground = css`
   height: 30px;
@@ -57,8 +58,8 @@ const TrendFeed: FC = () => (
     </div>
     <div className="ui feed" style={{ position: 'relative', top: 40 }} css={feed}>
       <div className="ui cards" style={{ margin: 1 }} css={uiCard}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => (
-          <PostCard key={i} />
+        {feeds.map((activity: Activity) => (
+          <ActivityCard key={activity.id} activity={activity} />
         ))}
       </div>
     </div>

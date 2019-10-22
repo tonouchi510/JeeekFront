@@ -1,4 +1,4 @@
-import { Feed } from '../services/models/feeds'
+import { Activity } from '../services/models/activities'
 
 export enum FeedActionType {
   GET_FEED_START = 'GET_FEED_START',
@@ -21,7 +21,7 @@ interface GetFeedParams {
 }
 
 export interface GetFeedResult {
-  feeds: Feed[]
+  feeds: Activity[]
 }
 
 export const getFeed = {
