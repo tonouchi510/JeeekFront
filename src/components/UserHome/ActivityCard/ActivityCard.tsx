@@ -65,7 +65,7 @@ const values = css`
   margin-bottom: 3px;
 `
 
-export interface PostCardMockProps {
+export interface ActivityCardProps {
   PostTime?: string | null
   UserName?: string | null
   UserIcon?: string | null
@@ -80,7 +80,7 @@ export interface PostCardMockProps {
 // 投稿文が長い想定。
 // 長くなるとカードが伸びてダサくなるから投稿文のフィールドの横幅を長くして、
 // カードの伸びを極力無くそうとしている。
-const PostCard: FC<PostCardMockProps> = ({
+const ActivityCard: FC<ActivityCardProps> = ({
   PostTime = '1 minute ago',
   UserName = 'かず',
   UserIcon = '',
@@ -223,9 +223,7 @@ const PostCard: FC<PostCardMockProps> = ({
             }}
             css={values}
           >
-            <i className="thumbs up outline icon">
-              {' '}
-            </i>
+            <i className="thumbs up outline icon"> </i>
           </div>
           <div
             className="ui circular label"
@@ -269,4 +267,4 @@ const PostCard: FC<PostCardMockProps> = ({
   </div>
 )
 
-export default PostCard
+export default ActivityCard
