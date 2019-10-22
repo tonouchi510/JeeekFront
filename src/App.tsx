@@ -20,6 +20,9 @@ const initState = {
   auth: {
     rsf: reduxSagaFirebase,
   },
+  menu: {
+    pageNumber: 0,
+  },
 }
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */

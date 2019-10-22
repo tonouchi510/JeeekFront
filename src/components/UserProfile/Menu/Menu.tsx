@@ -6,49 +6,57 @@ import { css, jsx } from '@emotion/core'
 const backgroundStyle = css`
   background-image: url(image/menuBackground.png);
 `
+const menuButtonStyle = css`
+  background-color: '#ffffff';
+`
 
 interface UserProfileMenuProps {
   user?: User
+  menuTransition?: (param?: number) => void
 }
 
 // Kazuのところは{user.displayName}に置き換える
-
-const Menu: FC<UserProfileMenuProps> = ({ user = null }) => (
-  <div className="ui grid" style={{ height: '100%' }}>
-    <div className="three wide column" style={{ height: '100%' }} css={backgroundStyle}>
-      <div
-        className="ui tiny labeled icon button"
-        style={{ float: 'left', marginTop: 10, marginLeft: 5, backgroundColor: 'Transparent' }}
-      >
-        <i className="left chevron icon"> </i>
-        Back
+const Menu: FC<UserProfileMenuProps> = ({ user = null, menuTransition = () => {} }) => (
+  <div className="content" style={{ height: '100%' }}>
+    <div className="content" css={backgroundStyle}>
+      <div className="content">
+        <div
+          className="ui tiny labeled icon button"
+          style={{ marginTop: 10, marginLeft: 5, backgroundColor: 'Transparent' }}
+        >
+          <i className="left chevron icon"> </i>
+          Back
+        </div>
       </div>
       <div
         className="content"
         style={{
-          marginTop: 65,
-          marginLeft: 80,
+          position: 'relative',
+          top: 55,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          width: 90,
-          height: 90,
         }}
       >
         <img
-          className="ui small circular image"
+          className="ui tiny circular image"
           // src={user.photoURL} に変える
           src="image/userIcon.png"
           alt="userIcon"
-          style={{ width: 90, height: 90 }}
+          style={{
+            width: 90,
+            height: 90,
+          }}
         />
       </div>
-      <h2
-        className="ui header"
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
-        Kazu
-      </h2>
+      <div className="content" style={{ marginTop: 90 }}>
+        <h2
+          className="ui header"
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+          Kazu
+        </h2>
+      </div>
       <div
         className="content"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -64,18 +72,38 @@ const Menu: FC<UserProfileMenuProps> = ({ user = null }) => (
             alignItems: 'center',
           }}
         >
-          <li className="ui button" style={{ marginTop: 5, backgroundColor: 'Transparent' }}>
+          <button
+            className="ui button"
+            type="button"
+            onClick={() => menuTransition(0)}
+            css={menuButtonStyle}
+          >
             About
-          </li>
-          <li className="ui button" style={{ backgroundColor: 'Transparent' }}>
+          </button>
+          <button
+            className="ui button"
+            type="button"
+            onClick={() => menuTransition(1)}
+            css={menuButtonStyle}
+          >
             Article
-          </li>
-          <li className="ui button" style={{ backgroundColor: 'Transparent' }}>
+          </button>
+          <button
+            className="ui button"
+            type="button"
+            onClick={() => menuTransition(2)}
+            css={menuButtonStyle}
+          >
             Products
-          </li>
-          <li className="ui button" style={{ backgroundColor: 'Transparent' }}>
+          </button>
+          <button
+            className="ui button"
+            type="button"
+            onClick={() => menuTransition(3)}
+            css={menuButtonStyle}
+          >
             Blog
-          </li>
+          </button>
           <div
             className="content"
             style={{
