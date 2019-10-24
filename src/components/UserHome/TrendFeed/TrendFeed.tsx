@@ -4,60 +4,51 @@ import { css, jsx } from '@emotion/core'
 import { Activity } from '../../../services/models/activities'
 import ActivityCard from '../ActivityCard'
 
-const headerBackground = css`
-  height: 30px;
-  width: 380px;
+const header = css`
+  margin-top: 30px;
+  text-align: center;
   background-image: url(image/background.png);
 `
-const searchBar = css`
-  width: 380px;
+
+const subHeader = css`
+  width: 100%;
   height: 50px;
+  margin-top: 8px;
   background-color: #dddddd;
 `
-const feed = css`
-  background-color: #ffffff;
-  width: 390px;
-  height: 700px;
-  overflow: auto;
-`
-const uiCard = css`
-  width: 380px;
-  background-color: #ffffff;
+
+const searchBar = css`
+  width: 100%;
+  height: 34px;
+  margin-top: 8px;
 `
 
-const TrendFeed: FC = () => (
+const feed = css`
+  height: 700px;
+  overflow-y: auto;
+`
+
+const uiCard = css`
+  padding: 4px;
+`
+
+export interface TrendFeedProps {
+  feeds?: Activity[]
+}
+
+const TrendFeed: FC<TrendFeedProps> = ({ feeds = null }) => (
   <div className="ui container">
-    <div className="content" style={{ position: 'relative', top: 30 }} css={headerBackground}>
-      <h2
-        className="ui header"
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}
-      >
-        TREND
-      </h2>
+    <div className="content" css={header}>
+      <h2 className="ui header">TREND</h2>
     </div>
-    <div
-      className="ui search"
-      style={{
-        position: 'relative',
-        top: 40,
-        display: 'flex',
-        alignItems: 'center',
-        justifyItems: 'center',
-      }}
-      css={searchBar}
-    >
-      <div className="ui icon input">
-        <input
-          className="prompt"
-          type="text"
-          placeholder="Common passwords..."
-          style={{ width: 380 }}
-        />
+    <div className="ui search" css={subHeader}>
+      <div className="ui icon input" css={searchBar}>
+        <input className="prompt" type="text" placeholder="Common passwords..." />
         <i className="search icon"> </i>
       </div>
     </div>
-    <div className="ui feed" style={{ position: 'relative', top: 40 }} css={feed}>
-      <div className="ui cards" style={{ margin: 1 }} css={uiCard}>
+    <div className="ui feed" css={feed}>
+      <div className="ui cards" css={uiCard}>
         {feeds.map((activity: Activity) => (
           <ActivityCard key={activity.id} activity={activity} />
         ))}

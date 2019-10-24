@@ -1,114 +1,80 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
+import { User } from 'firebase'
+
 import { Activity } from '../../../services/models/activities'
 import ActivityCard from '../ActivityCard'
 
-const headerBackground = css`
-  height: 30px;
-  width: 380px;
+const header = css`
+  margin-top: 30px;
+  text-align: center;
   background-image: url(image/background.png);
 `
 
-const button = css`
-  width: 50px;
+const subHeader = css`
+  margin-top: 8px;
   height: 50px;
-  background-image: url(image/headerBackGround.png);
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
 `
 
-const subHeader = css`
-  width: 270px;
-  height: 50px;
-  block-size: 50px;
-  font-size: 8px;
-  color: #333333;
-  background-image: url(image/headerBackGround.png);
+const userIcon = css`
+  float: left;
+  width: 13%;
+  height: 100%;
+`
+
+const message = css`
+  width: 69%;
+  height: 100%;
+  background-image: url(image/background.png);
 `
 
 const editButton = css`
-  width: 50px;
-  height: 50px;
-  background-color: #115666;
+  float: right;
+  width: 13%;
+  height: 100%;
 `
 
 const feed = css`
-  background-color: #ffffff;
-  width: 380px;
+  clear: both;
   height: 700px;
-  overflow: auto;
+  overflow-y: auto;
+`
+
+const card = css`
+  padding: 4px;
 `
 
 export interface HomeFeedProps {
+  signedUser: User
   feeds?: Activity[]
   isLoading?: boolean
 }
 
-const HomeFeed: FC<HomeFeedProps> = ({ feeds = null, isLoading = true }) => (
+const HomeFeed: FC<HomeFeedProps> = ({ signedUser, feeds, isLoading = true }) => (
   <div className="ui container">
-    <div
-      className="content"
-      style={{ position: 'relative', top: 30, left: 10 }}
-      css={headerBackground}
-    >
-      <h2
-        className="ui header"
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white' }}
-      >
-        HOME
-      </h2>
+    <div className="content" css={header}>
+      <h2 className="ui header">Recent Activity</h2>
     </div>
-    <div
-      className="ui icon button"
-      style={{
-        float: 'left',
-        position: 'relative',
-        top: 40,
-        left: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      css={button}
-    >
-      <i className="user icon" style={{ position: 'absolute' }} css={button} />
+    <div css={subHeader}>
+      <div className="ui label" css={userIcon}>
+        <img className="ui avatar large image" src={signedUser.photoURL} />
+      </div>
+      <div className="ui blue label" css={message}>
+        <b>あなたの実績を残していますか？</b>
+      </div>
+      <div className="ui button" css={editButton}>
+        <i className="edit icon" />
+      </div>
     </div>
-    <div
-      className="ui header"
-      style={{
-        float: 'left',
-        position: 'relative',
-        top: 14,
-        left: 12,
-        right: 5,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 10,
-      }}
-      css={subHeader}
-    >
-      あなたの実績を残していますか？
-    </div>
-    <div
-      className="ui icon button"
-      style={{
-        float: 'right',
-        position: 'relative',
-        top: 40,
-        right: 85,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      css={editButton}
-    >
-      <i className="edit icon" style={{ position: 'absolute', float: 'right' }} />
-    </div>
-    <div className="ui feed" style={{ position: 'relative', top: 15, left: 10 }} css={feed}>
+    <div className="ui feed" css={feed}>
       {isLoading ? (
         <p>isLoading...</p>
       ) : (
-        <div style={{ width: 400, backgroundColor: '#FFFFFF', margin: 1 }} className="ui cards">
+        <div className="ui cards" css={card}>
           {feeds.map((activity: Activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}

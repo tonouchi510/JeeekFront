@@ -40,7 +40,7 @@ const HomeFeedContainer: FC<EnhancedHomeFeedProps> = ({ signedUser, getFeedStart
   useEffect(() => {
     getFeedStart(signedUser.uid)
   }, [])
-  return <HomeFeed feeds={feed.feeds} isLoading={feed.isLoading} />
+  return <HomeFeed signedUser={signedUser} feeds={feed.feeds} isLoading={feed.isLoading} />
 }
 
 export default connect(
