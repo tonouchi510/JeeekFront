@@ -6,13 +6,16 @@ import { Activity } from '../../../services/models/activities'
 const categoryLabel = css`
   width: 5em;
   height: 3em;
-  font-size: 100px;
 `
 
 const rankLabel = css`
   width: 3em;
   height: 3em;
-  font-size: 100px;
+`
+
+const label = css`
+  text-align: center;
+  font-size: 15px;
 `
 
 const smallRightMargin = css`
@@ -22,6 +25,9 @@ const smallRightMargin = css`
 const smallTopMargin = css`
   margin-top: 1em;
 `
+
+const categoryMap = ['学習', '開発', '執筆', '賞等']
+const rankMap = ['C', 'B', 'A', 'S']
 
 export interface ActivityCardProps {
   activity: Activity
@@ -34,10 +40,10 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
   <div className="card" style={{ width: '100%' }}>
     <div className="content">
       <div className="right floated ui label" css={rankLabel}>
-        {activity.rank}
+        <p css={label}>{rankMap[activity.rank]}</p>
       </div>
       <div className="right floated ui label" css={categoryLabel}>
-        {activity.category}
+        <p css={label}>{categoryMap[activity.category]}</p>
       </div>
       <img
         className="left floated ui avatar image"
@@ -49,7 +55,9 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
       <div className="meta">{activity.updatedAt.toDate().toDateString()}</div>
       <div className="description">
         <div className="content">
-          <div><b>{activity.content.subject}</b></div>
+          <div>
+            <b>{activity.content.subject}</b>
+          </div>
           <div>{activity.content.comment}</div>
           <div css={smallTopMargin}>
             {activity.tags.map((tag: string) => (
