@@ -20,6 +20,10 @@ const initState = {
   auth: {
     rsf: reduxSagaFirebase,
   },
+  feed: {
+    isLoading: true,
+    feeds: [],
+  },
 }
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */

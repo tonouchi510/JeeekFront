@@ -1,12 +1,6 @@
 import { firestore } from 'firebase/app'
 
-export type Category = {
-  version?: string
-  id: number
-  name: string
-}
-
-export type Feed = {
+export type Activity = {
   id?: string
   version: number
   user: {
@@ -26,7 +20,7 @@ export type Feed = {
     uid: string
     eval: number
   }[]
-  replies: Replies
+  replies?: Replies
   updatedAt: firestore.Timestamp | null
 }
 
