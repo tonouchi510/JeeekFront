@@ -37,7 +37,7 @@ export interface ActivityCardProps {
 // 長くなるとカードが伸びてダサくなるから投稿文のフィールドの横幅を長くして、
 // カードの伸びを極力無くそうとしている。
 const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
-  <div className="card" style={{ width: '100%' }}>
+  <div className="card" style={{ width: '95%' }}>
     <div className="content">
       <div className="right floated ui label" css={rankLabel}>
         <p css={label}>{rankMap[activity.rank]}</p>

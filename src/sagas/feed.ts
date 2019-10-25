@@ -8,13 +8,8 @@ function* runGetFeeds(action: ReturnType<typeof getFeed.start>) {
     const snapshot = yield call(rsf.firestore.getCollection, 'feeds')
     let feeds
     snapshot.forEach(doc => {
-      if (feeds == null) {
-        feeds = [doc.data()]
-        feeds[feeds.length - 1].id = doc.id
-      } else {
-        feeds = [...feeds, doc.data()]
-        feeds[feeds.length - 1].id = doc.id
-      }
+      feeds = feeds ? [...feeds, doc.data()] : [doc.data()]
+      feeds[feeds.length - 1].id = doc.id
     })
     yield put(getFeed.succeed({ feeds }))
   } catch (error) {
