@@ -2,6 +2,6 @@ export const collectionName = {
   users: 'users',
   userProfiles: 'userProfiles',
   follows: 'follows',
-  feeds: 'feeds',
+  activities: 'activities',
   categories: 'categories',
 } as const

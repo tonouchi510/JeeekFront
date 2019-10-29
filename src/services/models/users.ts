@@ -13,10 +13,20 @@ export type UserProfile = {
   uid?: string
   version: number
   postCounter: number
+  career?: {
+    education: institution[]
+    workExperience: institution[]
+    certification: institution[]
+  }
   skills?: {
-    skill_id: number
-    eval: number
+    tag: string
+    point: number
   }[]
+}
+
+type institution = {
+  period: string
+  subject: string
 }
 
 export type Follows = {
