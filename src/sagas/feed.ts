@@ -5,7 +5,7 @@ function* runGetFeeds(action: ReturnType<typeof getFeed.start>) {
   const rsf = yield select(state => state.auth.rsf)
 
   try {
-    const snapshot = yield call(rsf.firestore.getCollection, 'feeds')
+    const snapshot = yield call(rsf.firestore.getCollection, 'activities')
     let feeds
     snapshot.forEach(doc => {
       feeds = feeds ? [...feeds, doc.data()] : [doc.data()]
