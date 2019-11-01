@@ -40,7 +40,10 @@ const TrendFeedContainer: FC<EnhancedTrendFeedProps> = ({
   useEffect(() => {
     getTrendStart(signedUser.uid)
   }, [])
-  return <TrendFeed feeds={trendFeed.trends} />
+  const trends = trendFeed.trends.sort((a, b) => {
+    return a.updatedAt < b.updatedAt ? 1 : -1
+  })
+  return <TrendFeed feeds={trends} />
 }
 
 export default connect(

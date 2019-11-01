@@ -51,7 +51,10 @@ const HomeFeedContainer: FC<EnhancedHomeFeedProps> = ({
     }
     getFeedStart(signedUser.uid)
   }, [follows])
-  return <HomeFeed signedUser={signedUser} feeds={feed.feeds} isLoading={feed.isLoading} />
+  const feeds = feed.feeds.sort((a, b) => {
+    return a.updatedAt < b.updatedAt ? 1 : -1
+  })
+  return <HomeFeed signedUser={signedUser} feeds={feeds} isLoading={feed.isLoading} />
 }
 
 export default connect(
