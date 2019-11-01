@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
-import firebase from 'firebase/app'
+import firebase from 'firebase'
 import ReduxSagaFirebase from 'redux-saga-firebase'
 
 import reducer, { initialState } from './reducers'
@@ -12,7 +12,7 @@ import rootSaga from './sagas'
 import AuthHandle from './containers/AuthHandleContainer'
 import { firebaseConfig } from './firebase-config'
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+export const firebaseApp = firebase.initializeApp(firebaseConfig)
 const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
 
 const initState = {
@@ -23,6 +23,9 @@ const initState = {
   feed: {
     isLoading: true,
     feeds: [],
+  },
+  trend: {
+    trends: [],
   },
 }
 
