@@ -36,10 +36,21 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
     dispatch,
   )
 
-const HomeFeedContainer: FC<EnhancedHomeFeedProps> = ({ signedUser, getFeedStart, feed }) => {
+const HomeFeedContainer: FC<EnhancedHomeFeedProps> = ({
+  signedUser,
+  follows,
+  feed,
+  getFeedStart,
+}) => {
   useEffect(() => {
+    // following ユーザ分fetch
+    if (follows) {
+      follows.followings.forEach(u => {
+        getFeedStart(u.uid)
+      })
+    }
     getFeedStart(signedUser.uid)
-  }, [])
+  }, [follows])
   return <HomeFeed signedUser={signedUser} feeds={feed.feeds} isLoading={feed.isLoading} />
 }
 

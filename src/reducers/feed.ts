@@ -26,7 +26,7 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
     case FeedActionType.GET_FEED_SUCCEED: {
       return {
         ...state,
-        feeds: action.payload.result.feeds,
+        feeds: [...state.feeds, ...action.payload.result.feeds],
         isLoading: false,
       }
     }

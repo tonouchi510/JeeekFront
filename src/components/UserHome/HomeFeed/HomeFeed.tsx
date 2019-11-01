@@ -61,7 +61,7 @@ const HomeFeed: FC<HomeFeedProps> = ({ signedUser, feeds, isLoading = true }) =>
     </div>
     <div css={subHeader}>
       <div className="ui label" css={userIcon}>
-        <img className="ui avatar large image" src={signedUser.photoURL} />
+        <img className="ui avatar large image" src={signedUser.photoURL} alt="icon" />
       </div>
       <div className="ui blue label" css={message}>
         <b>あなたの実績を残していますか？</b>
