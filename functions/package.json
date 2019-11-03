@@ -13,7 +13,6 @@
     "dbreset": "firebase firestore:delete --all-collections",
     "dbreset:activities": "firebase firestore:delete -y --shallow activities",
     "dbreset:follows": "firebase firestore:delete -y --shallow follows",
-    "dbseed": "npm run dbseed:users & npm run dbseed:categories & npm run dbseed:feeds & npm run dbseed:user-profiles",
     "dbseed:categories": "node lib/functions/src/commands/dbseed.js categories",
     "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
     "dbseed:user-profiles": "node lib/functions/src/commands/dbseed.js userProfiles",
