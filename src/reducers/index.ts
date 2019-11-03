@@ -3,6 +3,8 @@ import authReducer, { AuthState } from './auth'
 import postReducer, { PostState } from './post'
 import followReducer, { FollowsState } from './follows'
 import userProfileReducer, { UserProfileState } from './userProfile'
+import feedReducer, { FeedsState } from './feed'
+import trendReducer, { TrendsState } from './trend'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
@@ -11,6 +13,8 @@ export const initialState: CombinedState = {
   post: null,
   follow: null,
   userProfile: null,
+  feed: null,
+  trend: null,
 }
 
 export interface CombinedState {
@@ -18,6 +22,8 @@ export interface CombinedState {
   post: PostState
   follow: FollowsState
   userProfile: UserProfileState
+  feed: FeedsState
+  trend: TrendsState
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
@@ -25,6 +31,8 @@ const reducerMap: CombineReducerMap<CombinedState> = {
   post: postReducer,
   follow: followReducer,
   userProfile: userProfileReducer,
+  feed: feedReducer,
+  trend: trendReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)
