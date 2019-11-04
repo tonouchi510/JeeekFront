@@ -20,6 +20,9 @@ const initState = {
   auth: {
     rsf: reduxSagaFirebase,
   },
+  userProfile: {
+    userProfile: null,
+  },
   feed: {
     isLoading: true,
     feeds: [],
