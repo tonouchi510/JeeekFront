@@ -14,9 +14,9 @@ export type UserProfile = {
   version: number
   postCounter: number
   career?: {
-    education: institution[]
-    workExperience: institution[]
-    certification: institution[]
+    education: Institution[]
+    workExperience: Institution[]
+    certification: Institution[]
   }
   skills?: {
     tag: string
@@ -24,7 +24,7 @@ export type UserProfile = {
   }[]
 }
 
-type institution = {
+export type Institution = {
   period: string
   subject: string
 }
