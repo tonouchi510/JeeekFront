@@ -21,16 +21,6 @@ const initState = {
   auth: {
     rsf: reduxSagaFirebase,
   },
-  profile: {
-    profile: null,
-  },
-  feed: {
-    isLoading: true,
-    feeds: [],
-  },
-  trend: {
-    trends: [],
-  },
 }
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
