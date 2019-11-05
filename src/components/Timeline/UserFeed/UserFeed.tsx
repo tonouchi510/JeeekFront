@@ -48,13 +48,13 @@ const card = css`
   padding: 4px;
 `
 
-export interface HomeFeedProps {
+export interface UserFeedProps {
   signedUser: User
   feeds?: Activity[]
   isLoading?: boolean
 }
 
-const HomeFeed: FC<HomeFeedProps> = ({ signedUser, feeds, isLoading = true }) => (
+const UserFeed: FC<UserFeedProps> = ({ signedUser, feeds, isLoading = true }) => (
   <div className="ui container">
     <div className="content" css={header}>
       <h2 className="ui header">Recent Activity</h2>
@@ -84,4 +84,4 @@ const HomeFeed: FC<HomeFeedProps> = ({ signedUser, feeds, isLoading = true }) =>
   </div>
 )
 
-export default HomeFeed
+export default UserFeed

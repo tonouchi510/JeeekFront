@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import HomeFeed from '../../containers/UserHome/HomeFeed'
-import TrendFeed from '../../containers/UserHome/TrendFeed'
+import HomeFeed from '../../containers/Timeline/UserFeed'
+import TrendFeed from '../../containers/Timeline/TrendFeed'
 
-const UserHome: FC = () => (
+const Timeline: FC = () => (
   <div className="ui container">
     <div className="ui divided grid">
       <h2 className="four wide column">ユーザ情報</h2>
@@ -16,4 +16,4 @@ const UserHome: FC = () => (
   </div>
 )
 
-export default UserHome
+export default Timeline

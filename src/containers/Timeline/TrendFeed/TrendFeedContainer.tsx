@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { User } from 'firebase'
 
-import TrendFeed from '../../../components/UserHome/TrendFeed'
+import TrendFeed from '../../../components/Timeline/TrendFeed'
 import { CombinedState } from '../../../reducers'
 import { TrendsState } from '../../../reducers/trend'
 import { getTrend } from '../../../actions/trend'

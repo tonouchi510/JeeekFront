@@ -9,8 +9,9 @@ import ReduxSagaFirebase from 'redux-saga-firebase'
 
 import reducer, { initialState } from './reducers'
 import rootSaga from './sagas'
-import AuthHandle from './containers/AuthHandleContainer'
 import { firebaseConfig } from './firebase-config'
+import AuthHandle from './containers/AuthHandleContainer'
+import Profile from './containers/Profile/ProfileContainer'
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
 const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
@@ -20,8 +21,8 @@ const initState = {
   auth: {
     rsf: reduxSagaFirebase,
   },
-  userProfile: {
-    userProfile: null,
+  profile: {
+    profile: null,
   },
   feed: {
     isLoading: true,
@@ -50,6 +51,7 @@ const App: FC = () => (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={AuthHandle} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </BrowserRouter>
   </Provider>

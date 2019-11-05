@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { User } from 'firebase'
 
-import UserHome from '../../components/UserHome'
+import Timeline from '../../components/Timeline'
 import { getFollows } from '../../actions/follows'
 import { AuthState } from '../../reducers/auth'
 
@@ -29,16 +29,16 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
     dispatch,
   )
 
-const UserHomeContainer: FC<EnhancedUserHomeProps> = ({ signedUser, getFollowsStart }) => {
+const TimelineContainer: FC<EnhancedUserHomeProps> = ({ signedUser, getFollowsStart }) => {
   // followings, followersの取得
   useEffect(() => {
     getFollowsStart(signedUser.uid)
-  }, [])
+  }, [signedUser.uid])
 
-  return <UserHome />
+  return <Timeline />
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(UserHomeContainer)
+)(TimelineContainer)

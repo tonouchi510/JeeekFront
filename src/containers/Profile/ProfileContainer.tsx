@@ -3,49 +3,45 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
 import { User } from 'firebase'
-import UserProfile from '../../components/UserProfile'
+import Profile from '../../components/Profile'
 import { CombinedState } from '../../reducers'
-import { getUserProfile } from '../../actions/userProfile'
-import { UserProfile as Profile } from '../../services/models/users'
+import { getProfile } from '../../actions/profile'
+import { UserProfile } from '../../services/models/users'
 
 interface StateProps {
   user: User
-  userProfile: Profile
+  profile: UserProfile
 }
 
 interface DispatchProps {
-  getUserProfileStart: (uid: string) => void
+  getProfileStart: (uid: string) => void
 }
 
 type EnhancedUserProfileProps = StateProps & DispatchProps
 
 const mapStateToProps = (state: CombinedState): StateProps => ({
   user: state.auth.user,
-  userProfile: state.userProfile.userProfile,
+  profile: state.profile.profile,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
-      getUserProfileStart: (uid: string) => getUserProfile.start({ uid }),
+      getProfileStart: (uid: string) => getProfile.start({ uid }),
     },
     dispatch,
   )
 
-const UserProfileContainer: FC<EnhancedUserProfileProps> = ({
-  user,
-  userProfile,
-  getUserProfileStart,
-}) => {
+const ProfileContainer: FC<EnhancedUserProfileProps> = ({ user, profile, getProfileStart }) => {
   useEffect(() => {
-    getUserProfileStart(user.uid)
+    getProfileStart(user.uid)
   }, [])
 
-  if (!userProfile) return <p>loading...</p>
-  return <UserProfile userProfile={userProfile} />
+  if (!profile) return <p>loading...</p>
+  return <Profile userProfile={profile} />
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(UserProfileContainer)
+)(ProfileContainer)
