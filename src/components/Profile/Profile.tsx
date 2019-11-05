@@ -10,7 +10,7 @@ interface UserProfileProps {
   userProfile: Profile
 }
 
-const UserProfile: FC<UserProfileProps> = ({ userProfile = null }) => (
+const Profile: FC<UserProfileProps> = ({ userProfile = null }) => (
   <div className="ui grid">
     <div className="three wide column" />
     <div className="thirteen wide column">
@@ -19,4 +19,4 @@ const UserProfile: FC<UserProfileProps> = ({ userProfile = null }) => (
   </div>
 )
 
-export default UserProfile
+export default Profile

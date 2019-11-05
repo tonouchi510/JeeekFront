@@ -9,8 +9,11 @@ import ReduxSagaFirebase from 'redux-saga-firebase'
 
 import reducer, { initialState } from './reducers'
 import rootSaga from './sagas'
-import AuthHandle from './containers/AuthHandleContainer'
 import { firebaseConfig } from './firebase-config'
+import AuthHandle from './containers/AuthHandleContainer'
+import Timeline from './containers/Timeline/TimelineContainer'
+import Profile from './containers/Profile/ProfileContainer'
+import DefaultLayout from './Layout'
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
 const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
@@ -19,16 +22,6 @@ const initState = {
   ...initialState,
   auth: {
     rsf: reduxSagaFirebase,
-  },
-  userProfile: {
-    userProfile: null,
-  },
-  feed: {
-    isLoading: true,
-    feeds: [],
-  },
-  trend: {
-    trends: [],
   },
 }
 
@@ -48,9 +41,13 @@ const store = createStore(reducer, initState, enhancer)
 const App: FC = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={AuthHandle} />
-      </Switch>
+      <DefaultLayout>
+        <Switch>
+          <Route exact path="/" component={AuthHandle} />
+          <Route path="/timeline" component={Timeline} />
+          <Route path="/profile" component={Profile} />
+        </Switch>
+      </DefaultLayout>
     </BrowserRouter>
   </Provider>
 )
