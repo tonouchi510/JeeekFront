@@ -1,80 +1,58 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { User } from 'firebase'
 
 import { Activity } from '../../../services/models/activities'
 import ActivityCard from '../ActivityCard'
 
 const header = css`
-  margin-top: 30px;
-  text-align: center;
-  background-image: url(image/background.png);
+  margin-top: 15px;
 `
 
 const subHeader = css`
-  margin-top: 8px;
-  height: 50px;
+  height: 40px;
   width: 100%;
   text-align: center;
   font-size: 15px;
-`
-
-const userIcon = css`
-  float: left;
-  width: 13%;
-  height: 100%;
+  background-color: #eeeeee;
 `
 
 const message = css`
-  width: 69%;
-  height: 100%;
-  background-image: url(image/background.png);
-`
-
-const editButton = css`
-  float: right;
-  width: 13%;
-  height: 100%;
+  padding-top: 8px;
 `
 
 const feed = css`
   clear: both;
-  height: 700px;
+  height: 530px;
   overflow-y: auto;
 `
 
 const card = css`
   padding: 4px;
+  line-height: 1;
 `
 
 export interface UserFeedProps {
-  signedUser: User
   feeds?: Activity[]
   isLoading?: boolean
 }
 
-const UserFeed: FC<UserFeedProps> = ({ signedUser, feeds, isLoading = true }) => (
+const UserFeed: FC<UserFeedProps> = ({ feeds, isLoading = true }) => (
   <div className="ui container">
     <div className="content" css={header}>
-      <h2 className="ui header">Recent Activity</h2>
+      <h3 className="ui header">Recent Activity</h3>
     </div>
+    <hr />
     <div css={subHeader}>
-      <div className="ui label" css={userIcon}>
-        <img className="ui avatar large image" src={signedUser.photoURL} alt="icon" />
-      </div>
-      <div className="ui blue label" css={message}>
-        <b>あなたの実績を残していますか？</b>
-      </div>
-      <div className="ui button" css={editButton}>
-        <i className="edit icon" />
+      <div css={message}>
+        <h3>{feeds.length} activities today.</h3>
       </div>
     </div>
     <div className="ui feed" css={feed}>
       {isLoading ? (
         <p>isLoading...</p>
       ) : (
-        <div className="ui cards" css={card}>
+        <div className="cards" css={card}>
           {feeds.map((activity: Activity) => (
             <ActivityCard key={activity.id} activity={activity} />
           ))}
