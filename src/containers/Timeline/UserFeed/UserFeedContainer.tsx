@@ -37,14 +37,14 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
 
 const UserFeedContainer: FC<EnhancedHomeFeedProps> = ({ uid, follows, feed, getFeedStart }) => {
   useEffect(() => {
-    if (!feed.isLoading) return
-    // following ユーザ分fetch
-    if (follows) {
+    if (follows.followings || feed.isLoading) {
+      // following ユーザ分fetch
       follows.followings.forEach(u => {
         getFeedStart(u.uid)
       })
+      // 自分の分
+      getFeedStart(uid)
     }
-    getFeedStart(uid)
   }, [follows.followings])
   const feeds = feed.feeds.sort((a, b) => {
     return a.updatedAt < b.updatedAt ? 1 : -1
