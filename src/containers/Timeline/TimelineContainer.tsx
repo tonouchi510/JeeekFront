@@ -35,7 +35,7 @@ const TimelineContainer: FC<EnhancedUserHomeProps> = ({ signedUser, getFollowsSt
     getFollowsStart(signedUser.uid)
   }, [signedUser.uid])
 
-  return <Timeline />
+  return <Timeline user={signedUser} />
 }
 
 export default connect(

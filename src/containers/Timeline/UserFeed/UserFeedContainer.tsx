@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
 
 import UserFeed from '../../../components/Timeline/UserFeed'
 import { FollowsState } from '../../../reducers/follows'
@@ -11,7 +10,7 @@ import { UserFeedProps } from '../../../components/Timeline/UserFeed/UserFeed'
 import { CombinedState } from '../../../reducers'
 
 interface StateProps {
-  signedUser: User
+  uid: string
   follows: FollowsState
   feed: FeedsState
 }
@@ -23,7 +22,7 @@ interface DispatchProps {
 type EnhancedHomeFeedProps = StateProps & DispatchProps & UserFeedProps
 
 const mapStateToProps = (state: CombinedState): StateProps => ({
-  signedUser: state.auth.user,
+  uid: state.auth.user.uid,
   follows: state.follow,
   feed: state.feed,
 })
@@ -36,26 +35,21 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
     dispatch,
   )
 
-const UserFeedContainer: FC<EnhancedHomeFeedProps> = ({
-  signedUser,
-  follows,
-  feed,
-  getFeedStart,
-}) => {
+const UserFeedContainer: FC<EnhancedHomeFeedProps> = ({ uid, follows, feed, getFeedStart }) => {
   useEffect(() => {
-    if (!feed.isLoading) return
-    // following ユーザ分fetch
-    if (follows) {
+    if (follows.followings || feed.isLoading) {
+      // following ユーザ分fetch
       follows.followings.forEach(u => {
         getFeedStart(u.uid)
       })
+      // 自分の分
+      getFeedStart(uid)
     }
-    getFeedStart(signedUser.uid)
   }, [follows.followings])
   const feeds = feed.feeds.sort((a, b) => {
     return a.updatedAt < b.updatedAt ? 1 : -1
   })
-  return <UserFeed signedUser={signedUser} feeds={feeds} isLoading={feed.isLoading} />
+  return <UserFeed feeds={feeds} isLoading={feed.isLoading} />
 }
 
 export default connect(

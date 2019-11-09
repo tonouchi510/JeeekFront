@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-import { select, call, put, takeLatest } from 'redux-saga/effects'
+import { select, call, put, takeEvery } from 'redux-saga/effects'
 import { FeedActionType, getFeed } from '../actions/feed'
 
 function* runGetFeeds(action: ReturnType<typeof getFeed.start>) {
@@ -24,5 +24,5 @@ function* runGetFeeds(action: ReturnType<typeof getFeed.start>) {
 }
 
 export default function* feedSagas() {
-  yield takeLatest(FeedActionType.GET_FEED_START, runGetFeeds)
+  yield takeEvery(FeedActionType.GET_FEED_START, runGetFeeds)
 }

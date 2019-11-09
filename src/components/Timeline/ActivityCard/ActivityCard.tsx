@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
+import { Link } from 'react-router-dom'
 import { Activity } from '../../../services/models/activities'
 
 const categoryLabel = css`
@@ -37,7 +38,7 @@ export interface ActivityCardProps {
 // 長くなるとカードが伸びてダサくなるから投稿文のフィールドの横幅を長くして、
 // カードの伸びを極力無くそうとしている。
 const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
-  <div className="card" style={{ width: '95%' }}>
+  <div className="ui card" style={{ width: '98%' }}>
     <div className="content">
       <div className="right floated ui label" css={rankLabel}>
         <p css={label}>{rankMap[activity.rank]}</p>
@@ -46,12 +47,14 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
         <p css={label}>{categoryMap[activity.category]}</p>
       </div>
       <img
-        className="left floated ui avatar image"
+        className="left floated ui image"
         src={activity.user.photo_url}
         style={{ width: '2.5em', height: '2.5em' }}
         alt=""
       />
-      <a className="header">{activity.user.name}</a>
+      <Link className="header" to="/friends">
+        {activity.user.name}
+      </Link>
       <div className="meta">{activity.updatedAt.toDate().toDateString()}</div>
       <div className="description">
         <div className="content">

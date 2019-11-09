@@ -24,9 +24,18 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
       }
     }
     case FeedActionType.GET_FEED_SUCCEED: {
+      // まず重複排除（ここはもっとうまい仕組みにする）
+      const concat = [...state.feeds, ...action.payload.result.feeds]
+      const cleanFeeds = concat.filter((v1, i1, a1) => {
+        return (
+          a1.findIndex(v2 => {
+            return v1.id === v2.id
+          }) === i1
+        )
+      })
       return {
         ...state,
-        feeds: [...state.feeds, ...action.payload.result.feeds],
+        feeds: cleanFeeds,
         isLoading: false,
       }
     }

@@ -5,31 +5,29 @@ import { Activity } from '../../../services/models/activities'
 import ActivityCard from '../ActivityCard'
 
 const header = css`
-  margin-top: 30px;
-  text-align: center;
-  background-image: url(image/background.png);
+  margin-top: 15px;
 `
 
 const subHeader = css`
   width: 100%;
-  height: 50px;
-  margin-top: 8px;
-  background-color: #dddddd;
+  height: 40px;
+  background-color: #eeeeee;
 `
 
 const searchBar = css`
   width: 100%;
-  height: 34px;
-  margin-top: 8px;
+  height: 30px;
+  margin-top: 5px;
 `
 
 const feed = css`
-  height: 700px;
+  height: 530px;
   overflow-y: auto;
 `
 
 const uiCard = css`
   padding: 4px;
+  line-height: 1;
 `
 
 export interface TrendFeedProps {
@@ -39,8 +37,9 @@ export interface TrendFeedProps {
 const TrendFeed: FC<TrendFeedProps> = ({ feeds = null }) => (
   <div className="ui container">
     <div className="content" css={header}>
-      <h2 className="ui header">TREND</h2>
+      <h3 className="ui header">Trend</h3>
     </div>
+    <hr />
     <div className="ui search" css={subHeader}>
       <div className="ui icon input" css={searchBar}>
         <input className="prompt" type="text" placeholder="Common passwords..." />
@@ -48,7 +47,7 @@ const TrendFeed: FC<TrendFeedProps> = ({ feeds = null }) => (
       </div>
     </div>
     <div className="ui feed" css={feed}>
-      <div className="ui cards" css={uiCard}>
+      <div className="cards" css={uiCard}>
         {feeds.map((activity: Activity) => (
           <ActivityCard key={activity.id} activity={activity} />
         ))}
