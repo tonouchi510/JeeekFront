@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { UserProfile, Institution } from '../../../services/models/users'
 
 const headerBackgroundStyle = css`
-  width: 90%;
+  width: 100%;
 `
 
 interface AboutProps {

@@ -6,11 +6,12 @@ import { User } from 'firebase'
 import Profile from '../../components/Profile'
 import { CombinedState } from '../../reducers'
 import { getProfile } from '../../actions/profile'
-import { UserProfile } from '../../services/models/users'
+import { Follows, UserProfile } from '../../services/models/users'
 
 interface StateProps {
   user: User
   profile: UserProfile
+  follows?: Follows
 }
 
 interface DispatchProps {
@@ -22,6 +23,7 @@ type EnhancedUserProfileProps = StateProps & DispatchProps
 const mapStateToProps = (state: CombinedState): StateProps => ({
   user: state.auth.user,
   profile: state.profile.profile,
+  follows: state.follow,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
@@ -32,13 +34,18 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
     dispatch,
   )
 
-const ProfileContainer: FC<EnhancedUserProfileProps> = ({ user, profile, getProfileStart }) => {
+const ProfileContainer: FC<EnhancedUserProfileProps> = ({
+  user,
+  profile,
+  getProfileStart,
+  follows,
+}) => {
   useEffect(() => {
     getProfileStart(user.uid)
   }, [])
 
   if (!profile) return <p>loading...</p>
-  return <Profile userProfile={profile} />
+  return <Profile userProfile={profile} user={user} follows={follows} />
 }
 
 export default connect(
