@@ -48,7 +48,7 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
       </div>
       <img
         className="left floated ui image"
-        src={activity.user.photo_url}
+        src={activity.user.photoUrl}
         style={{ width: '2.5em', height: '2.5em' }}
         alt=""
       />

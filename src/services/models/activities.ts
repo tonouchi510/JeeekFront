@@ -6,7 +6,7 @@ export type Activity = {
   user: {
     uid: string
     name: string
-    photo_url: string
+    photoUrl: string
   }
   category: number
   rank: number
@@ -30,7 +30,7 @@ export type Replies = {
   user: {
     uid: string
     name: string
-    photo_url: string
+    photoUrl: string
   }
   comment: string
   favorites: {
