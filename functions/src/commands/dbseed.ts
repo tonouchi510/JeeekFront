@@ -69,7 +69,7 @@ const uploadSeed = async (collection: string) => {
     }
     case collectionName.activities: {
       const docs = await csv2json()
-        .fromFile('seeds/jeeek_dev_feeds.csv')
+        .fromFile('seeds/jeeek_dev_activities.csv')
         .then(jsonObj => {
           return jsonObj.map((record: Activity) => ({
             ...record,
