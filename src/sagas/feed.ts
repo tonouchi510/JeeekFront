@@ -7,16 +7,19 @@ function* syncFeeds(action: ReturnType<typeof getFeed.start>) {
   const rsf = yield select(state => state.auth.rsf)
   const db = firebase.firestore()
 
-  const channel = rsf.firestore.channel(db.collection('activities').where('user.uid', '==', uid))
+  const colRef = db.collection('activities').where('user.uid', '==', uid)
+  const channel = rsf.firestore.channel(colRef)
+
   while (true) {
-    const activities = yield take(channel)
+    const snapshot = yield take(channel)
 
     let feeds = []
-    activities.forEach(doc => {
+    snapshot.forEach(doc => {
       feeds = [...feeds, doc.data()]
       feeds[feeds.length - 1].id = doc.id
     })
-    yield put(getFeed.succeed({ feeds }))
+    if (feeds) yield put(getFeed.succeed({ feeds }))
+    else yield put(getFeed.fail('There are no items.'))
   }
 }
 
