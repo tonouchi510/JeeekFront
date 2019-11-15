@@ -2,6 +2,7 @@
 import React, { FC } from 'react'
 import { User } from 'firebase'
 import { jsx, css } from '@emotion/core'
+
 import dayjs from 'dayjs'
 import { Follows } from '../../../services/models/users'
 

@@ -2,20 +2,21 @@
 import React, { FC } from 'react'
 import { jsx } from '@emotion/core'
 import { User } from 'firebase'
+
 import About from './About'
-import { Follows, UserProfile as Profile } from '../../services/models/users'
+import { Follows, UserProfile } from '../../services/models/users'
 import UserInfo from './UserInfo'
 
-interface UserProfileProps {
+interface ProfileProps {
   user?: User
-  userProfile: Profile
+  userProfile: UserProfile
   follows?: Follows
 }
 
-const Profile: FC<UserProfileProps> = ({ userProfile = null, user = null, follows = null }) => (
+const Profile: FC<ProfileProps> = ({ userProfile = null, user = null, follows = null }) => (
   <div className="ui grid">
     <div className="four wide column">
-      <UserInfo user={user} follows={follows} />
+      <UserInfo user={user} follows={follows} description={userProfile.selfIntroduction} />
     </div>
     <div className="ten wide column">
       <About userProfile={userProfile} isEditMode={false} editStart={null} />

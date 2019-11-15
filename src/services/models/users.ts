@@ -13,6 +13,7 @@ export type UserProfile = {
   uid?: string
   version: number
   postCounter: number
+  selfIntroduction: string
   career?: {
     education: Institution[]
     workExperience: Institution[]

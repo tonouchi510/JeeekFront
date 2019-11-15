@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-
 import { User } from 'firebase'
+
 import Profile from '../../components/Profile'
 import { CombinedState } from '../../reducers'
 import { getProfile } from '../../actions/profile'
