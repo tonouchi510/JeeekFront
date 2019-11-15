@@ -20,7 +20,6 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
     case FeedActionType.GET_FEED_START: {
       return {
         ...state,
-        isLoading: true,
       }
     }
     case FeedActionType.GET_FEED_SUCCEED: {
