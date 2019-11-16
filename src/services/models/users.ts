@@ -19,9 +19,20 @@ export type UserProfile = {
     workExperience: Institution[]
     certification: Institution[]
   }
-  skills?: {
-    tag: string
-    point: number
+  skills?: Skill[]
+}
+
+export type Skill = {
+  tag: string
+  point: number
+}
+
+export type ChartData = {
+  labels: string[]
+  datasets: {
+    data: number[]
+    backgroundColor: string[]
+    hoverBackgroundColor: string[]
   }[]
 }
 
