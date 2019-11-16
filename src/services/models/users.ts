@@ -27,15 +27,6 @@ export type Skill = {
   point: number
 }
 
-export type ChartData = {
-  labels: string[]
-  datasets: {
-    data: number[]
-    backgroundColor: string[]
-    hoverBackgroundColor: string[]
-  }[]
-}
-
 export type Institution = {
   period: string
   subject: string

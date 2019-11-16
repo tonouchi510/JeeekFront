@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
+
 import { CombinedState } from '../../../reducers'
-import { Skill, UserProfile, ChartData } from '../../../services/models/users'
+import { Skill, UserProfile } from '../../../services/models/users'
+import { ChartData } from '../../../services/models/general'
 import { ProfileState } from '../../../reducers/profile'
 import { getProfile } from '../../../actions/profile'
 import SkillGraph from '../../../components/Home/SkillGraph'
 
 interface StateProps {
-  user: User
   profile?: UserProfile
 }
 
@@ -20,7 +20,6 @@ interface DispatchProps {
 type EnhancedHomeProps = StateProps & ProfileState & DispatchProps
 
 const mapStateToProps = (state: CombinedState): StateProps => ({
-  user: state.auth.user,
   profile: state.profile.profile,
 })
 
@@ -32,7 +31,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
     dispatch,
   )
 
-const SkillGraphContainer: FC<EnhancedHomeProps> = ({ user, profile, getProfileStart }) => {
+const SkillGraphContainer: FC<EnhancedHomeProps> = ({ profile }) => {
   const tags: string[] = []
   const points: number[] = []
   const colors: string[] = []
