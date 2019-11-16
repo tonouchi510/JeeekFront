@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import ReduxSagaFirebase from 'redux-saga-firebase'
 import Top from './Top'
-import Home from './Home'
+import Home from '../containers/Home'
 
 export interface AuthHandleProps {
   rsf?: ReduxSagaFirebase
