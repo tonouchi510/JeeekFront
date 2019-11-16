@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { User } from 'firebase'
 import { CombinedState } from '../../../reducers'
-import { Skill, UserProfile, SkillData } from '../../../services/models/users'
+import { Skill, UserProfile, ChartData } from '../../../services/models/users'
 import { ProfileState } from '../../../reducers/profile'
 import { getProfile } from '../../../actions/profile'
 import SkillGraph from '../../../components/Home/SkillGraph'
@@ -58,22 +58,16 @@ const SkillGraphContainer: FC<EnhancedHomeProps> = ({ user, profile, getProfileS
     i += 1
   })
 
-  const orderedPoints = points.sort((a, b) => {
-    return a < b ? 1 : -1
-  })
-
-  const dataSets: SkillData = {
+  const dataSets: ChartData = {
     labels: tags,
     datasets: [
       {
-        data: orderedPoints,
+        data: points,
         backgroundColor: colors,
         hoverBackgroundColor: colors,
       },
     ],
   }
-
-  console.log(dataSets)
 
   if (!profile) return <p>loading...</p>
   return <SkillGraph userProfile={profile} data={dataSets} />

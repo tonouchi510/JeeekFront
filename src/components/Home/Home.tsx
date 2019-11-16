@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import SkillList from './SkillList'
-import { SkillData, UserProfile } from '../../services/models/users'
+import { ChartData, UserProfile } from '../../services/models/users'
 import SkillGraph from '../../containers/Home/SkillGraph/SkillGraphContainer'
 
 interface HomeProps {
   userProfile?: UserProfile
-  data?: SkillData
+  data?: ChartData
 }
 
 const Home: FC<HomeProps> = ({ userProfile = null }) => (

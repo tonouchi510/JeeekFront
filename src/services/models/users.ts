@@ -18,7 +18,7 @@ export type UserProfile = {
     workExperience: Institution[]
     certification: Institution[]
   }
-  skills: Skill[]
+  skills?: Skill[]
 }
 
 export type Skill = {
@@ -26,7 +26,7 @@ export type Skill = {
   point: number
 }
 
-export type SkillData = {
+export type ChartData = {
   labels: string[]
   datasets: {
     data: number[]
