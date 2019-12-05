@@ -1,48 +1,60 @@
 import { combineReducers, Reducer } from 'redux'
 import authReducer, { AuthState } from './auth'
-import postReducer, { PostState } from './post'
-import followReducer, { FollowsState } from './follows'
-import profileReducer, { ProfileState } from './profile'
 import feedReducer, { FeedsState } from './feed'
 import trendReducer, { TrendsState } from './trend'
+import careerReducer, { CareerState } from './career'
+import skillReducer, { SkillState } from './skill'
+import followReducer, { FollowsState } from './follows'
+import coServiceReducer, { CoServiceState } from './coService'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  auth: null,
-  post: null,
-  follow: {
-    followings: [],
-    followers: [],
-  },
-  profile: {
-    profile: null,
-  },
-  feed: {
-    isLoading: true,
+  authUser: null,
+  userFeed: {
     feeds: [],
   },
-  trend: {
+  trendFeed: {
     trends: [],
+  },
+  career: {
+    education: [],
+    workExperience: [],
+    certification: [],
+  },
+  skillStack: {
+    skill: [],
+    point: [],
+    updateAt: [],
+  },
+  follows: {
+    followers: [],
+    followings: [],
+  },
+  coServices: {
+    service: [],
+    serviceUid: [],
   },
 }
 
 export interface CombinedState {
-  auth: AuthState
-  post: PostState
-  follow: FollowsState
-  profile: ProfileState
-  feed: FeedsState
-  trend: TrendsState
+  authUser: AuthState
+  userFeed: FeedsState
+  trendFeed: TrendsState
+  career: CareerState
+  skillStack: SkillState
+  follows: FollowsState
+  coServices: CoServiceState
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
-  auth: authReducer,
-  post: postReducer,
-  follow: followReducer,
-  profile: profileReducer,
-  feed: feedReducer,
-  trend: trendReducer,
+  authUser: authReducer,
+  userFeed: feedReducer,
+  trendFeed: trendReducer,
+  career: careerReducer,
+  skillStack: skillReducer,
+  follows: followReducer,
+  coServices: coServiceReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)
