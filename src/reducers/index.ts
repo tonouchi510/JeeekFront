@@ -1,7 +1,8 @@
 import { combineReducers, Reducer } from 'redux'
-import authReducer, { AuthState } from './auth'
-import feedReducer, { FeedsState } from './feed'
-import trendReducer, { TrendsState } from './trend'
+import ReduxSagaFirebase from 'redux-saga-firebase'
+import authReducer, { UserState } from './auth'
+import feedReducer, { UserFeedsState } from './feed'
+import trendReducer, { TrendFeedState } from './trend'
 import careerReducer, { CareerState } from './career'
 import skillReducer, { SkillState } from './skill'
 import followReducer, { FollowsState } from './follows'
@@ -10,44 +11,79 @@ import coServiceReducer, { CoServiceState } from './coService'
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  authUser: null,
-  userFeed: {
-    feeds: [],
+  rsf: null,
+  authUser: {
+    uid: null,
+    name: null,
+    email: null,
+    photoUrl: null,
+    phoneNumber: null,
+    emailVerified: null,
+    selfIntroduction: null,
   },
-  trendFeed: {
-    trends: [],
-  },
+  userFeed: [
+    {
+      id: null,
+      userTiny: null,
+      category: 0,
+      rank: 0,
+      content: null,
+      tags: [],
+      favorites: [],
+      gifting: [],
+      updateAt: null,
+    },
+  ],
+  trendFeed: [
+    {
+      id: null,
+      userTiny: null,
+      category: 0,
+      rank: 0,
+      content: null,
+      tags: [],
+      favorites: [],
+      gifting: [],
+      updateAt: null,
+    },
+  ],
   career: {
     education: [],
     workExperience: [],
     certification: [],
   },
-  skillStack: {
-    skill: [],
-    point: [],
-    updateAt: [],
-  },
+  skillStack: [
+    {
+      skill: [],
+      point: [],
+      updateAt: [],
+    },
+  ],
   follows: {
     followers: [],
     followings: [],
   },
-  coServices: {
-    service: [],
-    serviceUid: [],
-  },
+  coServices: [
+    {
+      service: null,
+      serviceUid: null,
+    },
+  ],
 }
 
 export interface CombinedState {
-  authUser: AuthState
-  userFeed: FeedsState
-  trendFeed: TrendsState
+  rsf: ReduxSagaFirebase
+  authUser: UserState
+  userFeed: UserFeedsState[]
+  trendFeed: TrendFeedState[]
   career: CareerState
-  skillStack: SkillState
+  skillStack: SkillState[]
   follows: FollowsState
-  coServices: CoServiceState
+  coServices: CoServiceState[]
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
+  rsf: ReduxSagaFirebase,
   authUser: authReducer,
   userFeed: feedReducer,
   trendFeed: trendReducer,
