@@ -1,7 +1,7 @@
 import { combineReducers, Reducer } from 'redux'
 import ReduxSagaFirebase from 'redux-saga-firebase'
 import authReducer, { UserState } from './auth'
-import feedReducer, { UserFeedsState } from './feed'
+import feedReducer, { UserFeedState } from './feed'
 import trendReducer, { TrendFeedState } from './trend'
 import careerReducer, { CareerState } from './career'
 import skillReducer, { SkillState } from './skill'
@@ -21,60 +21,25 @@ export const initialState: CombinedState = {
     emailVerified: null,
     selfIntroduction: null,
   },
-  userFeed: [
-    {
-      id: null,
-      userTiny: null,
-      category: 0,
-      rank: 0,
-      content: null,
-      tags: [],
-      favorites: [],
-      gifting: [],
-      updateAt: null,
-    },
-  ],
-  trendFeed: [
-    {
-      id: null,
-      userTiny: null,
-      category: 0,
-      rank: 0,
-      content: null,
-      tags: [],
-      favorites: [],
-      gifting: [],
-      updateAt: null,
-    },
-  ],
+  userFeed: [],
+  trendFeed: [],
   career: {
     education: [],
     workExperience: [],
     certification: [],
   },
-  skillStack: [
-    {
-      skill: [],
-      point: [],
-      updateAt: [],
-    },
-  ],
+  skillStack: [],
   follows: {
     followers: [],
     followings: [],
   },
-  coServices: [
-    {
-      service: null,
-      serviceUid: null,
-    },
-  ],
+  coServices: [],
 }
 
 export interface CombinedState {
   rsf: ReduxSagaFirebase
   authUser: UserState
-  userFeed: UserFeedsState[]
+  userFeed: UserFeedState[]
   trendFeed: TrendFeedState[]
   career: CareerState
   skillStack: SkillState[]
