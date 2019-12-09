@@ -6,9 +6,10 @@ function* runGetFollows(action: ReturnType<typeof getFollows.start>) {
   const rsf = yield select(state => state.auth.rsf)
 
   try {
-    const doc = yield call(rsf.firestore.getDocument, 'follows/'.concat(uid))
-    const data = doc.data()
-    yield put(getFollows.succeed({ uid }, data))
+    const doc = yield call(rsf.firestore.getDocument, 'users/'.concat(uid))
+    const followings = doc.followings.concat(uid)
+    const followers = doc.followers.concat(uid)
+    yield put(getFollows.succeed({ uid }, { followings, followers }))
   } catch (error) {
     yield put(getFollows.fail({ uid }, error))
   }
