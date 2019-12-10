@@ -1,4 +1,5 @@
-import { Activity } from '../services/models/activities'
+import firestore from 'firebase'
+import { UserTiny, Content } from '../services/models/users'
 
 export enum TrendActionType {
   GET_TREND_START = 'GET_TREND_START',
@@ -20,7 +21,14 @@ interface GetTrendParams {
 }
 
 export interface GetTrendResult {
-  trends: Activity[]
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: Content
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updatedAt: firestore.firestore.Timestamp
 }
 
 export const getTrend = {
