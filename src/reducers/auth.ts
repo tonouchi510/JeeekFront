@@ -1,22 +1,18 @@
 import { Reducer } from 'redux'
-import ReduxSagaFirebase from 'redux-saga-firebase'
-import { User } from 'firebase'
 import { AuthAction, AuthActionType } from '../actions/auth'
 
 export interface AuthState {
-  rsf: ReduxSagaFirebase
-  isSignedIn: boolean
-  user: User
-}
-
-const initialState: AuthState = {
-  rsf: null,
-  isSignedIn: false,
-  user: null,
+  uid: string
+  name: string
+  email: string
+  photoUrl: string
+  phoneNumber: string
+  emailVerified: string
+  selfIntroduction: string
 }
 
 const authReducer: Reducer<AuthState, AuthAction> = (
-  state: AuthState = initialState,
+  state: AuthState,
   action: AuthAction,
 ): AuthState => {
   switch (action.type) {
@@ -28,8 +24,13 @@ const authReducer: Reducer<AuthState, AuthAction> = (
     case AuthActionType.SIGNIN_OK: {
       return {
         ...state,
-        isSignedIn: true,
-        user: action.payload.user,
+        uid: action.payload.params.uid,
+        name: action.payload.params.name,
+        email: action.payload.params.email,
+        photoUrl: action.payload.params.photoUrl,
+        phoneNumber: action.payload.params.phoneNumber,
+        emailVerified: action.payload.params.emailVerified,
+        selfIntroduction: action.payload.params.selfIntroduction,
       }
     }
 
@@ -48,8 +49,13 @@ const authReducer: Reducer<AuthState, AuthAction> = (
     case AuthActionType.SIGNOUT_OK: {
       return {
         ...state,
-        isSignedIn: false,
-        user: null,
+        uid: null,
+        name: null,
+        email: null,
+        photoUrl: null,
+        phoneNumber: null,
+        emailVerified: null,
+        selfIntroduction: null,
       }
     }
 

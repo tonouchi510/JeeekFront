@@ -1,5 +1,3 @@
-import { User } from 'firebase'
-
 export enum AuthActionType {
   SIGNIN_START = 'SIGNIN_START',
   SIGNIN_OK = 'SIGNIN_OK',
@@ -11,21 +9,29 @@ export enum AuthActionType {
 
 export interface AuthAction {
   type: AuthActionType
-  payload?: AuthParams
+  payload?: {
+    params: AuthParams
+  }
 }
 
-interface AuthParams {
-  user: User
+export interface AuthParams {
+  uid: string
+  name: string
+  email: string
+  photoUrl: string
+  phoneNumber: string
+  emailVerified: string
+  selfIntroduction: string
 }
 
 export const signin = {
   start: (): AuthAction => ({
     type: AuthActionType.SIGNIN_START,
   }),
-  ok: (user: User): AuthAction => ({
+  ok: (params: AuthParams): AuthAction => ({
     type: AuthActionType.SIGNIN_OK,
     payload: {
-      user,
+      params,
     },
   }),
   fail: (): AuthAction => ({
