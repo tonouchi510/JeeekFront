@@ -1,21 +1,24 @@
 import { Reducer } from 'redux'
+import firestore from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { Activity } from '../services/models/activities'
+import { UserTiny, Content } from '../services/models/users'
 
-export interface FeedsState {
-  feeds: Activity[]
-  isLoading: boolean
+export interface UserFeedState {
+  id: string
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: Content
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updatedAt: firestore.firestore.Timestamp
 }
 
-const initialState = {
-  feeds: [],
-  isLoading: false,
-}
-
-const feedReducer: Reducer<FeedsState, FeedAction> = (
-  state: FeedsState = initialState,
+const feedReducer: Reducer<UserFeedState, FeedAction> = (
+  state: UserFeedState,
   action: FeedAction,
-): FeedsState => {
+): UserFeedState => {
   switch (action.type) {
     case FeedActionType.GET_FEED_START: {
       return {
@@ -23,19 +26,16 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
       }
     }
     case FeedActionType.GET_FEED_SUCCEED: {
-      // まず重複排除（ここはもっとうまい仕組みにする）
-      const concat = [...state.feeds, ...action.payload.result.feeds]
-      const cleanFeeds = concat.filter((v1, i1, a1) => {
-        return (
-          a1.findIndex(v2 => {
-            return v1.id === v2.id
-          }) === i1
-        )
-      })
       return {
         ...state,
-        feeds: cleanFeeds,
-        isLoading: false,
+        userTiny: action.payload.result.userTiny,
+        category: action.payload.result.category,
+        rank: action.payload.result.rank,
+        content: action.payload.result.content,
+        tags: action.payload.result.tags,
+        favorites: action.payload.result.favorites,
+        gifts: action.payload.result.gifts,
+        updatedAt: action.payload.result.updatedAt,
       }
     }
     case FeedActionType.GET_FEED_FAIL: {
