@@ -1,40 +1,20 @@
-import { firestore } from 'firebase/app'
+import firestore from 'firebase/app'
+import { UserTiny } from './users'
 
-export type Activity = {
-  id?: string
-  version: number
-  user: {
-    uid: string
-    name: string
-    photoUrl: string
-  }
+export type activities = {
+  activityID: string
+  userTiny: UserTiny
   category: number
   rank: number
-  content: {
-    subject: string
-    url: string
-    comment: string
-  }
+  content: Content
   tags: string[]
-  favorites: {
-    uid: string
-    eval: number
-  }[]
-  replies?: Replies
-  updatedAt: firestore.Timestamp | null
+  favorites: string[]
+  gifting: string[]
+  updateAt: firestore.firestore.Timestamp
 }
 
-export type Replies = {
-  id?: string
-  version: number
-  user: {
-    uid: string
-    name: string
-    photoUrl: string
-  }
+export type Content = {
+  subject: string
+  url: string
   comment: string
-  favorites: {
-    uid: string
-    eval: number
-  }[]
 }

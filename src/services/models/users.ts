@@ -1,39 +1,13 @@
-export type User = {
+export type users = {
   uid: string
-  email: string
-  emailVerified: boolean
-  phoneNumber?: string
-  password: string
-  displayName: string
-  photoURL?: string
-  disabled: boolean
-}
-
-export type UserProfile = {
-  uid?: string
-  version: number
-  postCounter: number
+  userTiny: UserTiny
   selfIntroduction: string
-  career?: {
-    education: Institution[]
-    workExperience: Institution[]
-    certification: Institution[]
-  }
-  skills?: Skill[]
+  followings: UserTiny[]
+  followers: UserTiny[]
 }
 
-export type Skill = {
-  tag: string
-  point: number
-}
-
-export type Institution = {
-  period: string
-  subject: string
-}
-
-export type Follows = {
-  uid?: string
-  followings: { uid: string }[]
-  followers: { uid: string }[]
+export type UserTiny = {
+  uid: string
+  name: string
+  photoUrl: string
 }
