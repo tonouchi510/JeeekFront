@@ -1,7 +1,7 @@
 import { firestore } from 'firebase/app'
-import { UserTiny } from './users'
+import { UserTiny } from './user'
 
-export type activities = {
+export type activity = {
   id: string
   userTiny: UserTiny
   category: number
