@@ -1,5 +1,4 @@
 export type career = {
-  uid: string
   education: Institution[]
   workExperience: Institution[]
   certification: Institution[]
