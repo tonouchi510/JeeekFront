@@ -1,4 +1,4 @@
-export type user = {
+export type User = {
   userTiny: UserTiny
   selfIntroduction: string
   followings: UserTiny[]

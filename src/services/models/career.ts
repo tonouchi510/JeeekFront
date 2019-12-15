@@ -1,4 +1,4 @@
-export type career = {
+export type Career = {
   education: Institution[]
   workExperience: Institution[]
   certification: Institution[]
