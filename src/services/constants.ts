@@ -1,7 +1,8 @@
 export const collectionName = {
+  firebaseUsers: 'firebaseUsers',
   users: 'users',
-  userProfiles: 'userProfiles',
-  follows: 'follows',
+  careers: 'careers',
   activities: 'activities',
+  skillStacks: 'skillStacks',
   categories: 'categories',
 } as const
