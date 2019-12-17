@@ -73,7 +73,7 @@ const uploadSeed = async (collection: string) => {
         const followUserUIDs = userDoc.followings.map(elem => elem.uid)
         followUserUIDs.push(uid)
         const followUserActivities = activityDocs.filter(
-          elem => elem.userTiny.uid in followUserUIDs,
+          elem => followUserUIDs.indexOf(elem.userTiny.uid) >= 0,
         )
         for await (const doc of followUserActivities) {
           // null itemの削除
