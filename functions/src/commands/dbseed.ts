@@ -9,6 +9,7 @@ import { FirebaseUser } from '../../../src/services/models/firebaseUser'
 import { User } from '../../../src/services/models/user'
 import { Career } from '../../../src/services/models/career'
 import { SkillStacks } from '../../../src/services/models/skillStacks'
+import { extServices } from '../../../src/services/models/extServices'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
@@ -160,6 +161,28 @@ const uploadSeed = async (collection: string) => {
               .doc(uid)
               .set({ point: skill.point })
           }
+        }
+      }
+
+      return
+    }
+    case collectionName.extServices: {
+      const docs = await csv2json()
+        .fromFile('seeds/jeeek_dev_extServices.csv')
+        .then(jsonObj => {
+          return jsonObj.map((record: extServices) => ({
+            ...record,
+          }))
+        })
+      for await (const doc of docs) {
+        // null itemの削除
+        doc.services = doc.services.filter(elem => elem.name !== '')
+
+        const { uid } = doc
+        const docWithoutId = { ...doc }
+        delete docWithoutId.uid
+        if (uid != null) {
+          await ref.doc(uid).set(docWithoutId)
         }
       }
 

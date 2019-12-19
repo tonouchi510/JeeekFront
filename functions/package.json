@@ -14,7 +14,8 @@
     "dbseed:firebaseUsers": "node lib/functions/src/commands/dbseed.js firebaseUsers",
     "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
     "dbseed:careers": "node lib/functions/src/commands/dbseed.js careers",
-    "dbseed:skillStacks": "node lib/functions/src/commands/dbseed.js skillStacks"
+    "dbseed:skillStacks": "node lib/functions/src/commands/dbseed.js skillStacks",
+    "dbseed:extServices": "node lib/functions/src/commands/dbseed.js extServices"
   },
   "author": "tonouchi510",
   "license": "ISC",
