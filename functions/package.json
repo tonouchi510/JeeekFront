@@ -15,7 +15,7 @@
     "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
     "dbseed:careers": "node lib/functions/src/commands/dbseed.js careers",
     "dbseed:skillStacks": "node lib/functions/src/commands/dbseed.js skillStacks",
-    "dbseed:extServices": "node lib/functions/src/commands/dbseed.js extServices"
+    "dbseed:externalServices": "node lib/functions/src/commands/dbseed.js externalServices"
   },
   "author": "tonouchi510",
   "license": "ISC",

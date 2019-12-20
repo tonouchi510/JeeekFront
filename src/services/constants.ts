@@ -4,6 +4,6 @@ export const collectionName = {
   careers: 'careers',
   activities: 'activities',
   skillStacks: 'skillStacks',
-  extServices: 'extServices',
+  externalServices: 'externalServices',
   categories: 'categories',
 } as const
