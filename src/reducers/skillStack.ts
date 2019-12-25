@@ -3,7 +3,7 @@ import { Reducer } from 'redux'
 import { SkillAction, SkillActionType } from '../actions/skillStack'
 
 export interface SkillState {
-  skill: string
+  tag: string
   point: number
   updateAt: firestore.Timestamp
 }
@@ -22,7 +22,7 @@ const skillReducer: Reducer<SkillState[], SkillAction> = (
       return [
         {
           ...state,
-          skill: action.payload.result.skill,
+          tag: action.payload.result.tag,
           point: action.payload.result.point,
           updateAt: action.payload.result.updateAt,
         },

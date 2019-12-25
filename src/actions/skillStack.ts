@@ -20,7 +20,7 @@ interface GetSkillParams {
 }
 
 export interface GetSkillResult {
-  skill: string
+  tag: string
   point: number
   updateAt: firestore.Timestamp
 }
