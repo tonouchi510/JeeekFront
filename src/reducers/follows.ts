@@ -1,20 +1,15 @@
 import { Reducer } from 'redux'
 import { FollowsAction, FollowsActionType } from '../actions/follows'
 
-export interface FollowsState {
+export interface FollowState {
   followings: { uid: string }[]
   followers: { uid: string }[]
 }
 
-const initialState = {
-  followings: [],
-  followers: [],
-}
-
-const followReducer: Reducer<FollowsState, FollowsAction> = (
-  state: FollowsState = initialState,
+const followReducer: Reducer<FollowState, FollowsAction> = (
+  state: FollowState,
   action: FollowsAction,
-): FollowsState => {
+): FollowState => {
   switch (action.type) {
     case FollowsActionType.GET_FOLLOWS_START: {
       return {
@@ -35,7 +30,9 @@ const followReducer: Reducer<FollowsState, FollowsAction> = (
       return state
     }
     default: {
-      return state
+      return {
+        ...state,
+      }
     }
   }
 }

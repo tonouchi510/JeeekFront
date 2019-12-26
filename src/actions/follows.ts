@@ -7,33 +7,33 @@ export enum FollowsActionType {
 export interface FollowsAction {
   type: FollowsActionType
   payload: {
-    params: GetFollowsParams
-    result?: GetFollowsResult
+    params: FollowsParams
+    result?: FollowsResult
     error?: any
   }
 }
 
-interface GetFollowsParams {
+interface FollowsParams {
   uid: string
 }
 
-export interface GetFollowsResult {
+export interface FollowsResult {
   followings: []
   followers: []
 }
 
 export const getFollows = {
-  start: (params: GetFollowsParams): FollowsAction => ({
+  start: (params: FollowsParams): FollowsAction => ({
     type: FollowsActionType.GET_FOLLOWS_START,
     payload: { params },
   }),
 
-  succeed: (params: GetFollowsParams, result: GetFollowsResult): FollowsAction => ({
+  succeed: (params: FollowsParams, result: FollowsResult): FollowsAction => ({
     type: FollowsActionType.GET_FOLLOWS_SUCCEED,
     payload: { params, result },
   }),
 
-  fail: (params: GetFollowsParams, error: any): FollowsAction => ({
+  fail: (params: FollowsParams, error: any): FollowsAction => ({
     type: FollowsActionType.GET_FOLLOWS_FAIL,
     payload: { params, error },
   }),
