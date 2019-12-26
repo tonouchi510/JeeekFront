@@ -1,5 +1,4 @@
-import { firestore } from 'firebase'
-import { UserTiny } from '../services/models/user'
+import { Activity } from '../services/models/activities'
 
 export enum FeedActionType {
   GET_FEED_START = 'GET_FEED_START',
@@ -22,21 +21,7 @@ interface GetFeedParams {
 }
 
 export interface GetFeedResult {
-  userFeeds: {
-    id: string
-    userTiny: UserTiny
-    category: number
-    rank: number
-    content: {
-      subject: string
-      url: string
-      comment: string
-    }
-    tags: string[]
-    favorites: string[]
-    gifts: string[]
-    updateAt: firestore.Timestamp
-  }[]
+  feeds: Activity[]
 }
 
 export const getFeed = {

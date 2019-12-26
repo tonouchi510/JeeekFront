@@ -1,61 +1,48 @@
 import { combineReducers, Reducer } from 'redux'
-import ReduxSagaFirebase from 'redux-saga-firebase'
-import authReducer, { UserState } from './auth'
-import feedReducer, { UserFeedState } from './feed'
-import trendReducer, { TrendFeedState } from './trend'
-import careerReducer, { CareerState } from './career'
-import skillReducer, { SkillState } from './skill'
+import authReducer, { AuthState } from './auth'
+import postReducer, { PostState } from './post'
 import followReducer, { FollowsState } from './follows'
-import coServiceReducer, { CoServiceState } from './coService'
+import profileReducer, { ProfileState } from './profile'
+import feedReducer, { FeedsState } from './feed'
+import trendReducer, { TrendsState } from './trend'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  rsf: null,
-  authUser: {
-    uid: null,
-    name: null,
-    email: null,
-    photoUrl: null,
-    phoneNumber: null,
-    emailVerified: null,
-    selfIntroduction: null,
-  },
-  userFeed: null,
-  trendFeed: [],
-  career: {
-    education: [],
-    workExperience: [],
-    certification: [],
-  },
-  skillStack: [],
-  follows: {
-    followers: [],
+  auth: null,
+  post: null,
+  follow: {
     followings: [],
+    followers: [],
   },
-  coServices: [],
+  profile: {
+    profile: null,
+  },
+  feed: {
+    isLoading: true,
+    feeds: [],
+  },
+  trend: {
+    trends: [],
+  },
 }
 
 export interface CombinedState {
-  rsf: ReduxSagaFirebase
-  authUser: UserState
-  userFeed: UserFeedState
-  trendFeed: TrendFeedState[]
-  career: CareerState
-  skillStack: SkillState[]
-  follows: FollowsState
-  coServices: CoServiceState[]
+  auth: AuthState
+  post: PostState
+  follow: FollowsState
+  profile: ProfileState
+  feed: FeedsState
+  trend: TrendsState
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
-  rsf: ReduxSagaFirebase,
-  authUser: authReducer,
-  userFeed: feedReducer,
-  trendFeed: trendReducer,
-  career: careerReducer,
-  skillStack: skillReducer,
-  follows: followReducer,
-  coServices: coServiceReducer,
+  auth: authReducer,
+  post: postReducer,
+  follow: followReducer,
+  profile: profileReducer,
+  feed: feedReducer,
+  trend: trendReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)

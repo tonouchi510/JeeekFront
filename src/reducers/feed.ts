@@ -1,32 +1,21 @@
 import { Reducer } from 'redux'
-import { firestore } from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { UserTiny } from '../services/models/user'
+import { Activity } from '../services/models/activities'
 
-export interface UserFeedState {
-  // filterや重複排除などで配列プロパティを取り扱いためuserFeedプロパティを作り配列にしている
-  // これに伴いreducerのインプット・アウトプットは配列じゃなくしてる(議論必要)
-  userFeeds: {
-    id: string
-    userTiny: UserTiny
-    category: number
-    rank: number
-    content: {
-      subject: string
-      url: string
-      comment: string
-    }
-    tags: string[]
-    favorites: string[]
-    gifts: string[]
-    updateAt: firestore.Timestamp
-  }[]
+export interface FeedsState {
+  feeds: Activity[]
+  isLoading: boolean
 }
 
-const userFeedReducer: Reducer<UserFeedState, FeedAction> = (
-  state: UserFeedState,
+const initialState = {
+  feeds: [],
+  isLoading: false,
+}
+
+const feedReducer: Reducer<FeedsState, FeedAction> = (
+  state: FeedsState = initialState,
   action: FeedAction,
-): UserFeedState => {
+): FeedsState => {
   switch (action.type) {
     case FeedActionType.GET_FEED_START: {
       return {
@@ -35,17 +24,18 @@ const userFeedReducer: Reducer<UserFeedState, FeedAction> = (
     }
     case FeedActionType.GET_FEED_SUCCEED: {
       // まず重複排除（ここはもっとうまい仕組みにする）
-      const concat = [...state.userFeeds, ...action.payload.result.userFeeds]
+      const concat = [...state.feeds, ...action.payload.result.feeds]
       const cleanFeeds = concat.filter((v1, i1, a1) => {
-        return [
+        return (
           a1.findIndex(v2 => {
             return v1.id === v2.id
-          }) === i1,
-        ]
+          }) === i1
+        )
       })
       return {
         ...state,
-        userFeeds: cleanFeeds,
+        feeds: cleanFeeds,
+        isLoading: false,
       }
     }
     case FeedActionType.GET_FEED_FAIL: {
@@ -53,11 +43,9 @@ const userFeedReducer: Reducer<UserFeedState, FeedAction> = (
       return state
     }
     default: {
-      return {
-        ...state,
-      }
+      return state
     }
   }
 }
 
-export default userFeedReducer
+export default feedReducer
