@@ -1,21 +1,32 @@
 import { Reducer } from 'redux'
+import { firestore } from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { Activity } from '../services/models/activities'
+import { UserTiny } from '../services/models/user'
 
-export interface FeedsState {
-  feeds: Activity[]
-  isLoading: boolean
+export interface UserFeedState {
+  // filterや重複排除などで配列プロパティを取り扱いためuserFeedプロパティを作り配列にしている
+  // そのためfeedReducerのインプット・アウトプットは配列にしていない(議論必要)
+  userFeeds: {
+    id: string
+    userTiny: UserTiny
+    category: number
+    rank: number
+    content: {
+      subject: string
+      url: string
+      comment: string
+    }
+    tags: string[]
+    favorites: string[]
+    gifts: string[]
+    updateAt: firestore.Timestamp
+  }[]
 }
 
-const initialState = {
-  feeds: [],
-  isLoading: false,
-}
-
-const feedReducer: Reducer<FeedsState, FeedAction> = (
-  state: FeedsState = initialState,
+const feedReducer: Reducer<UserFeedState, FeedAction> = (
+  state: UserFeedState,
   action: FeedAction,
-): FeedsState => {
+): UserFeedState => {
   switch (action.type) {
     case FeedActionType.GET_FEED_START: {
       return {
@@ -24,18 +35,17 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
     }
     case FeedActionType.GET_FEED_SUCCEED: {
       // まず重複排除（ここはもっとうまい仕組みにする）
-      const concat = [...state.feeds, ...action.payload.result.feeds]
+      const concat = [...state.userFeeds, ...action.payload.result.userFeeds]
       const cleanFeeds = concat.filter((v1, i1, a1) => {
-        return (
+        return [
           a1.findIndex(v2 => {
             return v1.id === v2.id
-          }) === i1
-        )
+          }) === i1,
+        ]
       })
       return {
         ...state,
-        feeds: cleanFeeds,
-        isLoading: false,
+        userFeeds: cleanFeeds,
       }
     }
     case FeedActionType.GET_FEED_FAIL: {
@@ -43,7 +53,9 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
       return state
     }
     default: {
-      return state
+      return {
+        ...state,
+      }
     }
   }
 }
