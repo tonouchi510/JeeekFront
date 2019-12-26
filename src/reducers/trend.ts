@@ -1,19 +1,30 @@
+import { firestore } from 'firebase'
 import { Reducer } from 'redux'
 import { TrendAction, TrendActionType } from '../actions/trend'
-import { Activity } from '../services/models/activities'
+import { UserTiny } from '../services/models/user'
 
-export interface TrendsState {
-  trends: Activity[]
+export interface TrendFeedState {
+  trendFeeds: {
+    id: string
+    userTiny: UserTiny
+    category: number
+    rank: number
+    content: {
+      subject: string
+      url: string
+      comment: string
+    }
+    tags: string[]
+    favorites: string[]
+    gifts: string[]
+    updateAt: firestore.Timestamp
+  }[]
 }
 
-const initialState = {
-  trends: [],
-}
-
-const trendReducer: Reducer<TrendsState, TrendAction> = (
-  state: TrendsState = initialState,
+const trendReducer: Reducer<TrendFeedState, TrendAction> = (
+  state: TrendFeedState,
   action: TrendAction,
-): TrendsState => {
+): TrendFeedState => {
   switch (action.type) {
     case TrendActionType.GET_TREND_START: {
       return {
@@ -23,7 +34,7 @@ const trendReducer: Reducer<TrendsState, TrendAction> = (
     case TrendActionType.GET_TREND_SUCCEED: {
       return {
         ...state,
-        trends: action.payload.result.trends,
+        trendFeeds: action.payload.result.trendFeeds,
       }
     }
     case TrendActionType.GET_TREND_FAIL: {
@@ -31,7 +42,9 @@ const trendReducer: Reducer<TrendsState, TrendAction> = (
       return state
     }
     default: {
-      return state
+      return {
+        ...state,
+      }
     }
   }
 }
