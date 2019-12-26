@@ -10,51 +10,51 @@ export enum CareerActionType {
 export interface CareerAction {
   type: CareerActionType
   payload: {
-    params: GetCareerParams
-    result?: GetCareerResult
+    params: CareerParams
+    result?: CareerResult
     error?: any
   }
 }
 
-interface GetCareerParams {
+interface CareerParams {
   uid: string
 }
 
-export interface GetCareerResult {
+export interface CareerResult {
   education: []
   workExperience: []
   certification: []
 }
 
 export const getCareer = {
-  start: (params: GetCareerParams): CareerAction => ({
+  start: (params: CareerParams): CareerAction => ({
     type: CareerActionType.GET_CAREER_START,
     payload: { params },
   }),
 
-  succeed: (params: GetCareerParams, result: GetCareerResult): CareerAction => ({
+  succeed: (params: CareerParams, result: CareerResult): CareerAction => ({
     type: CareerActionType.GET_CAREER_SUCCEED,
     payload: { params, result },
   }),
 
-  fail: (params: GetCareerParams, error: any): CareerAction => ({
+  fail: (params: CareerParams, error: any): CareerAction => ({
     type: CareerActionType.GET_CAREER_FAIL,
     payload: { params, error },
   }),
 }
 
 export const updateCareer = {
-  start: (params: GetCareerParams): CareerAction => ({
+  start: (params: CareerParams): CareerAction => ({
     type: CareerActionType.UPDATE_CAREER_START,
     payload: { params },
   }),
 
-  succeed: (params: GetCareerParams, result: GetCareerResult): CareerAction => ({
+  succeed: (params: CareerParams, result: CareerResult): CareerAction => ({
     type: CareerActionType.UPDATE_CAREER_SUCCEED,
     payload: { params, result },
   }),
 
-  fail: (params: GetCareerParams, error: any): CareerAction => ({
+  fail: (params: CareerParams, error: any): CareerAction => ({
     type: CareerActionType.UPDATE_CAREER_FAIL,
     payload: { params, error },
   }),
