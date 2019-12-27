@@ -18,6 +18,9 @@ export interface CareerAction {
 
 interface CareerParams {
   uid: string
+  education?: []
+  workExperience?: []
+  certification?: []
 }
 
 export interface CareerResult {

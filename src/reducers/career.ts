@@ -26,16 +26,16 @@ const careerReducer: Reducer<CareerState, CareerAction> = (
         certification: action.payload.result.certification,
       }
     }
-    case CareerActionType.UPDATE_CAREER_START: {
+    case CareerActionType.GET_CAREER_FAIL: {
       // TODO: error処理
       return state
     }
-    case CareerActionType.UPDATE_CAREER_SUCCEED: {
+    case CareerActionType.UPDATE_CAREER_START: {
       return {
         ...state,
       }
     }
-    case CareerActionType.UPDATE_CAREER_FAIL: {
+    case CareerActionType.UPDATE_CAREER_SUCCEED: {
       return {
         ...state,
         education: action.payload.result.education,
@@ -43,7 +43,7 @@ const careerReducer: Reducer<CareerState, CareerAction> = (
         certification: action.payload.result.certification,
       }
     }
-    case CareerActionType.GET_CAREER_FAIL: {
+    case CareerActionType.UPDATE_CAREER_FAIL: {
       // TODO: error処理
       return state
     }
