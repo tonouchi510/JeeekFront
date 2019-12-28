@@ -1,6 +1,6 @@
 import { Reducer } from 'redux'
 import ReduxSagaFirebase from 'redux-saga-firebase'
-import { AuthAction, AuthActionType } from '../actions/authUser'
+import { AuthUserAction, AuthUserActionType } from '../actions/authUser'
 
 export interface UserState {
   rsf: ReduxSagaFirebase
@@ -14,17 +14,17 @@ export interface UserState {
   selfIntroduction: string
 }
 
-const authReducer: Reducer<UserState, AuthAction> = (
+const authReducer: Reducer<UserState, AuthUserAction> = (
   state: UserState,
-  action: AuthAction,
+  action: AuthUserAction,
 ): UserState => {
   switch (action.type) {
-    case AuthActionType.SIGNIN_START: {
+    case AuthUserActionType.SIGNIN_START: {
       return {
         ...state,
       }
     }
-    case AuthActionType.SIGNIN_OK: {
+    case AuthUserActionType.SIGNIN_OK: {
       return {
         ...state,
         isSignedIn: true,
@@ -38,33 +38,56 @@ const authReducer: Reducer<UserState, AuthAction> = (
       }
     }
 
-    case AuthActionType.SIGNIN_FAIL: {
+    case AuthUserActionType.SIGNIN_FAIL: {
       return {
         ...state,
       }
     }
 
-    case AuthActionType.SIGNOUT_START: {
+    case AuthUserActionType.GET_USER_START: {
+      return {
+        ...state,
+      }
+    }
+    case AuthUserActionType.GET_USER_SUCCEED: {
+      return {
+        ...state,
+        uid: action.payload.params.uid,
+        name: action.payload.result.user.name,
+        email: action.payload.result.user.email,
+        photoUrl: action.payload.result.user.email,
+        phoneNumber: action.payload.result.user.phoneNumber,
+        emailVerified: action.payload.result.user.emailVerified,
+        selfIntroduction: action.payload.result.user.selfIntroduction,
+      }
+    }
+
+    case AuthUserActionType.GET_USER_FAIL: {
       return {
         ...state,
       }
     }
 
-    case AuthActionType.SIGNOUT_OK: {
+    case AuthUserActionType.UPDATE_USER_START: {
       return {
         ...state,
-        isSignedIn: false,
-        uid: null,
-        name: null,
-        email: null,
-        photoUrl: null,
-        phoneNumber: null,
-        emailVerified: null,
-        selfIntroduction: null,
       }
     }
 
-    case AuthActionType.SIGNOUT_FAIL: {
+    case AuthUserActionType.UPDATE_USER_SUCCEED: {
+      return {
+        ...state,
+        uid: action.payload.params.uid,
+        name: action.payload.result.user.name,
+        email: action.payload.result.user.email,
+        photoUrl: action.payload.result.user.email,
+        phoneNumber: action.payload.result.user.phoneNumber,
+        emailVerified: action.payload.result.user.emailVerified,
+        selfIntroduction: action.payload.result.user.selfIntroduction,
+      }
+    }
+
+    case AuthUserActionType.UPDATE_USER_FAIL: {
       return {
         ...state,
       }
