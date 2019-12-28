@@ -1,3 +1,5 @@
+import ReduxSagaFirebase from 'redux-saga-firebase'
+
 export enum AuthActionType {
   SIGNIN_START = 'SIGNIN_START',
   SIGNIN_OK = 'SIGNIN_OK',
@@ -15,6 +17,7 @@ export interface AuthAction {
 }
 
 interface AuthParams {
+  rsf: ReduxSagaFirebase
   isSignedIn: boolean
   uid: string
   name: string

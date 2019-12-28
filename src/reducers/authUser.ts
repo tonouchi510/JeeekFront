@@ -1,7 +1,9 @@
 import { Reducer } from 'redux'
+import ReduxSagaFirebase from 'redux-saga-firebase'
 import { AuthAction, AuthActionType } from '../actions/authUser'
 
 export interface UserState {
+  rsf: ReduxSagaFirebase
   isSignedIn: boolean
   uid: string
   name: string
