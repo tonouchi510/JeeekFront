@@ -81,7 +81,7 @@ const TagForm: FC = () => (
   <div className="field" css={field}>
     <b>Tag *</b>
     <div className="ui input focus" css={inputField}>
-      <input type="text" placeholder="React, 機械学習, GCP, ..." />
+      <input type="text" name="tag" placeholder="React, 機械学習, GCP, ..." />
     </div>
   </div>
 )
@@ -90,11 +90,12 @@ const UrlForm: FC = () => (
   <div className="field" css={field}>
     <b>URL</b>
     <div className="ui input focus" css={inputField}>
-      <input type="text" name="comment" placeholder="https://jeeek.com" />
+      <input type="text" name="url" placeholder="https://jeeek.com" />
     </div>
   </div>
 )
 
+// 117行目のデータ送信先(http://localhost:5000)はAPI作成後に適切なURIに変更する
 const PostScreen: FC<PostScreenProps> = ({ user }) => (
   <div css={postScreen}>
     <div className="content">
@@ -113,19 +114,16 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
         </div>
       </div>
       <div className="content">
-        <form>
+        <form action="http://localhost:5000" method="post">
           <CategoryForm />
           <SubjectForm />
           <CommentForm />
           <TagForm />
           <UrlForm />
-        </form>
-        <div css={field2}>
+          <div css={field2} />
           <b>*は必須項目です。</b>
-          <div className="ui teal button" css={submitButtonStyle}>
-            投稿
-          </div>
-        </div>
+          <input type="submit" value="投稿" className="ui teal button" css={submitButtonStyle} />
+        </form>
       </div>
     </div>
   </div>
