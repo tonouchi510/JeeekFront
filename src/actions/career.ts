@@ -1,3 +1,5 @@
+import { Institution } from '../services/models/career'
+
 export enum CareerActionType {
   GET_CAREER_START = 'GET_CAREER_START',
   GET_CAREER_SUCCEED = 'GET_CAREER_SUCCEED',
@@ -18,15 +20,15 @@ export interface CareerAction {
 
 interface CareerParams {
   uid: string
-  education?: []
-  workExperience?: []
-  certification?: []
+  education?: Institution[]
+  workExperience?: Institution[]
+  certification?: Institution[]
 }
 
 export interface CareerResult {
-  education: []
-  workExperience: []
-  certification: []
+  education: Institution[]
+  workExperience: Institution[]
+  certification: Institution[]
 }
 
 export const getCareer = {
