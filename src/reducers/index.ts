@@ -4,7 +4,7 @@ import authReducer, { UserState } from './auth'
 import feedReducer, { UserFeedState } from './feed'
 import trendReducer, { TrendFeedState } from './trend'
 import careerReducer, { CareerState } from './career'
-import skillReducer, { SkillState } from './skill'
+import skillReducer, { SkillState } from './skillStack'
 import followReducer, { FollowsState } from './follows'
 import externalServiceReducer, { ExternalServiceState } from './externalService'
 
