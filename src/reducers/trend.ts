@@ -4,27 +4,25 @@ import { TrendAction, TrendActionType } from '../actions/trend'
 import { UserTiny } from '../services/models/user'
 
 export interface TrendFeedState {
-  trendFeeds: {
-    id: string
-    userTiny: UserTiny
-    category: number
-    rank: number
-    content: {
-      subject: string
-      url: string
-      comment: string
-    }
-    tags: string[]
-    favorites: string[]
-    gifts: string[]
-    updateAt: firestore.Timestamp
-  }[]
+  id: string
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: {
+    subject: string
+    url: string
+    comment: string
+  }
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updateAt: firestore.Timestamp
 }
 
-const trendReducer: Reducer<TrendFeedState, TrendAction> = (
-  state: TrendFeedState,
+const trendReducer: Reducer<TrendFeedState[], TrendAction> = (
+  state: TrendFeedState[],
   action: TrendAction,
-): TrendFeedState => {
+): TrendFeedState[] => {
   switch (action.type) {
     case TrendActionType.GET_TREND_START: {
       return {
@@ -32,10 +30,7 @@ const trendReducer: Reducer<TrendFeedState, TrendAction> = (
       }
     }
     case TrendActionType.GET_TREND_SUCCEED: {
-      return {
-        ...state,
-        trendFeeds: action.payload.result.trendFeeds,
-      }
+      return action.payload.result
     }
     case TrendActionType.GET_TREND_FAIL: {
       // TODO: error処理

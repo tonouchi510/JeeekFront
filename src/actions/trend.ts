@@ -10,7 +10,7 @@ export interface TrendAction {
   type: TrendActionType
   payload: {
     params?: GetTrendParams
-    result?: GetTrendResult
+    result?: GetTrendResult[]
     error?: any
   }
 }
@@ -19,21 +19,19 @@ interface GetTrendParams {
 }
 
 export interface GetTrendResult {
-  trendFeeds: {
-    id: string
-    userTiny: UserTiny
-    category: number
-    rank: number
-    content: {
-      subject: string
-      url: string
-      comment: string
-    }
-    tags: string[]
-    favorites: string[]
-    gifts: string[]
-    updateAt: firestore.Timestamp
-  }[]
+  id: string
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: {
+    subject: string
+    url: string
+    comment: string
+  }
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updateAt: firestore.Timestamp
 }
 
 export const getTrend = {
@@ -41,7 +39,7 @@ export const getTrend = {
     type: TrendActionType.GET_TREND_START,
     payload: { params },
   }),
-  succeed: (result: GetTrendResult): TrendAction => ({
+  succeed: (result: GetTrendResult[]): TrendAction => ({
     type: TrendActionType.GET_TREND_SUCCEED,
     payload: { result },
   }),
