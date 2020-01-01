@@ -43,7 +43,7 @@ const CategoryForm: FC = () => (
   <div className="field" css={field}>
     <b>Category *</b>
     <div>
-      <select className="ui dropdown" required>
+      <select className="ui dropdown" name="category" required>
         <option value="">----------</option>
         <option value="0">学習</option>
         <option value="1">開発</option>
@@ -95,7 +95,6 @@ const UrlForm: FC = () => (
   </div>
 )
 
-
 // 117行目のデータ送信先(http://localhost:5000)はAPI作成後に適切なURIに変更する
 const PostScreen: FC<PostScreenProps> = ({ user }) => (
   <div css={postScreen}>
@@ -123,12 +122,7 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
           <UrlForm />
           <div css={field2} />
           <b>*は必須項目です。</b>
-          <input
-            type="submit"
-            value="投稿"
-            className="ui teal button"
-            css={submitButtonStyle}
-          />
+          <input type="submit" value="投稿" className="ui teal button" css={submitButtonStyle} />
         </form>
       </div>
     </div>
