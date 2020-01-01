@@ -43,7 +43,7 @@ const CategoryForm: FC = () => (
   <div className="field" css={field}>
     <b>Category *</b>
     <div>
-      <select className="ui dropdown">
+      <select className="ui dropdown" required>
         <option value="">----------</option>
         <option value="0">学習</option>
         <option value="1">開発</option>
@@ -58,7 +58,7 @@ const SubjectForm: FC = () => (
   <div className="field" css={field}>
     <b>Subject *</b>
     <div className="ui input focus" css={inputField}>
-      <input type="text" name="title" placeholder="サービス名、本のタイトル、勉強会、" />
+      <input type="text" name="title" placeholder="サービス名、本のタイトル、勉強会、" required />
     </div>
   </div>
 )
@@ -81,7 +81,7 @@ const TagForm: FC = () => (
   <div className="field" css={field}>
     <b>Tag *</b>
     <div className="ui input focus" css={inputField}>
-      <input type="text" name="tag" placeholder="React, 機械学習, GCP, ..." />
+      <input type="text" name="tag" placeholder="React, 機械学習, GCP, ..." required />
     </div>
   </div>
 )
@@ -94,6 +94,7 @@ const UrlForm: FC = () => (
     </div>
   </div>
 )
+
 
 // 117行目のデータ送信先(http://localhost:5000)はAPI作成後に適切なURIに変更する
 const PostScreen: FC<PostScreenProps> = ({ user }) => (
@@ -122,7 +123,12 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
           <UrlForm />
           <div css={field2} />
           <b>*は必須項目です。</b>
-          <input type="submit" value="投稿" className="ui teal button" css={submitButtonStyle} />
+          <input
+            type="submit"
+            value="投稿"
+            className="ui teal button"
+            css={submitButtonStyle}
+          />
         </form>
       </div>
     </div>
