@@ -1,21 +1,28 @@
 import { Reducer } from 'redux'
+import { firestore } from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { Activity } from '../services/models/activities'
+import { UserTiny } from '../services/models/user'
 
-export interface FeedsState {
-  feeds: Activity[]
-  isLoading: boolean
+export interface UserFeedState {
+  id: string
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: {
+    subject: string
+    url: string
+    comment: string
+  }
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updateAt: firestore.Timestamp
 }
 
-const initialState = {
-  feeds: [],
-  isLoading: false,
-}
-
-const feedReducer: Reducer<FeedsState, FeedAction> = (
-  state: FeedsState = initialState,
+const feedReducer: Reducer<UserFeedState[], FeedAction> = (
+  state: UserFeedState[],
   action: FeedAction,
-): FeedsState => {
+): UserFeedState[] => {
   switch (action.type) {
     case FeedActionType.GET_FEED_START: {
       return {
@@ -23,27 +30,16 @@ const feedReducer: Reducer<FeedsState, FeedAction> = (
       }
     }
     case FeedActionType.GET_FEED_SUCCEED: {
-      // まず重複排除（ここはもっとうまい仕組みにする）
-      const concat = [...state.feeds, ...action.payload.result.feeds]
-      const cleanFeeds = concat.filter((v1, i1, a1) => {
-        return (
-          a1.findIndex(v2 => {
-            return v1.id === v2.id
-          }) === i1
-        )
-      })
-      return {
-        ...state,
-        feeds: cleanFeeds,
-        isLoading: false,
-      }
+      return action.payload.result
     }
     case FeedActionType.GET_FEED_FAIL: {
       // TODO: error処理
       return state
     }
     default: {
-      return state
+      return {
+        ...state,
+      }
     }
   }
 }
