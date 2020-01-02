@@ -3,7 +3,14 @@ import authSagas from './auth'
 import followSagas from './follows'
 import feedSagas from './feed'
 import trendSagas from './trend'
+import skillSagas from './skillStack'
 
 export default function* rootSaga() {
-  yield all([fork(authSagas), fork(followSagas), fork(feedSagas), fork(trendSagas)])
+  yield all([
+    fork(authSagas),
+    fork(followSagas),
+    fork(feedSagas),
+    fork(trendSagas),
+    fork(skillSagas),
+  ])
 }
