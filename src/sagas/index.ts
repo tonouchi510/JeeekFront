@@ -4,6 +4,7 @@ import followSagas from './follows'
 import feedSagas from './feed'
 import trendSagas from './trend'
 import skillSagas from './skillStack'
+import careerSagas from './career'
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     fork(feedSagas),
     fork(trendSagas),
     fork(skillSagas),
+    fork(careerSagas),
   ])
 }
