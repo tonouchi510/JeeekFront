@@ -8,6 +8,7 @@ export interface AuthUserState {
   photoUrl: string
   phoneNumber: string
   emailVerified: boolean
+  startedAt: string
   selfIntroduction: string
 }
 
@@ -30,6 +31,7 @@ const authReducer: Reducer<AuthUserState, AuthAction> = (
         photoUrl: action.payload.user.photoURL,
         phoneNumber: action.payload.user.phoneNumber,
         emailVerified: action.payload.user.emailVerified,
+        startedAt: action.payload.user.metadata.creationTime,
         selfIntroduction: null,
       }
     }
