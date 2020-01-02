@@ -20,7 +20,7 @@ export interface UserFeedState {
 }
 
 const feedReducer: Reducer<UserFeedState[], FeedAction> = (
-  state: UserFeedState[],
+  state: UserFeedState[] = [],
   action: FeedAction,
 ): UserFeedState[] => {
   switch (action.type) {

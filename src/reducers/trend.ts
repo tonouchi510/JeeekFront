@@ -20,7 +20,7 @@ export interface TrendFeedState {
 }
 
 const trendReducer: Reducer<TrendFeedState[], TrendAction> = (
-  state: TrendFeedState[],
+  state: TrendFeedState[] = [],
   action: TrendAction,
 ): TrendFeedState[] => {
   switch (action.type) {

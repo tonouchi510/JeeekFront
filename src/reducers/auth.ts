@@ -12,7 +12,7 @@ export interface AuthUserState {
 }
 
 const authReducer: Reducer<AuthUserState, AuthAction> = (
-  state: AuthUserState,
+  state: AuthUserState = null,
   action: AuthAction,
 ): AuthUserState => {
   switch (action.type) {
@@ -47,16 +47,7 @@ const authReducer: Reducer<AuthUserState, AuthAction> = (
     }
 
     case AuthActionType.SIGNOUT_OK: {
-      return {
-        ...state,
-        uid: null,
-        name: null,
-        email: null,
-        photoUrl: null,
-        phoneNumber: null,
-        emailVerified: null,
-        selfIntroduction: null,
-      }
+      return null
     }
 
     case AuthActionType.SIGNOUT_FAIL: {

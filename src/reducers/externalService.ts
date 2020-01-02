@@ -6,7 +6,7 @@ export interface ExternalServiceState {
 }
 
 const externalServiceReducer: Reducer<ExternalServiceState, ExternalServiceAction> = (
-  state: ExternalServiceState,
+  state: ExternalServiceState = null,
   action: ExternalServiceAction,
 ): ExternalServiceState => {
   switch (action.type) {

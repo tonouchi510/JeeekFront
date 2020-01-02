@@ -9,7 +9,7 @@ export interface SkillState {
 }
 
 const skillReducer: Reducer<SkillState[], SkillAction> = (
-  state: SkillState[],
+  state: SkillState[] = [],
   action: SkillAction,
 ): SkillState[] => {
   switch (action.type) {

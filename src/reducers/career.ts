@@ -17,7 +17,7 @@ export interface CareerState {
 }
 
 const careerReducer: Reducer<CareerState, CareerAction> = (
-  state: CareerState,
+  state: CareerState = null,
   action: CareerAction,
 ): CareerState => {
   switch (action.type) {

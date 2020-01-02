@@ -7,7 +7,7 @@ export interface FollowState {
 }
 
 const followReducer: Reducer<FollowState, FollowsAction> = (
-  state: FollowState,
+  state: FollowState = null,
   action: FollowsAction,
 ): FollowState => {
   switch (action.type) {
