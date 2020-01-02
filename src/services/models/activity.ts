@@ -14,5 +14,5 @@ export type Activity = {
   tags: string[]
   favorites: string[]
   gifts: string[]
-  updateAt: firestore.Timestamp
+  updatedAt: firestore.Timestamp
 }

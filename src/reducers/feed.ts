@@ -3,7 +3,7 @@ import { firestore } from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
 import { UserTiny } from '../services/models/user'
 
-export interface UserFeedState {
+export interface Activity {
   id: string
   userTiny: UserTiny
   category: number
@@ -16,23 +16,46 @@ export interface UserFeedState {
   tags: string[]
   favorites: string[]
   gifts: string[]
-  updateAt: firestore.Timestamp
+  updatedAt: firestore.Timestamp
 }
 
-const feedReducer: Reducer<UserFeedState[], FeedAction> = (
-  state: UserFeedState[] = [],
+export interface FeedState {
+  userFeed: Activity[]
+  trendFeed: Activity[]
+}
+
+const feedReducer: Reducer<FeedState, FeedAction> = (
+  state: FeedState = null,
   action: FeedAction,
-): UserFeedState[] => {
+): FeedState => {
   switch (action.type) {
-    case FeedActionType.GET_FEED_START: {
+    case FeedActionType.GET_USER_FEED_START: {
       return {
         ...state,
       }
     }
-    case FeedActionType.GET_FEED_SUCCEED: {
-      return action.payload.result
+    case FeedActionType.GET_USER_FEED_SUCCEED: {
+      return {
+        ...state,
+        userFeed: action.payload.result,
+      }
     }
-    case FeedActionType.GET_FEED_FAIL: {
+    case FeedActionType.GET_USER_FEED_FAIL: {
+      // TODO: error処理
+      return state
+    }
+    case FeedActionType.GET_TREND_FEED_START: {
+      return {
+        ...state,
+      }
+    }
+    case FeedActionType.GET_TREND_FEED_SUCCEED: {
+      return {
+        ...state,
+        trendFeed: action.payload.result,
+      }
+    }
+    case FeedActionType.GET_TREND_FEED_FAIL: {
       // TODO: error処理
       return state
     }
