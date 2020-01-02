@@ -6,19 +6,13 @@ import careerReducer, { CareerState } from './career'
 import skillReducer, { SkillState } from './skillStack'
 import followReducer, { FollowState } from './follows'
 import externalServiceReducer, { ExternalServiceState } from './externalService'
+import commonReducer, { CommonState } from './common'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  authUser: {
-    uid: null,
-    name: null,
-    email: null,
-    photoUrl: null,
-    phoneNumber: null,
-    emailVerified: null,
-    selfIntroduction: null,
-  },
+  common: null,
+  authUser: null,
   userFeed: [],
   trendFeed: [],
   career: {
@@ -37,6 +31,7 @@ export const initialState: CombinedState = {
 }
 
 export interface CombinedState {
+  common: CommonState
   authUser: AuthUserState
   userFeed: UserFeedState[]
   trendFeed: TrendFeedState[]
@@ -47,6 +42,7 @@ export interface CombinedState {
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
+  common: commonReducer,
   authUser: authReducer,
   userFeed: feedReducer,
   trendFeed: trendReducer,
