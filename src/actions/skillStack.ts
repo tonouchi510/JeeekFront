@@ -10,7 +10,7 @@ export interface SkillAction {
   type: SkillActionType
   payload: {
     params: GetSkillParams
-    result?: GetSkillResult
+    result?: GetSkillResult[]
     error?: any
   }
 }
@@ -31,7 +31,7 @@ export const getSkill = {
     payload: { params },
   }),
 
-  succeed: (params: GetSkillParams, result: GetSkillResult): SkillAction => ({
+  succeed: (params: GetSkillParams, result: GetSkillResult[]): SkillAction => ({
     type: SkillActionType.GET_SKILL_SUCCEED,
     payload: { params, result },
   }),
