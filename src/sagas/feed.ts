@@ -4,7 +4,7 @@ import { FeedActionType, getFeed } from '../actions/feed'
 
 function* syncFeeds(action: ReturnType<typeof getFeed.start>) {
   const { uid } = action.payload.params
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.rsf)
   const db = firebase.firestore()
 
   const colRef = db.collection('activities').where('user.uid', '==', uid)

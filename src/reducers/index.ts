@@ -1,5 +1,4 @@
 import { combineReducers, Reducer } from 'redux'
-import ReduxSagaFirebase from 'redux-saga-firebase'
 import authReducer, { AuthUserState } from './auth'
 import feedReducer, { UserFeedState } from './feed'
 import trendReducer, { TrendFeedState } from './trend'
@@ -11,7 +10,6 @@ import externalServiceReducer, { ExternalServiceState } from './externalService'
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  rsf: null,
   authUser: {
     uid: null,
     name: null,
@@ -39,7 +37,6 @@ export const initialState: CombinedState = {
 }
 
 export interface CombinedState {
-  rsf: ReduxSagaFirebase
   authUser: AuthUserState
   userFeed: UserFeedState[]
   trendFeed: TrendFeedState[]
@@ -50,7 +47,6 @@ export interface CombinedState {
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
-  rsf: ReduxSagaFirebase,
   authUser: authReducer,
   userFeed: feedReducer,
   trendFeed: trendReducer,

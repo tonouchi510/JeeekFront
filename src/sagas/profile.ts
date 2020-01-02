@@ -3,7 +3,7 @@ import { GetProfileType, getProfile } from '../actions/profile'
 
 function* runGetProfile(action: ReturnType<typeof getProfile.start>) {
   const { uid } = action.payload.params
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.rsf)
   try {
     const doc = yield call(rsf.firestore.getDocument, 'userProfiles/'.concat(uid))
     const data = doc.data()

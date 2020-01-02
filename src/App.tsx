@@ -20,9 +20,7 @@ const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
 
 const initState = {
   ...initialState,
-  auth: {
-    rsf: reduxSagaFirebase,
-  },
+  rsf: reduxSagaFirebase,
 }
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */

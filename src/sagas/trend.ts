@@ -3,7 +3,7 @@ import { select, put, takeLatest, take } from 'redux-saga/effects'
 import { TrendActionType, getTrend } from '../actions/trend'
 
 function* syncTrends(action: ReturnType<typeof getTrend.start>) {
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.rsf)
   const db = firebase.firestore()
 
   const colRef = db.collection('activities').where('rank', '==', 3)

@@ -14,7 +14,7 @@ function* runSignin() {
 
 function* runSignout() {
   try {
-    const rsf = yield select(state => state.auth.rsf)
+    const rsf = yield select(state => state.rsf)
     yield call(rsf.auth.signOut)
   } catch (error) {
     yield put(signout.fail())
@@ -23,7 +23,7 @@ function* runSignout() {
 
 function* signedStatusWatcher() {
   // events on this channel fire when the user logs in or logs out
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.rsf)
   const channel = yield call(rsf.auth.channel)
 
   while (true) {
