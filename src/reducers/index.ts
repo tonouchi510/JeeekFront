@@ -1,6 +1,6 @@
 import { combineReducers, Reducer } from 'redux'
 import ReduxSagaFirebase from 'redux-saga-firebase'
-import authReducer, { UserState } from './auth'
+import authReducer, { AuthUserState } from './auth'
 import feedReducer, { UserFeedState } from './feed'
 import trendReducer, { TrendFeedState } from './trend'
 import careerReducer, { CareerState } from './career'
@@ -40,7 +40,7 @@ export const initialState: CombinedState = {
 
 export interface CombinedState {
   rsf: ReduxSagaFirebase
-  authUser: UserState
+  authUser: AuthUserState
   userFeed: UserFeedState[]
   trendFeed: TrendFeedState[]
   career: CareerState
