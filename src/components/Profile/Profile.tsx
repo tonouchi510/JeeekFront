@@ -1,25 +1,26 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { jsx } from '@emotion/core'
-import { User } from 'firebase'
 
 import About from './About'
-import { Follows, UserProfile } from '../../services/models/users'
 import UserInfo from './UserInfo'
+import { AuthUserState } from '../../reducers/auth'
+import { CareerState } from '../../reducers/career'
+import { FollowState } from '../../reducers/follows'
 
 interface ProfileProps {
-  user?: User
-  userProfile: UserProfile
-  follows?: Follows
+  user: AuthUserState
+  career?: CareerState
+  follows?: FollowState
 }
 
-const Profile: FC<ProfileProps> = ({ userProfile = null, user = null, follows = null }) => (
+const Profile: FC<ProfileProps> = ({ user = null, career = null, follows = null }) => (
   <div className="ui grid">
     <div className="four wide column">
-      <UserInfo user={user} follows={follows} description={userProfile.selfIntroduction} />
+      <UserInfo user={user} follows={follows} description={user.selfIntroduction} />
     </div>
     <div className="ten wide column">
-      <About userProfile={userProfile} isEditMode={false} editStart={null} />
+      <About uid={user.uid} career={career} isEditMode={false} editStart={null} />
     </div>
   </div>
 )

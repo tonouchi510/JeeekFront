@@ -1,51 +1,59 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
 
 import Profile from '../../components/Profile'
-import { CombinedState } from '../../reducers'
-import { getProfile } from '../../actions/profile'
-import { Follows, UserProfile } from '../../services/models/users'
+import { AuthUserState } from '../../reducers/auth'
+import { CareerState } from '../../reducers/career'
+import { FollowState } from '../../reducers/follows'
+import { getCareer } from '../../actions/career'
+import { getFollows } from '../../actions/follows'
 
 interface StateProps {
-  user: User
-  profile: UserProfile
-  follows?: Follows
+  user?: AuthUserState
+  career?: CareerState
+  follows?: FollowState
 }
 
 interface DispatchProps {
-  getProfileStart: (uid: string) => void
+  getCareerStart: (uid: string) => void
+  getFollowsStart: (uid: string) => void
 }
 
 type EnhancedUserProfileProps = StateProps & DispatchProps
 
-const mapStateToProps = (state: CombinedState): StateProps => ({
-  user: state.auth.user,
-  profile: state.profile.profile,
-  follows: state.follow,
+const mapStateToProps = (state: {
+  authUser: AuthUserState
+  career: CareerState
+  follows: FollowState
+}): StateProps => ({
+  user: state.authUser,
+  career: state.career,
+  follows: state.follows,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
-      getProfileStart: (uid: string) => getProfile.start({ uid }),
+      getCareerStart: (uid: string) => getCareer.start({ uid }),
+      getFollowsStart: (uid: string) => getFollows.start({ uid }),
     },
     dispatch,
   )
 
 const ProfileContainer: FC<EnhancedUserProfileProps> = ({
   user,
-  profile,
-  getProfileStart,
+  career,
   follows,
+  getCareerStart,
+  getFollowsStart,
 }) => {
   useEffect(() => {
-    getProfileStart(user.uid)
+    getCareerStart(user.uid)
+    getFollowsStart(user.uid)
   }, [])
 
-  if (!profile) return <p>loading...</p>
-  return <Profile userProfile={profile} user={user} follows={follows} />
+  return <Profile user={user} career={career} follows={follows} />
 }
 
 export default connect(

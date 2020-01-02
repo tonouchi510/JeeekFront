@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
-import { User } from 'firebase'
 import { jsx, css } from '@emotion/core'
 
 import dayjs from 'dayjs'
-import { Follows } from '../../../services/models/users'
+import { AuthUserState } from '../../../reducers/auth'
+import { FollowState } from '../../../reducers/follows'
 
 const cardStyle = css`
   width: '100%';
@@ -19,20 +19,18 @@ const editButton = css`
 `
 
 export interface UserInfoProps {
-  user?: User
-  follows?: Follows
+  user: AuthUserState
+  follows?: FollowState
   description?: string
 }
 
 const UserInfo: FC<UserInfoProps> = ({ user = null, follows = null, description = '自己紹介' }) => (
   <div className="ui card" style={{ marginTop: '15px' }} css={cardStyle}>
-    <img className="ui medium image" src={user.photoURL} css={imageStyle} alt="" />
+    <img className="ui medium image" src={user.photoUrl} css={imageStyle} alt="" />
     <div className="content">
-      <b className="header">{user.displayName}</b>
+      <b className="header">{user.name}</b>
       <div className="meta">
-        <span className="date">
-          Joined at&nbsp;{dayjs(user.metadata.creationTime).format('YYYY-MM-DD')}
-        </span>
+        <span className="date">Joined at&nbsp;{dayjs(user.startedAt).format('YYYY-MM-DD')}</span>
       </div>
       <div className="item" style={{ marginTop: '5px' }}>
         <i className="mail icon" />
