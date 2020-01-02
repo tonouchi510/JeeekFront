@@ -5,7 +5,7 @@ import feedReducer, { UserFeedState } from './feed'
 import trendReducer, { TrendFeedState } from './trend'
 import careerReducer, { CareerState } from './career'
 import skillReducer, { SkillState } from './skillStack'
-import followReducer, { FollowsState } from './follows'
+import followReducer, { FollowState } from './follows'
 import externalServiceReducer, { ExternalServiceState } from './externalService'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
@@ -45,7 +45,7 @@ export interface CombinedState {
   trendFeed: TrendFeedState[]
   career: CareerState
   skillStack: SkillState[]
-  follows: FollowsState
+  follows: FollowState
   externalServices: ExternalServiceState
 }
 
@@ -57,7 +57,7 @@ const reducerMap: CombineReducerMap<CombinedState> = {
   career: careerReducer,
   skillStack: skillReducer,
   follows: followReducer,
-  coServices: externalServiceReducer,
+  externalServices: externalServiceReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)
