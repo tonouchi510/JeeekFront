@@ -29,8 +29,15 @@ function* signedStatusWatcher() {
   while (true) {
     const { user } = yield take(channel)
 
-    if (user) yield put(signin.ok(user))
-    else yield put(signout.ok())
+    if (user) {
+      try {
+        const doc = yield call(rsf.firestore.getDocument, 'users/'.concat(user.uid))
+        user.selfIntroduction = doc.data().selfIntroduction
+      } catch (error) {
+        yield put(signin.fail())
+      }
+      yield put(signin.ok(user))
+    } else yield put(signout.ok())
   }
 }
 
