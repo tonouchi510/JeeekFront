@@ -1,37 +1,14 @@
 import React, { FC } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
 
-import { CombinedState } from '../../../reducers'
-import { Skill, UserProfile } from '../../../services/models/users'
 import { ChartData } from '../../../services/models/general'
-import { ProfileState } from '../../../reducers/profile'
-import { getProfile } from '../../../actions/profile'
 import SkillGraph from '../../../components/Home/SkillGraph'
+import { SkillState } from '../../../reducers/skillStack'
 
 interface StateProps {
-  profile?: UserProfile
+  skillStack?: SkillState[]
 }
 
-interface DispatchProps {
-  getProfileStart: (uid: string) => void
-}
-
-type EnhancedHomeProps = StateProps & ProfileState & DispatchProps
-
-const mapStateToProps = (state: CombinedState): StateProps => ({
-  profile: state.profile.profile,
-})
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
-  bindActionCreators(
-    {
-      getProfileStart: (uid: string) => getProfile.start({ uid }),
-    },
-    dispatch,
-  )
-
-const SkillGraphContainer: FC<EnhancedHomeProps> = ({ profile }) => {
+const SkillGraphContainer: FC<StateProps> = ({ skillStack }) => {
   const tags: string[] = []
   const points: number[] = []
   const colors: string[] = []
@@ -50,7 +27,7 @@ const SkillGraphContainer: FC<EnhancedHomeProps> = ({ profile }) => {
   ]
 
   let i = 0
-  profile.skills.forEach((s: Skill) => {
+  skillStack.forEach((s: SkillState) => {
     tags.push(s.tag)
     points.push(s.point)
     colors.push(defaultColors[i])
@@ -68,11 +45,8 @@ const SkillGraphContainer: FC<EnhancedHomeProps> = ({ profile }) => {
     ],
   }
 
-  if (!profile) return <p>loading...</p>
-  return <SkillGraph userProfile={profile} data={dataSets} />
+  if (!skillStack) return <p>loading...</p>
+  return <SkillGraph skillStack={skillStack} data={dataSets} />
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SkillGraphContainer)
+export default SkillGraphContainer

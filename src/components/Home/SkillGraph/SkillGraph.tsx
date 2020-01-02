@@ -1,9 +1,10 @@
 import { Pie } from 'react-chartjs-2'
 import React, { FC } from 'react'
-import { UserProfile, ChartData } from '../../../services/models/users'
+import { SkillState } from '../../../reducers/skillStack'
+import { ChartData } from '../../../services/models/general'
 
 interface SkillGraphProps {
-  userProfile?: UserProfile
+  skillStack?: SkillState[]
   data?: ChartData
 }
 
