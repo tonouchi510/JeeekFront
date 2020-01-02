@@ -4,7 +4,7 @@ import { FeedActionType, getFeed } from '../actions/feed'
 
 function* syncFeeds(action: ReturnType<typeof getFeed.start>) {
   const { uid } = action.payload.params
-  const rsf = yield select(state => state.rsf)
+  const rsf = yield select(state => state.common.rsf)
   const db = firebase.firestore()
 
   const colRef = db.collection('activities').where('user.uid', '==', uid)
@@ -18,7 +18,7 @@ function* syncFeeds(action: ReturnType<typeof getFeed.start>) {
       feeds = [...feeds, doc.data()]
       feeds[feeds.length - 1].id = doc.id
     })
-    if (feeds) yield put(getFeed.succeed({ feeds }))
+    if (feeds) yield put(getFeed.succeed(feeds))
     else yield put(getFeed.fail('There are no items.'))
   }
 }
