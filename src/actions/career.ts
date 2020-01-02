@@ -20,6 +20,7 @@ export interface CareerAction {
 
 interface CareerParams {
   uid: string
+  // 以下，Update用
   education?: Institution[]
   workExperience?: Institution[]
   certification?: Institution[]
