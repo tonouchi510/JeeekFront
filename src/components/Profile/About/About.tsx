@@ -1,20 +1,22 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { UserProfile, Institution } from '../../../services/models/users'
+import { CareerState, Institution } from '../../../reducers/career'
 
 const headerBackgroundStyle = css`
   width: 100%;
 `
 
 interface AboutProps {
-  userProfile?: UserProfile
+  uid: string
+  career?: CareerState
   isEditMode?: boolean
   editStart?: (param?: string) => void
 }
 
 const About: FC<AboutProps> = ({
-  userProfile = null,
+  uid = null,
+  career = null,
   isEditMode = false,
   editStart = () => {},
 }) => (
@@ -25,7 +27,7 @@ const About: FC<AboutProps> = ({
     <button
       className="mini ui button"
       type="button"
-      onClick={() => editStart(userProfile.uid)}
+      onClick={() => editStart(uid)}
       style={{ marginLeft: '10px', marginTop: '10px' }}
     >
       編集
@@ -43,8 +45,8 @@ const About: FC<AboutProps> = ({
           <textarea> </textarea>
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
-            {userProfile.career.education.map((inst: Institution) => (
-              <ul key={inst.subject}>
+            {career.education.map((inst: Institution) => (
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
                 <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>
@@ -66,8 +68,8 @@ const About: FC<AboutProps> = ({
           <textarea> </textarea>
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
-            {userProfile.career.workExperience.map((inst: Institution) => (
-              <ul key={inst.subject}>
+            {career.workExperience.map((inst: Institution) => (
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
                 <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>
@@ -89,8 +91,8 @@ const About: FC<AboutProps> = ({
           <textarea> </textarea>
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
-            {userProfile.career.certification.map((inst: Institution) => (
-              <ul key={inst.subject}>
+            {career.certification.map((inst: Institution) => (
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
                 <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>

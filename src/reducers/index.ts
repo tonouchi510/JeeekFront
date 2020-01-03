@@ -1,48 +1,51 @@
 import { combineReducers, Reducer } from 'redux'
-import authReducer, { AuthState } from './auth'
-import postReducer, { PostState } from './post'
-import followReducer, { FollowsState } from './follows'
-import profileReducer, { ProfileState } from './profile'
-import feedReducer, { FeedsState } from './feed'
-import trendReducer, { TrendsState } from './trend'
+import authReducer, { AuthUserState } from './auth'
+import feedReducer, { FeedState } from './feed'
+import careerReducer, { CareerState } from './career'
+import skillReducer, { SkillState } from './skillStack'
+import followReducer, { FollowState } from './follows'
+import externalServiceReducer, { ExternalServiceState } from './externalService'
+import commonReducer, { CommonState } from './common'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
 export const initialState: CombinedState = {
-  auth: null,
-  post: null,
-  follow: {
-    followings: [],
+  common: null,
+  authUser: null,
+  timeline: null,
+  career: {
+    education: [],
+    workExperience: [],
+    certification: [],
+  },
+  skillStack: [],
+  follows: {
     followers: [],
+    followings: [],
   },
-  profile: {
-    profile: null,
-  },
-  feed: {
-    isLoading: true,
-    feeds: [],
-  },
-  trend: {
-    trends: [],
+  externalServices: {
+    services: [],
   },
 }
 
 export interface CombinedState {
-  auth: AuthState
-  post: PostState
-  follow: FollowsState
-  profile: ProfileState
-  feed: FeedsState
-  trend: TrendsState
+  common: CommonState
+  authUser: AuthUserState
+  timeline: FeedState
+  career: CareerState
+  skillStack: SkillState[]
+  follows: FollowState
+  externalServices: ExternalServiceState
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
-  auth: authReducer,
-  post: postReducer,
-  follow: followReducer,
-  profile: profileReducer,
-  feed: feedReducer,
-  trend: trendReducer,
+  common: commonReducer,
+  authUser: authReducer,
+  timeline: feedReducer,
+  career: careerReducer,
+  skillStack: skillReducer,
+  follows: followReducer,
+  externalServices: externalServiceReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)

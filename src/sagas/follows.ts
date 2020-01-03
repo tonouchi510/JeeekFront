@@ -3,10 +3,10 @@ import { FollowsActionType, getFollows } from '../actions/follows'
 
 function* runGetFollows(action: ReturnType<typeof getFollows.start>) {
   const { uid } = action.payload.params
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.common.rsf)
 
   try {
-    const doc = yield call(rsf.firestore.getDocument, 'follows/'.concat(uid))
+    const doc = yield call(rsf.firestore.getDocument, 'users/'.concat(uid))
     const data = doc.data()
     yield put(getFollows.succeed({ uid }, data))
   } catch (error) {

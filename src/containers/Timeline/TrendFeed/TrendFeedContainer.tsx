@@ -1,49 +1,47 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
 
 import TrendFeed from '../../../components/Timeline/TrendFeed'
-import { CombinedState } from '../../../reducers'
-import { TrendsState } from '../../../reducers/trend'
-import { getTrend } from '../../../actions/trend'
+import { getTrendFeed } from '../../../actions/feed'
+import { Activity } from '../../../reducers/feed'
 
 interface StateProps {
-  signedUser: User
-  trendFeed: TrendsState
+  uid: string
+  feed: Activity[]
 }
 
 interface DispatchProps {
-  getTrendStart: (uid: string) => void
+  getTrendFeedStart: (uid: string) => void
 }
 
 type EnhancedTrendFeedProps = StateProps & DispatchProps
 
-const mapStateToProps = (state: CombinedState): StateProps => ({
-  signedUser: state.auth.user,
-  trendFeed: state.trend,
+const mapStateToProps = (state: {
+  authUser: { uid: string }
+  timeline: { trendFeed: Activity[] }
+}): StateProps => ({
+  uid: state.authUser.uid,
+  feed: state.timeline.trendFeed,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
-      getTrendStart: (uid: string) => getTrend.start({ uid }),
+      getTrendFeedStart: (uid: string) => getTrendFeed.start({ uid }),
     },
     dispatch,
   )
 
 const TrendFeedContainer: FC<EnhancedTrendFeedProps> = ({
-  signedUser,
-  trendFeed,
-  getTrendStart,
+  uid = null,
+  feed = [],
+  getTrendFeedStart,
 }) => {
   useEffect(() => {
-    getTrendStart(signedUser.uid)
+    getTrendFeedStart(uid)
   }, [])
-  const trends = trendFeed.trends.sort((a, b) => {
-    return a.updatedAt < b.updatedAt ? 1 : -1
-  })
-  return <TrendFeed feeds={trends} />
+  return <TrendFeed feed={feed} />
 }
 
 export default connect(

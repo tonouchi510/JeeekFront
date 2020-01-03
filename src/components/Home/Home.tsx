@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
 import SkillList from './SkillList'
-import { UserProfile } from '../../services/models/users'
 import SkillGraph from '../../containers/Home/SkillGraph'
+import { SkillState } from '../../reducers/skillStack'
 
 interface HomeProps {
-  userProfile?: UserProfile
+  skillStack: SkillState[]
 }
 
-const Home: FC<HomeProps> = ({ userProfile = null }) => (
+const Home: FC<HomeProps> = ({ skillStack = [] }) => (
   <div className="ui grid">
     <div className="three wide column">
-      <SkillGraph />
+      <SkillGraph skillStack={skillStack} />
     </div>
     <div className="ten wide column">
-      <SkillList userProfile={userProfile} />
+      <SkillList skillStack={skillStack} />
     </div>
   </div>
 )

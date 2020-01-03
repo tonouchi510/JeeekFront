@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { User } from 'firebase'
+import { AuthUserState } from '../../../reducers/auth'
 
 const postScreen = css`
   margin-top: 15px;
@@ -36,7 +36,7 @@ const submitButtonStyle = css`
 `
 
 interface PostScreenProps {
-  user?: User
+  user?: AuthUserState
 }
 
 const CategoryForm: FC = () => (
@@ -106,10 +106,10 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
       <b>From</b>
       <div className="ui grid">
         <div className="four wide column">
-          <img className="ui image" src={user.photoURL} alt="userIcon" css={imgIcon} />
+          <img className="ui image" src={user.photoUrl} alt="userIcon" css={imgIcon} />
         </div>
         <div className="six wide column">
-          <b>{user.displayName}</b>
+          <b>{user.name}</b>
           <p>{user.email}</p>
         </div>
       </div>

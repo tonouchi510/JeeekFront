@@ -1,24 +1,21 @@
 import { Reducer } from 'redux'
-import ReduxSagaFirebase from 'redux-saga-firebase'
-import { User } from 'firebase'
 import { AuthAction, AuthActionType } from '../actions/auth'
 
-export interface AuthState {
-  rsf: ReduxSagaFirebase
-  isSignedIn: boolean
-  user: User
+export interface AuthUserState {
+  uid: string
+  name: string
+  email: string
+  photoUrl: string
+  phoneNumber: string
+  emailVerified: boolean
+  startedAt: string
+  selfIntroduction: string
 }
 
-const initialState: AuthState = {
-  rsf: null,
-  isSignedIn: false,
-  user: null,
-}
-
-const authReducer: Reducer<AuthState, AuthAction> = (
-  state: AuthState = initialState,
+const authReducer: Reducer<AuthUserState, AuthAction> = (
+  state: AuthUserState = null,
   action: AuthAction,
-): AuthState => {
+): AuthUserState => {
   switch (action.type) {
     case AuthActionType.SIGNIN_START: {
       return {
@@ -28,8 +25,14 @@ const authReducer: Reducer<AuthState, AuthAction> = (
     case AuthActionType.SIGNIN_OK: {
       return {
         ...state,
-        isSignedIn: true,
-        user: action.payload.user,
+        uid: action.payload.user.uid,
+        name: action.payload.user.displayName,
+        email: action.payload.user.email,
+        photoUrl: action.payload.user.photoURL,
+        phoneNumber: action.payload.user.phoneNumber,
+        emailVerified: action.payload.user.emailVerified,
+        startedAt: action.payload.user.metadata.creationTime,
+        selfIntroduction: null,
       }
     }
 
@@ -46,11 +49,7 @@ const authReducer: Reducer<AuthState, AuthAction> = (
     }
 
     case AuthActionType.SIGNOUT_OK: {
-      return {
-        ...state,
-        isSignedIn: false,
-        user: null,
-      }
+      return null
     }
 
     case AuthActionType.SIGNOUT_FAIL: {

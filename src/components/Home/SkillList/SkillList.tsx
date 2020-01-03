@@ -1,17 +1,17 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { Skill, UserProfile } from '../../../services/models/users'
+import { SkillState } from '../../../reducers/skillStack'
 
 const header = css`
   margin-top: 15px;
 `
 
 interface SkillListProps {
-  userProfile?: UserProfile
+  skillStack: SkillState[]
 }
 
-const SkillList: FC<SkillListProps> = ({ userProfile = null }) => (
+const SkillList: FC<SkillListProps> = ({ skillStack = [] }) => (
   <div className="ui container">
     <div className="content" css={header}>
       <h3 className="ui header">Skill List</h3>
@@ -27,7 +27,7 @@ const SkillList: FC<SkillListProps> = ({ userProfile = null }) => (
         </tr>
       </thead>
       <tbody>
-        {userProfile.skills.map((s: Skill) => (
+        {Array.prototype.map.call(skillStack, (s: SkillState) => (
           <tr key={s.tag}>
             <td>{s.tag}</td>
             <td>

@@ -1,14 +1,13 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
 
 import Timeline from '../../components/Timeline'
 import { getFollows } from '../../actions/follows'
-import { AuthState } from '../../reducers/auth'
+import { AuthUserState } from '../../reducers/auth'
 
 interface StateProps {
-  signedUser: User
+  signedUser: AuthUserState
 }
 
 interface DispatchProps {
@@ -17,8 +16,8 @@ interface DispatchProps {
 
 type EnhancedUserHomeProps = StateProps & DispatchProps
 
-const mapStateToProps = (state: { auth: AuthState }): StateProps => ({
-  signedUser: state.auth.user,
+const mapStateToProps = (state: { authUser: AuthUserState }): StateProps => ({
+  signedUser: state.authUser,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>

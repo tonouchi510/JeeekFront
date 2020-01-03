@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { User } from 'firebase'
 import HomeFeed from '../../containers/Timeline/UserFeed'
 import TrendFeed from '../../containers/Timeline/TrendFeed'
 import PostScreen from './PostScreen'
+import { AuthUserState } from '../../reducers/auth'
 
 interface TimelineProps {
-  user: User
+  user: AuthUserState
 }
 
 const Timeline: FC<TimelineProps> = ({ user }) => (

@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { Activity } from '../../../services/models/activities'
+
 import ActivityCard from '../ActivityCard'
+import { Activity } from '../../../reducers/feed'
 
 const header = css`
   margin-top: 15px;
@@ -20,7 +21,7 @@ const searchBar = css`
   margin-top: 5px;
 `
 
-const feed = css`
+const feedLayout = css`
   height: 530px;
   overflow-y: auto;
 `
@@ -31,10 +32,10 @@ const uiCard = css`
 `
 
 export interface TrendFeedProps {
-  feeds?: Activity[]
+  feed: Activity[]
 }
 
-const TrendFeed: FC<TrendFeedProps> = ({ feeds = null }) => (
+const TrendFeed: FC<TrendFeedProps> = ({ feed = [] }) => (
   <div className="ui container">
     <div className="content" css={header}>
       <h3 className="ui header">Trend</h3>
@@ -46,9 +47,9 @@ const TrendFeed: FC<TrendFeedProps> = ({ feeds = null }) => (
         <i className="search icon"> </i>
       </div>
     </div>
-    <div className="ui feed" css={feed}>
+    <div className="ui feed" css={feedLayout}>
       <div className="cards" css={uiCard}>
-        {feeds.map((activity: Activity) => (
+        {feed.map((activity: Activity) => (
           <ActivityCard key={activity.id} activity={activity} />
         ))}
       </div>

@@ -1,44 +1,46 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { User } from 'firebase'
+
 import Home from '../../components/Home'
-import { CombinedState } from '../../reducers'
-import { UserProfile } from '../../services/models/users'
-import { ProfileState } from '../../reducers/profile'
-import { getProfile } from '../../actions/profile'
+import { SkillState } from '../../reducers/skillStack'
+import { getSkill } from '../../actions/skillStack'
+import { AuthUserState } from '../../reducers/auth'
 
 interface StateProps {
-  user: User
-  profile?: UserProfile
+  user: AuthUserState
+  skillStack: SkillState[]
 }
 
 interface DispatchProps {
-  getProfileStart: (uid: string) => void
+  getSkillStackStart: (uid: string) => void
 }
 
-type EnhancedHomeProps = StateProps & ProfileState & DispatchProps
+type EnhancedHomeProps = StateProps & DispatchProps
 
-const mapStateToProps = (state: CombinedState): StateProps => ({
-  user: state.auth.user,
-  profile: state.profile.profile,
+const mapStateToProps = (state: {
+  authUser: AuthUserState
+  skillStack: SkillState[]
+}): StateProps => ({
+  user: state.authUser,
+  skillStack: state.skillStack,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
-      getProfileStart: (uid: string) => getProfile.start({ uid }),
+      getSkillStackStart: (uid: string) => getSkill.start({ uid }),
     },
     dispatch,
   )
 
-const HomeContainer: FC<EnhancedHomeProps> = ({ user, profile, getProfileStart }) => {
+const HomeContainer: FC<EnhancedHomeProps> = ({ user, skillStack, getSkillStackStart }) => {
   useEffect(() => {
-    getProfileStart(user.uid)
+    getSkillStackStart(user.uid)
   }, [])
 
-  if (!profile) return <p>loading...</p>
-  return <Home userProfile={profile} />
+  if (!skillStack) return <p>loading...</p>
+  return <Home skillStack={skillStack} />
 }
 
 export default connect(

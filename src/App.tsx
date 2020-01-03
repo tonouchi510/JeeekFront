@@ -20,7 +20,7 @@ const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
 
 const initState = {
   ...initialState,
-  auth: {
+  common: {
     rsf: reduxSagaFirebase,
   },
 }

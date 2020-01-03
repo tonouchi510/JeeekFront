@@ -1,49 +1,68 @@
 import { Reducer } from 'redux'
+import { firestore } from 'firebase'
 import { FeedAction, FeedActionType } from '../actions/feed'
-import { Activity } from '../services/models/activities'
+import { UserTiny } from '../services/models/user'
 
-export interface FeedsState {
-  feeds: Activity[]
-  isLoading: boolean
+export interface Activity {
+  id: string
+  userTiny: UserTiny
+  category: number
+  rank: number
+  content: {
+    subject: string
+    url: string
+    comment: string
+  }
+  tags: string[]
+  favorites: string[]
+  gifts: string[]
+  updatedAt: firestore.Timestamp
 }
 
-const initialState = {
-  feeds: [],
-  isLoading: false,
+export interface FeedState {
+  userFeed: Activity[]
+  trendFeed: Activity[]
 }
 
-const feedReducer: Reducer<FeedsState, FeedAction> = (
-  state: FeedsState = initialState,
+const feedReducer: Reducer<FeedState, FeedAction> = (
+  state: FeedState = null,
   action: FeedAction,
-): FeedsState => {
+): FeedState => {
   switch (action.type) {
-    case FeedActionType.GET_FEED_START: {
+    case FeedActionType.GET_USER_FEED_START: {
       return {
         ...state,
       }
     }
-    case FeedActionType.GET_FEED_SUCCEED: {
-      // まず重複排除（ここはもっとうまい仕組みにする）
-      const concat = [...state.feeds, ...action.payload.result.feeds]
-      const cleanFeeds = concat.filter((v1, i1, a1) => {
-        return (
-          a1.findIndex(v2 => {
-            return v1.id === v2.id
-          }) === i1
-        )
-      })
+    case FeedActionType.GET_USER_FEED_SUCCEED: {
       return {
         ...state,
-        feeds: cleanFeeds,
-        isLoading: false,
+        userFeed: action.payload.result,
       }
     }
-    case FeedActionType.GET_FEED_FAIL: {
+    case FeedActionType.GET_USER_FEED_FAIL: {
+      // TODO: error処理
+      return state
+    }
+    case FeedActionType.GET_TREND_FEED_START: {
+      return {
+        ...state,
+      }
+    }
+    case FeedActionType.GET_TREND_FEED_SUCCEED: {
+      return {
+        ...state,
+        trendFeed: action.payload.result,
+      }
+    }
+    case FeedActionType.GET_TREND_FEED_FAIL: {
       // TODO: error処理
       return state
     }
     default: {
-      return state
+      return {
+        ...state,
+      }
     }
   }
 }

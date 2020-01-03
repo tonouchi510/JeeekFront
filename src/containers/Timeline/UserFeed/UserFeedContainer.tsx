@@ -3,53 +3,46 @@ import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 
 import UserFeed from '../../../components/Timeline/UserFeed'
-import { FollowsState } from '../../../reducers/follows'
-import { FeedsState } from '../../../reducers/feed'
-import { getFeed } from '../../../actions/feed'
+import { Activity } from '../../../reducers/feed'
+import { getUserFeed } from '../../../actions/feed'
 import { UserFeedProps } from '../../../components/Timeline/UserFeed/UserFeed'
-import { CombinedState } from '../../../reducers'
 
 interface StateProps {
   uid: string
-  follows: FollowsState
-  feed: FeedsState
+  feed: Activity[]
 }
 
 interface DispatchProps {
-  getFeedStart: (uid: string) => void
+  getUserFeedStart: (uid: string) => void
 }
 
 type EnhancedHomeFeedProps = StateProps & DispatchProps & UserFeedProps
 
-const mapStateToProps = (state: CombinedState): StateProps => ({
-  uid: state.auth.user.uid,
-  follows: state.follow,
-  feed: state.feed,
+const mapStateToProps = (state: {
+  authUser: { uid: string }
+  timeline: { userFeed: Activity[] }
+}): StateProps => ({
+  uid: state.authUser.uid,
+  feed: state.timeline.userFeed,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
   bindActionCreators(
     {
-      getFeedStart: (uid: string) => getFeed.start({ uid, followings: [] }),
+      getUserFeedStart: (uid: string) => getUserFeed.start({ uid }),
     },
     dispatch,
   )
 
-const UserFeedContainer: FC<EnhancedHomeFeedProps> = ({ uid, follows, feed, getFeedStart }) => {
+const UserFeedContainer: FC<EnhancedHomeFeedProps> = ({
+  uid = null,
+  feed = [],
+  getUserFeedStart,
+}) => {
   useEffect(() => {
-    if (follows.followings || feed.isLoading) {
-      // following ユーザ分fetch
-      follows.followings.forEach(u => {
-        getFeedStart(u.uid)
-      })
-      // 自分の分
-      getFeedStart(uid)
-    }
-  }, [follows.followings])
-  const feeds = feed.feeds.sort((a, b) => {
-    return a.updatedAt < b.updatedAt ? 1 : -1
-  })
-  return <UserFeed feeds={feeds} isLoading={feed.isLoading} />
+    getUserFeedStart(uid)
+  }, [])
+  return <UserFeed feed={feed} />
 }
 
 export default connect(

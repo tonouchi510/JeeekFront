@@ -11,13 +11,11 @@
     "start": "npm run shell",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dbreset": "firebase firestore:delete --all-collections",
-    "dbreset:activities": "firebase firestore:delete -y --shallow activities",
-    "dbreset:follows": "firebase firestore:delete -y --shallow follows",
-    "dbseed:categories": "node lib/functions/src/commands/dbseed.js categories",
+    "dbseed:firebaseUsers": "node lib/functions/src/commands/dbseed.js firebaseUsers",
     "dbseed:users": "node lib/functions/src/commands/dbseed.js users",
-    "dbseed:user-profiles": "node lib/functions/src/commands/dbseed.js userProfiles",
-    "dbseed:follows": "node lib/functions/src/commands/dbseed.js follows",
-    "dbseed:activities": "node lib/functions/src/commands/dbseed.js activities"
+    "dbseed:careers": "node lib/functions/src/commands/dbseed.js careers",
+    "dbseed:skillStacks": "node lib/functions/src/commands/dbseed.js skillStacks",
+    "dbseed:externalServices": "node lib/functions/src/commands/dbseed.js externalServices"
   },
   "author": "tonouchi510",
   "license": "ISC",

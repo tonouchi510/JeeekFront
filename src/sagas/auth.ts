@@ -14,7 +14,7 @@ function* runSignin() {
 
 function* runSignout() {
   try {
-    const rsf = yield select(state => state.auth.rsf)
+    const rsf = yield select(state => state.common.rsf)
     yield call(rsf.auth.signOut)
   } catch (error) {
     yield put(signout.fail())
@@ -23,14 +23,21 @@ function* runSignout() {
 
 function* signedStatusWatcher() {
   // events on this channel fire when the user logs in or logs out
-  const rsf = yield select(state => state.auth.rsf)
+  const rsf = yield select(state => state.common.rsf)
   const channel = yield call(rsf.auth.channel)
 
   while (true) {
     const { user } = yield take(channel)
 
-    if (user) yield put(signin.ok(user))
-    else yield put(signout.ok())
+    if (user) {
+      try {
+        const doc = yield call(rsf.firestore.getDocument, 'users/'.concat(user.uid))
+        user.selfIntroduction = doc.data().selfIntroduction
+      } catch (error) {
+        yield put(signin.fail())
+      }
+      yield put(signin.ok(user))
+    } else yield put(signout.ok())
   }
 }
 
