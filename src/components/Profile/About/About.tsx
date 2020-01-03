@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
-import { CareerState } from '../../../reducers/career'
-import { Institution } from '../../../services/models/career'
+import { CareerState, Institution } from '../../../reducers/career'
 
 const headerBackgroundStyle = css`
   width: 100%;
@@ -47,9 +46,9 @@ const About: FC<AboutProps> = ({
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
             {career.education.map((inst: Institution) => (
-              <ul key={inst.content}>
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
-                <li style={{ listStyle: 'none' }}>{inst.content}</li>
+                <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>
             ))}
           </div>
@@ -70,9 +69,9 @@ const About: FC<AboutProps> = ({
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
             {career.workExperience.map((inst: Institution) => (
-              <ul key={inst.content}>
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
-                <li style={{ listStyle: 'none' }}>{inst.content}</li>
+                <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>
             ))}
           </div>
@@ -93,9 +92,9 @@ const About: FC<AboutProps> = ({
         ) : (
           <div className="description" style={{ marginLeft: '30px' }}>
             {career.certification.map((inst: Institution) => (
-              <ul key={inst.content}>
+              <ul key={inst.subject} style={{ clear: 'both' }}>
                 <li style={{ float: 'left', width: '10%' }}>{inst.period}</li>
-                <li style={{ listStyle: 'none' }}>{inst.content}</li>
+                <li style={{ listStyle: 'none' }}>{inst.subject}</li>
               </ul>
             ))}
           </div>
