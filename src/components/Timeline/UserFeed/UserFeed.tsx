@@ -2,8 +2,8 @@
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
 
-import { Activity } from '../../../services/models/activities'
 import ActivityCard from '../ActivityCard'
+import { Activity } from '../../../reducers/feed'
 
 const header = css`
   margin-top: 15px;
@@ -21,7 +21,7 @@ const message = css`
   padding-top: 8px;
 `
 
-const feed = css`
+const feedLayout = css`
   clear: both;
   height: 530px;
   overflow-y: auto;
@@ -33,11 +33,10 @@ const card = css`
 `
 
 export interface UserFeedProps {
-  feeds?: Activity[]
-  isLoading?: boolean
+  feed: Activity[]
 }
 
-const UserFeed: FC<UserFeedProps> = ({ feeds, isLoading = true }) => (
+const UserFeed: FC<UserFeedProps> = ({ feed = [] }) => (
   <div className="ui container">
     <div className="content" css={header}>
       <h3 className="ui header">Recent Activity</h3>
@@ -45,19 +44,15 @@ const UserFeed: FC<UserFeedProps> = ({ feeds, isLoading = true }) => (
     <hr />
     <div css={subHeader}>
       <div css={message}>
-        <h3>{feeds.length} activities today.</h3>
+        <h3>{feed.length} activities today.</h3>
       </div>
     </div>
-    <div className="ui feed" css={feed}>
-      {isLoading ? (
-        <p>isLoading...</p>
-      ) : (
-        <div className="cards" css={card}>
-          {feeds.map((activity: Activity) => (
-            <ActivityCard key={activity.id} activity={activity} />
-          ))}
-        </div>
-      )}
+    <div className="ui feed" css={feedLayout}>
+      <div className="cards" css={card}>
+        {feed.map((activity: Activity) => (
+          <ActivityCard key={activity.id} activity={activity} />
+        ))}
+      </div>
     </div>
   </div>
 )

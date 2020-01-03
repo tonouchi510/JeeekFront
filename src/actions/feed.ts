@@ -2,9 +2,12 @@ import { firestore } from 'firebase'
 import { UserTiny } from '../services/models/user'
 
 export enum FeedActionType {
-  GET_FEED_START = 'GET_FEED_START',
-  GET_FEED_SUCCEED = 'GET_FEED_SUCCEED',
-  GET_FEED_FAIL = 'GET_FEED_FAIL',
+  GET_USER_FEED_START = 'GET_USER_FEED_START',
+  GET_USER_FEED_SUCCEED = 'GET_USER_FEED_SUCCEED',
+  GET_USER_FEED_FAIL = 'GET_USER_FEED_FAIL',
+  GET_TREND_FEED_START = 'GET_TREND_FEED_START',
+  GET_TREND_FEED_SUCCEED = 'GET_TREND_FEED_SUCCEED',
+  GET_TREND_FEED_FAIL = 'GET_TREND_FEED_FAIL',
 }
 
 export interface FeedAction {
@@ -33,22 +36,37 @@ export interface GetFeedResult {
   tags: string[]
   favorites: string[]
   gifts: string[]
-  updateAt: firestore.Timestamp
+  updatedAt: firestore.Timestamp
 }
 
-export const getFeed = {
+export const getUserFeed = {
   start: (params: GetFeedParams): FeedAction => ({
-    type: FeedActionType.GET_FEED_START,
+    type: FeedActionType.GET_USER_FEED_START,
     payload: { params },
   }),
 
   succeed: (result: GetFeedResult[]): FeedAction => ({
-    type: FeedActionType.GET_FEED_SUCCEED,
+    type: FeedActionType.GET_USER_FEED_SUCCEED,
     payload: { result },
   }),
 
   fail: (error: any): FeedAction => ({
-    type: FeedActionType.GET_FEED_FAIL,
+    type: FeedActionType.GET_USER_FEED_FAIL,
+    payload: { error },
+  }),
+}
+
+export const getTrendFeed = {
+  start: (params: GetFeedParams): FeedAction => ({
+    type: FeedActionType.GET_TREND_FEED_START,
+    payload: { params },
+  }),
+  succeed: (result: GetFeedResult[]): FeedAction => ({
+    type: FeedActionType.GET_TREND_FEED_SUCCEED,
+    payload: { result },
+  }),
+  fail: (error: any): FeedAction => ({
+    type: FeedActionType.GET_TREND_FEED_FAIL,
     payload: { error },
   }),
 }

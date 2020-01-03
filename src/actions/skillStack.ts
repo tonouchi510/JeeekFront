@@ -10,7 +10,7 @@ export interface SkillAction {
   type: SkillActionType
   payload: {
     params: GetSkillParams
-    result?: GetSkillResult[]
+    result?: GetSkillResult
     error?: any
   }
 }
@@ -20,9 +20,11 @@ interface GetSkillParams {
 }
 
 export interface GetSkillResult {
-  tag: string
-  point: number
-  updateAt: firestore.Timestamp
+  skills: {
+    tag: string
+    point: number
+    updateAt: firestore.Timestamp
+  }[]
 }
 
 export const getSkill = {
@@ -31,7 +33,7 @@ export const getSkill = {
     payload: { params },
   }),
 
-  succeed: (params: GetSkillParams, result: GetSkillResult[]): SkillAction => ({
+  succeed: (params: GetSkillParams, result: GetSkillResult): SkillAction => ({
     type: SkillActionType.GET_SKILL_SUCCEED,
     payload: { params, result },
   }),
