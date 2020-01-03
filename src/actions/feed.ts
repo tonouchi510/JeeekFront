@@ -36,7 +36,7 @@ export interface GetFeedResult {
   tags: string[]
   favorites: string[]
   gifts: string[]
-  updateAt: firestore.Timestamp
+  updatedAt: firestore.Timestamp
 }
 
 export const getUserFeed = {

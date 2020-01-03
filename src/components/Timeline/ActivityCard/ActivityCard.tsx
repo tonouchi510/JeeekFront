@@ -2,7 +2,7 @@
 import React, { FC } from 'react'
 import { css, jsx } from '@emotion/core'
 import { Link } from 'react-router-dom'
-import { Activity } from '../../../services/models/activities'
+import { Activity } from '../../../reducers/feed'
 
 const categoryLabel = css`
   width: 5em;
@@ -48,12 +48,12 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
       </div>
       <img
         className="left floated ui image"
-        src={activity.user.photoUrl}
+        src={activity.userTiny.photoUrl}
         style={{ width: '2.5em', height: '2.5em' }}
         alt=""
       />
       <Link className="header" to="/friends">
-        {activity.user.name}
+        {activity.userTiny.name}
       </Link>
       <div className="meta">{activity.updatedAt.toDate().toDateString()}</div>
       <div className="description">
