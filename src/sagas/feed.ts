@@ -7,7 +7,12 @@ function* syncUserFeed(action: ReturnType<typeof getUserFeed.start>) {
   const rsf = yield select(state => state.common.rsf)
   const db = firebase.firestore()
 
-  const colRef = db.collection('activities').where('user.uid', '==', uid)
+  const colRef = db
+    .collection('users')
+    .doc(uid)
+    .collection('timeline')
+    .orderBy('updatedAt')
+
   const channel = rsf.firestore.channel(colRef)
 
   while (true) {
@@ -27,7 +32,12 @@ function* syncTrendFeed(action: ReturnType<typeof getTrendFeed.start>) {
   const rsf = yield select(state => state.common.rsf)
   const db = firebase.firestore()
 
-  const colRef = db.collection('activities').where('rank', '==', 3)
+  const colRef = db
+    .collection('users')
+    .doc(action.payload.params.uid)
+    .collection('timeline')
+    .orderBy('updatedAt')
+
   const channel = rsf.firestore.channel(colRef)
 
   while (true) {
@@ -42,7 +52,6 @@ function* syncTrendFeed(action: ReturnType<typeof getTrendFeed.start>) {
     else yield put(getTrendFeed.fail('There are no items.'))
   }
 }
-
 
 export default function* feedSagas() {
   yield takeLatest(FeedActionType.GET_USER_FEED_START, syncUserFeed)
