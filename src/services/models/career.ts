@@ -7,5 +7,5 @@ export type Career = {
 
 export type Institution = {
   period: string
-  content: string
+  subject: string
 }

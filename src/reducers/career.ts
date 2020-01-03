@@ -1,19 +1,15 @@
 import { Reducer } from 'redux'
 import { CareerAction, CareerActionType } from '../actions/career'
 
+export interface Institution {
+  period: string
+  subject: string
+}
+
 export interface CareerState {
-  education: {
-    period: string
-    content: string
-  }[]
-  workExperience: {
-    period: string
-    content: string
-  }[]
-  certification: {
-    period: string
-    content: string
-  }[]
+  education: Institution[]
+  workExperience: Institution[]
+  certification: Institution[]
 }
 
 const careerReducer: Reducer<CareerState, CareerAction> = (
