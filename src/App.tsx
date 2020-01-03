@@ -11,6 +11,8 @@ import reducer, { initialState } from './reducers'
 import rootSaga from './sagas'
 import { firebaseConfig } from './firebase-config'
 import AuthHandle from './containers/AuthHandleContainer'
+import Timeline from './containers/Timeline/TimelineContainer'
+import Profile from './containers/Profile/ProfileContainer'
 import DefaultLayout from './Layout'
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
@@ -18,7 +20,9 @@ const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
 
 const initState = {
   ...initialState,
-  common: { rsf: reduxSagaFirebase },
+  common: {
+    rsf: reduxSagaFirebase,
+  },
 }
 
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
@@ -40,6 +44,8 @@ const App: FC = () => (
       <DefaultLayout>
         <Switch>
           <Route exact path="/" component={AuthHandle} />
+          <Route path="/timeline" component={Timeline} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </DefaultLayout>
     </BrowserRouter>
