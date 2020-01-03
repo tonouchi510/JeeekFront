@@ -19,7 +19,7 @@ const skillReducer: Reducer<SkillState[], SkillAction> = (
       }
     }
     case SkillActionType.GET_SKILL_SUCCEED: {
-      return action.payload.result
+      return action.payload.result.skills
     }
     case SkillActionType.GET_SKILL_FAIL: {
       // TODO: error処理

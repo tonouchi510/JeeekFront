@@ -5,10 +5,10 @@ import SkillGraph from '../../../components/Home/SkillGraph'
 import { SkillState } from '../../../reducers/skillStack'
 
 interface StateProps {
-  skillStack?: SkillState[]
+  skillStack: SkillState[]
 }
 
-const SkillGraphContainer: FC<StateProps> = ({ skillStack }) => {
+const SkillGraphContainer: FC<StateProps> = ({ skillStack = [] }) => {
   const tags: string[] = []
   const points: number[] = []
   const colors: string[] = []
@@ -27,7 +27,7 @@ const SkillGraphContainer: FC<StateProps> = ({ skillStack }) => {
   ]
 
   let i = 0
-  skillStack.forEach((s: SkillState) => {
+  Array.prototype.forEach.call(skillStack, (s: SkillState) => {
     tags.push(s.tag)
     points.push(s.point)
     colors.push(defaultColors[i])
@@ -45,8 +45,7 @@ const SkillGraphContainer: FC<StateProps> = ({ skillStack }) => {
     ],
   }
 
-  if (!skillStack) return <p>loading...</p>
-  return <SkillGraph skillStack={skillStack} data={dataSets} />
+  return <SkillGraph data={dataSets} />
 }
 
 export default SkillGraphContainer

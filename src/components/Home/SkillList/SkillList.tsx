@@ -27,7 +27,7 @@ const SkillList: FC<SkillListProps> = ({ skillStack = [] }) => (
         </tr>
       </thead>
       <tbody>
-        {skillStack.map((s: SkillState) => (
+        {Array.prototype.map.call(skillStack, (s: SkillState) => (
           <tr key={s.tag}>
             <td>{s.tag}</td>
             <td>
