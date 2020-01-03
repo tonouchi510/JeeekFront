@@ -34,9 +34,6 @@ export interface ActivityCardProps {
   activity: Activity
 }
 
-// 投稿文が長い想定。
-// 長くなるとカードが伸びてダサくなるから投稿文のフィールドの横幅を長くして、
-// カードの伸びを極力無くそうとしている。
 const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
   <div className="ui card" style={{ width: '98%' }}>
     <div className="content">
@@ -48,12 +45,12 @@ const ActivityCard: FC<ActivityCardProps> = ({ activity }) => (
       </div>
       <img
         className="left floated ui image"
-        src={activity.userTiny.photoUrl}
+        src={activity.userTiny ? activity.userTiny.photoUrl : ''}
         style={{ width: '2.5em', height: '2.5em' }}
         alt=""
       />
       <Link className="header" to="/friends">
-        {activity.userTiny.name}
+        {activity.userTiny ? activity.userTiny.name : ''}
       </Link>
       <div className="meta">{activity.updatedAt.toDate().toDateString()}</div>
       <div className="description">
