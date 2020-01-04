@@ -11,7 +11,7 @@ interface TimelineProps {
 const Timeline: FC<TimelineProps> = ({ user }) => (
   <div className="ui container">
     <div className="ui grid">
-      <div className="five wide column" style={{ backgroundColor: '#eeeeee' }}>
+      <div className="five wide column">
         <PostScreen user={user} />
       </div>
       <div className="five wide column">

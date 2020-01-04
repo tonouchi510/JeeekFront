@@ -10,25 +10,23 @@ const header = css`
 `
 
 const subHeader = css`
-  width: 100%;
   height: 40px;
-  background-color: #eeeeee;
-`
-
-const searchBar = css`
   width: 100%;
-  height: 30px;
-  margin-top: 5px;
+  text-align: center;
+  background-color: #eee;
 `
 
 const feedLayout = css`
-  height: 530px;
+  height: 480px;
   overflow-y: auto;
 `
 
 const uiCard = css`
   padding: 4px;
   line-height: 1;
+`
+const message = css`
+  padding-top: 8px;
 `
 
 export interface TrendFeedProps {
@@ -41,10 +39,9 @@ const TrendFeed: FC<TrendFeedProps> = ({ feed = [] }) => (
       <h3 className="ui header">Trend</h3>
     </div>
     <hr />
-    <div className="ui search" css={subHeader}>
-      <div className="ui icon input" css={searchBar}>
-        <input className="prompt" type="text" placeholder="Common passwords..." />
-        <i className="search icon"> </i>
+    <div css={subHeader}>
+      <div css={message}>
+        <h3>There are trend activities.</h3>
       </div>
     </div>
     <div className="ui feed" css={feedLayout}>
