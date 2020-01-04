@@ -18,10 +18,12 @@ const commentField = css`
 const imgIcon = css`
   width: 48px;
   height: 48px;
+  margin-left: 1em;
+  margin-top: 1em;
 `
 
 const field = css`
-  margin-top: 20px;
+  margin-top: 7px;
 `
 
 const field2 = css`
@@ -29,10 +31,44 @@ const field2 = css`
   margin-right: 5%;
 `
 
-const submitButtonStyle = css`
+const backGroundGrey = css`
+  background-color: #eee;
+`
+
+const submitButton = css`
+  background-color: #47555e;
   float: right;
-  width: 80px;
-  height: 40px;
+  margin-right: 5%;
+  padding: 0.5em 1em;
+  color: #fff;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+`
+
+const additional = css`
+  height: 2.5em;
+`
+
+const username = css`
+  display: flex;
+  align-items: center;
+  margin-left: 0.5em;
+`
+
+const textarea = css`
+  border-color: #85b7d9;
+  border-radius: 0.28571429rem;
+  padding: 0.67857143em 1em;
+  width: -webkit-fill-available;
+`
+const dropdown = css`
+  height: 2.5em;
+  border-color: #85b7d9;
+`
+
+const marginTopSmall = css`
+  display: flex;
+  margin-top: 8px;
 `
 
 interface PostScreenProps {
@@ -41,9 +77,9 @@ interface PostScreenProps {
 
 const CategoryForm: FC = () => (
   <div className="field" css={field}>
-    <b>Category *</b>
+    <b>カテゴリ *</b>
     <div>
-      <select className="ui dropdown" name="category" required>
+      <select className="dropdown" name="category" css={dropdown} required>
         <option value="">----------</option>
         <option value="0">学習</option>
         <option value="1">開発</option>
@@ -56,22 +92,21 @@ const CategoryForm: FC = () => (
 
 const SubjectForm: FC = () => (
   <div className="field" css={field}>
-    <b>Subject *</b>
+    <b>タイトル *</b>
     <div className="ui input focus" css={inputField}>
-      <input type="text" name="title" placeholder="サービス名、本のタイトル、勉強会、" required />
+      <input type="text" name="title" placeholder="サービス名, 本のタイトル, 勉強会, " required />
     </div>
   </div>
 )
 
 const CommentForm: FC = () => (
   <div className="field" css={field}>
-    <b>Comment</b>
+    <b>一言コメント</b>
     <div className="ui input focus" css={commentField}>
       <textarea
         name="comment"
-        cols={50}
-        wrap="soft"
-        placeholder="「記事投稿しました！」, 「賞をとりました！」, 「7章を読みました！」, etc."
+        placeholder="記事投稿しました！, 賞をとりました！, 7章を読みました！, etc."
+        css={textarea}
       />
     </div>
   </div>
@@ -79,7 +114,7 @@ const CommentForm: FC = () => (
 
 const TagForm: FC = () => (
   <div className="field" css={field}>
-    <b>Tag *</b>
+    <b>スキルタグ *</b>
     <div className="ui input focus" css={inputField}>
       <input type="text" name="tag" placeholder="React, 機械学習, GCP, ..." required />
     </div>
@@ -102,27 +137,31 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
       <h3 className="ui header">New Activity</h3>
     </div>
     <hr />
-    <div>
-      <b>From</b>
-      <div className="ui grid">
-        <div className="four wide column">
-          <img className="ui image" src={user.photoUrl} alt="userIcon" css={imgIcon} />
+    <div css={backGroundGrey}>
+      <div className="grid" css={marginTopSmall}>
+        <div className="one wide column">
+          <img className="image" src={user.photoUrl} alt="userIcon" css={imgIcon} />
         </div>
-        <div className="six wide column">
+        <div className="two wide column" css={username}>
           <b>{user.name}</b>
-          <p>{user.email}</p>
         </div>
       </div>
-      <div className="content">
+      <div>
         <form action="http://localhost:5000" method="post">
-          <CategoryForm />
-          <SubjectForm />
-          <CommentForm />
-          <TagForm />
-          <UrlForm />
-          <div css={field2} />
-          <b>*は必須項目です。</b>
-          <input type="submit" value="投稿" className="ui teal button" css={submitButtonStyle} />
+          <div className="content" style={{ marginLeft: '20%' }}>
+            <CategoryForm />
+            <SubjectForm />
+            <CommentForm />
+            <TagForm />
+            <UrlForm />
+            <div css={field2} />
+            <b>*は必須項目です。</b>
+            <button type="submit" value="投稿" className="button" css={submitButton}>
+              <i className="plus icon" />
+              投稿
+            </button>
+            <div className="container" css={additional} />
+          </div>
         </form>
       </div>
     </div>

@@ -13,8 +13,7 @@ const subHeader = css`
   height: 40px;
   width: 100%;
   text-align: center;
-  font-size: 15px;
-  background-color: #eeeeee;
+  background-color: #eee;
 `
 
 const message = css`
@@ -23,7 +22,7 @@ const message = css`
 
 const feedLayout = css`
   clear: both;
-  height: 530px;
+  height: 480px;
   overflow-y: auto;
 `
 
@@ -44,7 +43,7 @@ const UserFeed: FC<UserFeedProps> = ({ feed = [] }) => (
     <hr />
     <div css={subHeader}>
       <div css={message}>
-        <h3>{feed.length} activities today.</h3>
+        <h3>{feed.length} activities today. Just do it!</h3>
       </div>
     </div>
     <div className="ui feed" css={feedLayout}>

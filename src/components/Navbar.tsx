@@ -1,7 +1,13 @@
+/** @jsx jsx */
 import React, { FC } from 'react'
 import { RouteComponentProps, Link, withRouter } from 'react-router-dom'
+import { css, jsx } from '@emotion/core'
 
 type NavbarProps = {} & RouteComponentProps<{}>
+
+const fontWhite = css`
+  color: #fff;
+`
 
 const routeMap = ['/', '/timeline', '/profile', '/users', '/services', '/issue-board']
 const tabMap = {
@@ -23,11 +29,11 @@ function iconMap(r) {
 }
 
 const Navbar: FC<NavbarProps> = props => (
-  <div className="ui secondary pointing menu">
+  <div className="ui secondary pointing menu" style={{ backgroundColor: '#47555E' }}>
     {routeMap.map(r =>
       props.location.pathname === r ? (
-        <Link key={r} className="ui teal item active" to={r}>
-          <h3>
+        <Link key={r} className="ui white item active" to={r}>
+          <h3 css={fontWhite}>
             {iconMap(r)}
             {tabMap[r]}
           </h3>
