@@ -41,13 +41,13 @@ const store = createStore(reducer, initState, enhancer)
 const App: FC = () => (
   <Provider store={store}>
     <BrowserRouter>
-      <DefaultLayout>
-        <Switch>
-          <Route exact path="/" component={AuthHandle} />
+      <Switch>
+        <Route exact path="/" component={AuthHandle} />
+        <DefaultLayout>
           <Route path="/timeline" component={Timeline} />
           <Route path="/profile" component={Profile} />
-        </Switch>
-      </DefaultLayout>
+        </DefaultLayout>
+      </Switch>
     </BrowserRouter>
   </Provider>
 )

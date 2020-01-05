@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import DefaultLayout from '../Layout'
 import Top from './Top'
 import Home from '../containers/Home'
 import { AuthUserState } from '../reducers/auth'
@@ -13,6 +14,16 @@ const AuthHandle: FC<AuthHandleProps> = ({
   authUser = null,
   signinStart = () => {},
   signoutStart = () => {},
-}) => <>{authUser ? <Home /> : <Top signinStart={signinStart} signoutStart={signoutStart} />}</>
+}) => (
+  <>
+    {authUser ? (
+      <DefaultLayout>
+        <Home />
+      </DefaultLayout>
+    ) : (
+      <Top signinStart={signinStart} signoutStart={signoutStart} />
+    )}
+  </>
+)
 
 export default AuthHandle
