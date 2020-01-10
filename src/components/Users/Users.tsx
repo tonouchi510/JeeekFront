@@ -1,12 +1,15 @@
 import React, { FC } from 'react'
-import { FollowState } from '../../reducers/follows'
 import UserList from './UserList'
+import { FollowState } from '../../reducers/follows'
+import { UserTiny } from '../../reducers/userSearch'
 
 interface UsersProps {
   follows: FollowState
+  searchedResult: UserTiny[]
+  searchUserAction: (query: string) => void
 }
 
-const Users: FC<UsersProps> = ({ follows }) => (
+const Users: FC<UsersProps> = ({ follows, searchedResult }) => (
   <div className="ui grid">
     <div className="four wide column">
       <div className="content" style={{ marginTop: '15px' }}>
@@ -34,7 +37,7 @@ const Users: FC<UsersProps> = ({ follows }) => (
         </div>
         <div className="results" />
       </div>
-      <UserList />
+      <UserList users={searchedResult} />
     </div>
   </div>
 )
