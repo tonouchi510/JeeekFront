@@ -14,6 +14,7 @@ import AuthHandle from './containers/AuthHandleContainer'
 import Timeline from './containers/Timeline/TimelineContainer'
 import Profile from './containers/Profile/ProfileContainer'
 import DefaultLayout from './Layout'
+import Users from './containers/Users/UsersContainer'
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
 const reduxSagaFirebase = new ReduxSagaFirebase(firebaseApp)
@@ -46,6 +47,7 @@ const App: FC = () => (
         <DefaultLayout>
           <Route path="/timeline" component={Timeline} />
           <Route path="/profile" component={Profile} />
+          <Route path="/users" component={Users} />
         </DefaultLayout>
       </Switch>
     </BrowserRouter>
