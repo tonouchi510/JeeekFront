@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { AuthUserState } from '../../../reducers/auth'
-import Followings from '../Followings'
-import { FollowState } from '../../../reducers/follows'
-import Followers from '../Followers'
-import Search from '../Search/Search'
+import { AuthUserState } from '../../reducers/auth'
+import Followings from './Followings'
+import { FollowState } from '../../reducers/follows'
+import Followers from './Followers'
+import Search from './Search/Search'
 
 interface UsersProps {
   follows: FollowState

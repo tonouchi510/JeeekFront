@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import Users from '../../components/Users/Users'
+import Users from '../../components/Users'
 import { AuthUserState } from '../../reducers/auth'
 import { FollowState } from '../../reducers/follows'
 import { getFollows } from '../../actions/follows'
