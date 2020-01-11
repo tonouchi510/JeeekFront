@@ -2,8 +2,14 @@ import { Reducer } from 'redux'
 import { FollowsAction, FollowsActionType } from '../actions/follows'
 
 export interface FollowState {
-  followings: { uid: string }[]
-  followers: { uid: string }[]
+  followings: UserTiny[]
+  followers: UserTiny[]
+}
+
+export interface UserTiny {
+  uid: string
+  name: string
+  photoUrl: string
 }
 
 const followReducer: Reducer<FollowState, FollowsAction> = (

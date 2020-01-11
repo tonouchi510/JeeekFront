@@ -1,3 +1,5 @@
+import { UserTiny } from '../services/models/user'
+
 export enum FollowsActionType {
   GET_FOLLOWS_START = 'GET_FOLLOWS_START',
   GET_FOLLOWS_SUCCEED = 'GET_FOLLOWS_SUCCEED',
@@ -18,8 +20,8 @@ interface FollowsParams {
 }
 
 export interface FollowsResult {
-  followings: []
-  followers: []
+  followings: UserTiny[]
+  followers: UserTiny[]
 }
 
 export const getFollows = {

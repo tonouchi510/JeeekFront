@@ -6,6 +6,7 @@ import skillReducer, { SkillState } from './skillStack'
 import followReducer, { FollowState } from './follows'
 import externalServiceReducer, { ExternalServiceState } from './externalService'
 import commonReducer, { CommonState } from './common'
+import userSearchReducer, { UserSearchState } from './userSearch'
 
 export type CombineReducerMap<S extends {}> = { [K in keyof S]: Reducer<S[K]> }
 
@@ -26,6 +27,9 @@ export const initialState: CombinedState = {
   externalServices: {
     services: [],
   },
+  userSearch: {
+    results: [],
+  },
 }
 
 export interface CombinedState {
@@ -36,6 +40,7 @@ export interface CombinedState {
   skillStack: SkillState[]
   follows: FollowState
   externalServices: ExternalServiceState
+  userSearch: UserSearchState
 }
 
 const reducerMap: CombineReducerMap<CombinedState> = {
@@ -46,6 +51,7 @@ const reducerMap: CombineReducerMap<CombinedState> = {
   skillStack: skillReducer,
   follows: followReducer,
   externalServices: externalServiceReducer,
+  userSearch: userSearchReducer,
 }
 
 const appReducer: Reducer<CombinedState> = combineReducers<CombinedState>(reducerMap)
