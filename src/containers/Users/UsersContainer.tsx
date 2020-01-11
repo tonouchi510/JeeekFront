@@ -49,7 +49,7 @@ const UsersContainer: FC<EnhancedUserProfileProps> = ({
 }) => {
   useEffect(() => {
     getFollowsStart(user.uid)
-    searchUserStart('aaa')
+    searchUserStart('')
   }, [])
   return (
     <Users

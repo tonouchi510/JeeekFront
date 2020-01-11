@@ -1,3 +1,3 @@
-import UserList from './UserList'
+import UserRow from './UserRow'
 
-export default UserList
+export default UserRow

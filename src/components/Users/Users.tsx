@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import UserList from './UserList'
+import UserRow from './UserRow'
 import { FollowState } from '../../reducers/follows'
 import { UserTiny } from '../../reducers/userSearch'
 
@@ -16,14 +16,32 @@ const Users: FC<UsersProps> = ({ follows, searchedResult }) => (
         <h3 className="ui header">Following</h3>
       </div>
       <hr />
-      <UserList users={follows.followings} />
+      <div className="ui middle aligned divided list">
+        {follows.followings.map((u: UserTiny) => (
+          <UserRow
+            key={u.uid}
+            user={u}
+            following={follows.followings.some(f => f.uid === u.uid)}
+            follower={follows.followers.some(f => f.uid === u.uid)}
+          />
+        ))}
+      </div>
     </div>
     <div className="four wide column">
       <div className="content" style={{ marginTop: '15px' }}>
         <h3 className="ui header">Followers</h3>
       </div>
       <hr />
-      <UserList users={follows.followers} />
+      <div className="ui middle aligned divided list">
+        {follows.followers.map((u: UserTiny) => (
+          <UserRow
+            key={u.uid}
+            user={u}
+            following={follows.followings.some(f => f.uid === u.uid)}
+            follower={follows.followers.some(f => f.uid === u.uid)}
+          />
+        ))}
+      </div>
     </div>
     <div className="four wide column">
       <div className="content" style={{ marginTop: '15px' }}>
@@ -37,7 +55,16 @@ const Users: FC<UsersProps> = ({ follows, searchedResult }) => (
         </div>
         <div className="results" />
       </div>
-      <UserList users={searchedResult} />
+      <div className="ui middle aligned divided list">
+        {searchedResult.map((u: UserTiny) => (
+          <UserRow
+            key={u.uid}
+            user={u}
+            following={follows.followings.some(f => f.uid === u.uid)}
+            follower={follows.followers.some(f => f.uid === u.uid)}
+          />
+        ))}
+      </div>
     </div>
   </div>
 )
