@@ -2,29 +2,84 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 11.7.0
+version: 2
+
+commands:
+  load-env:
+    steps:
+      - run:
+          name: Load credential files
+          command: |
+            echo $FIREBASE_CREDENTIALS > firebase-service-key-dev.json.enc
+            base64 --decode firebase-service-key-dev.json.enc > firebase-service-key-dev.json
+            rm firebase-service-key-dev.json.enc
+
+  npm-install:
+     steps:
+       - restore_cache:
+             keys: v1-dependencies-{{ checksum "package.json" }}
+       - run:
+           name: install node packages
+           comand: npm i
+       - save_cache:
+           paths:
+             - node_modules
+           key: v1-dependencies-{{ checksum "package.json" }}
+
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-    working_directory: ~/repo
+      - image: circleci/node:11.7.0
     steps:
       - checkout
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      # run tests!
-      - run: yarn test
+      - load-env
+      - npm-install
+      - run:
+          name: npm build
+          command: npm run build
+
+  test:
+    docker:
+      - image: circleci/node:11.7.0
+    steps:
+      - checkout
+      - load-env
+      - npm-install
+      - run:
+          name: run test
+          comand: echo 'not implemented!'
+
+  deploy:
+    docker:
+      - image: circleci/node:11.7.0
+    steps:
+      - checkout
+      - load-env
+      - npm-install
+      - run:
+          name: install firebase tools
+          command: npm install -g firebase-tools
+      - run:
+          name: deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build:
+        filters:
+          branches:
+            ignore: master
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: master
+      - deploy:
+          requires:
+            - test
+            filters:
+              branches:
+                only: develop
