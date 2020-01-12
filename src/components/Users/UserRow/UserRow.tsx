@@ -23,11 +23,21 @@ const UserRow: FC<UserRowProps> = ({ user, following, follower }) => (
   <div key={user.uid} className="ui item" style={{ width: '98%' }}>
     <div className="right floated content">
       {following ? (
-        <button className="mini ui green button" css={ffButtonStyle} style={{ fontSize: '8px' }}>
+        <button
+          className="mini ui green button"
+          type="button"
+          css={ffButtonStyle}
+          style={{ fontSize: '8px' }}
+        >
           フォロー中
         </button>
       ) : (
-        <button className="mini ui green basic button" css={ffButtonStyle} style={{ fontSize: '8px' }}>
+        <button
+          className="mini ui green basic button"
+          type="button"
+          css={ffButtonStyle}
+          style={{ fontSize: '8px' }}
+        >
           フォローする
         </button>
       )}
