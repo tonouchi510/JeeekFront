@@ -2,7 +2,7 @@
   "name": "functions",
   "version": "1.0.0",
   "description": "for npm-script",
-  "main": "lib/index.js",
+  "main": "lib/functions/src/commands/dbseed.js",
   "scripts": {
     "lint": "eslint 'src/**/*.{js,ts}' --fix",
     "build": "npm run lint && tsc",

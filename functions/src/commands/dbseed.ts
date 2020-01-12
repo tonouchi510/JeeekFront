@@ -9,7 +9,7 @@ import { FirebaseUser } from '../../../src/services/models/firebaseUser'
 import { User } from '../../../src/services/models/user'
 import { Career } from '../../../src/services/models/career'
 import { SkillStacks } from '../../../src/services/models/skillStacks'
-import { externalServices } from '../../../src/services/models/externalServices'
+import { ExternalServices } from '../../../src/services/models/externalServices'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
@@ -170,7 +170,7 @@ const uploadSeed = async (collection: string) => {
       const docs = await csv2json()
         .fromFile('seeds/jeeek_dev_external_services.csv')
         .then(jsonObj => {
-          return jsonObj.map((record: externalServices) => ({
+          return jsonObj.map((record: ExternalServices) => ({
             ...record,
           }))
         })
