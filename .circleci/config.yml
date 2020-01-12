@@ -13,18 +13,19 @@ commands:
             echo $FIREBASE_CREDENTIALS > firebase-service-key-dev.json.enc
             base64 --decode firebase-service-key-dev.json.enc > firebase-service-key-dev.json
             rm firebase-service-key-dev.json.enc
-
   npm-install:
-     steps:
-       - restore_cache:
-             keys: v1-dependencies-{{ checksum "package.json" }}
-       - run:
-           name: install node packages
-           comand: npm i
-       - save_cache:
-           paths:
-             - node_modules
-           key: v1-dependencies-{{ checksum "package.json" }}
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run:
+          name: install node packages
+          command: npm i
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
 jobs:
   build:
@@ -47,7 +48,7 @@ jobs:
       - npm-install
       - run:
           name: run test
-          comand: echo 'not implemented!'
+          command: echo 'not implemented!'
 
   deploy:
     docker:
