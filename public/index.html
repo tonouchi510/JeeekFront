@@ -12,12 +12,9 @@
     loading...
 </div>
 <script>
-  const devServerScript = document.createElement('script')
-  devServerScript.src = 'http://localhost:5000/webpack-dev-server.js'
-  document.body.appendChild(devServerScript)
-  const appScript = document.createElement('script')
-  appScript.src = '/bundle.js'
-  document.body.appendChild(appScript)
+    const appScript = document.createElement('script')
+    appScript.src = '/bundle.js'
+    document.body.appendChild(appScript)
 </script>
 </body>
 </html>
