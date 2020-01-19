@@ -59,6 +59,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.23",
+    "@storybook/addon-info": "^5.3.6",
+    "@storybook/addon-knobs": "^5.3.6",
     "@types/firebase": "^3.2.1",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
@@ -68,6 +70,7 @@
     "chart.js": "^2.9.3",
     "dayjs": "^1.8.17",
     "firebase": "^5.0.4",
+    "marked": "^0.8.0",
     "react": "^16.9.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.9.0",
