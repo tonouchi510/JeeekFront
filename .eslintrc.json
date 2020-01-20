@@ -59,5 +59,11 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": "webpack"
-  }
+  },
+  "import/no-extraneous-dependencies": [ "error",
+    {
+      "devDependencies": [
+        ".storybook/**", "stories/**", "**/*/*.story.*", "**/*/*.stories.*"
+      ] }
+  ]
 }
