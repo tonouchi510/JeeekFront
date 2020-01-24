@@ -29,7 +29,7 @@ export const userData: AuthUserState = {
   uid: '4sra3r4zibfrzp4i',
   name: 'かず',
   email: 'kazuhiro.1247@gmail.com',
-  photoUrl: 'kazuhiro.image.png',
+  photoUrl: 'http://ドラマシリコンバレー.com/content/images/siliconvalley/richard.jpg',
   phoneNumber: '09091879023',
   emailVerified: true,
   startedAt: '2019/12/1',
