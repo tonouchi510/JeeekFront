@@ -7,19 +7,11 @@ export default {
   title: 'Home/SkillGraph',
   component: SkillGraph,
   excludeStories: /.*Data$/,
-};
+}
 
-const tagsData: string[] = [
-  'React',
-  'Next'
-]
-const pointsData: number[] = [
-  60,30
-]
-const colorsData: string[] = [
-  '#36A2EB',
-  '#FFCE56',
-]
+const tagsData: string[] = ['React', 'Next']
+const pointsData: number[] = [60, 30]
+const colorsData: string[] = ['#36A2EB', '#FFCE56']
 
 export const dataSetsData: ChartData = {
   labels: tagsData,
@@ -35,5 +27,5 @@ export const dataSetsData: ChartData = {
 export const skillGraph = () => <SkillGraph data={dataSetsData} />
 
 skillGraph.story = {
-  name: 'SkillGraph'
+  name: 'SkillGraph',
 }

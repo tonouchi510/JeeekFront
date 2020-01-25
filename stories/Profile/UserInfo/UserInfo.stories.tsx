@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import UserInfo from '../../../src/components/Profile/UserInfo'
 import { AuthUserState } from '../../../src/reducers/auth'
 import { FollowState } from '../../../src/reducers/follows'
@@ -7,7 +7,7 @@ export default {
   title: 'Profile/UserInfo',
   component: UserInfo,
   excludeStories: /.*Data$/,
-};
+}
 
 export const userData: AuthUserState = {
   uid: '4sra3r4zibfrzp4i',
@@ -17,26 +17,32 @@ export const userData: AuthUserState = {
   phoneNumber: '09091879023',
   emailVerified: true,
   startedAt: '2019/12/1',
-  selfIntroduction: '俺が世界を救う'
+  selfIntroduction: '俺が世界を救う',
 }
 
 export const followsData: FollowState = {
-  followings: [{
-    uid: 'akkynv4v3v8d5evx',
-    name:'ビルゲイツ',
-    photoUrl: 'bill.png',
-  }],
-  followers: [{
-    uid: 'i4ac4evjvhc7cv5x',
-    name:'tono',
-    photoUrl: 'tono.png',
-  }],
+  followings: [
+    {
+      uid: 'akkynv4v3v8d5evx',
+      name: 'ビルゲイツ',
+      photoUrl: 'bill.png',
+    },
+  ],
+  followers: [
+    {
+      uid: 'i4ac4evjvhc7cv5x',
+      name: 'tono',
+      photoUrl: 'tono.png',
+    },
+  ],
 }
 
-const descriptionData: string = "フロントエンドエンジニアです。"
+const descriptionData = 'フロントエンドエンジニアです。'
 
-export const userInfoStory = () => <UserInfo user={userData} follows={followsData} description={descriptionData} />
+export const userInfoStory = () => (
+  <UserInfo user={userData} follows={followsData} description={descriptionData} />
+)
 
 userInfoStory.story = {
-  name: 'userInfo'
+  name: 'userInfo',
 }
