@@ -1,7 +1,6 @@
 import React from 'react'
 import SkillList from '../../../src/components/Home/SkillList'
 import { SkillState } from '../../../src/reducers/skillStack'
-import 'semantic-ui-css/semantic.min.css'
 
 export default {
   title: 'Home/SkillList',

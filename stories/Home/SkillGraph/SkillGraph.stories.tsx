@@ -1,5 +1,4 @@
 import React from 'react'
-import 'semantic-ui-css/semantic.min.css'
 import SkillGraph from '../../../src/components/Home/SkillGraph'
 import { ChartData } from '../../../src/services/models/general'
 
