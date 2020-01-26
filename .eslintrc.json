@@ -43,7 +43,7 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "max-len": ["error", {"code": 100}],
+    "max-len": ["error", {"code": 120}],
     "react/jsx-filename-extension": ["off"],
     "react/prop-types": ["off"],
     "import/prefer-default-export": ["off"],

@@ -18,7 +18,8 @@
     "types": ["jest", "node"]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "stories/**/*"
   ],
   "exclude": [
     "node_modules",
