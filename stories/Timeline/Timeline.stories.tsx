@@ -1,34 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { storiesOf } from '@storybook/react'
 import { MemoryRouter } from 'react-router'
-import configureStore from 'redux-mock-store'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { firestore } from 'firebase'
-import Timeline from '../../src/components/Timeline'
-import { AuthUserState } from '../../src/reducers/auth'
-import Profile from '../../src/components/Profile'
-import { careerData, followsData } from '../Profile/Profile.stories'
-// import Provider from 'react-redux'
-// import Profile from "../../src/components/Profile";
-// import {careerData, followsData} from "../Profile/Profile.stories";
-// import {LocationProvider} from "@reach/router";
-// import UserFeed from "../../src/components/Timeline/UserFeed";
-import reducer, {initialState} from '../../src/reducers'
-import { Activity } from "../../src/reducers/feed";
-import { store } from '../../src/App'
 
-export default {
-  title: 'Timeline',
-  component: Timeline,
-  excludeStories: /.*Data$/,
-}
-//
-// const withProvider = (story) => (
-//   <Provider store={store}>
-//     { story() }
-//   </Provider>
-// )
+import { AuthUserState } from '../../src/reducers/auth'
+import PostScreen from '../../src/components/Timeline/PostScreen'
+import HomeFeed from '../../src/components/Timeline/UserFeed'
+import TrendFeed from '../../src/components/Timeline/TrendFeed'
+import { userFeedData } from './UserFeed/UserFeed.stories'
+import { trendFeedData } from './TrendFeed/TrendFeed.stories'
+import { Activity } from '../../src/reducers/feed'
 
 const userData: AuthUserState = {
   uid: '4sra3r4zibfrzp4i',
@@ -41,71 +21,30 @@ const userData: AuthUserState = {
   selfIntroduction: 'フロントエンドエンジニア',
 }
 
-// const feedData: Activity[] = [
-//   {
-//     id: '26rd5kg3cfsu8pyu9kts',
-//     userTiny: {
-//       name: 'コースケ',
-//       photoUrl: 'https://cyclestyle.net/feature/img18/223.jpg',
-//       uid: 'kdwt55yd8w9647qk',
-//     },
-//     category: 0,
-//     rank: 0,
-//     content: {
-//       comment: '今日もpythonを勉強した',
-//       subject: 'progate-python#3',
-//       url: null,
-//     },
-//     tags: ['python'],
-//     favorites: [],
-//     gifts: [],
-//     updatedAt: firestore.Timestamp.now(),
-//   },
-//   {
-//     id: '26rd5kg3cfsu8pyu9kts',
-//     userTiny: {
-//       name: 'ケイスケホンダ',
-//       photoUrl: 'https://pbs.twimg.com/profile_images/960682119210008576/2N7WJGZE.jpg',
-//       uid: 'kdwt55yd8w9647qk',
-//     },
-//     category: 0,
-//     rank: 0,
-//     content: {
-//       comment: '読んだ。伸び代ですねえ',
-//       subject: '初めてのJavaScript3章',
-//       url: null,
-//     },
-//     tags: ['JavaScript'],
-//     favorites: [],
-//     gifts: [],
-//     updatedAt: firestore.Timestamp.now(),
-//   },
-// ]
+interface TimelineStoryProps {
+  user: AuthUserState
+  userFeed: Activity[]
+  trendFeed: Activity[]
+}
 
-// const mockState = {
-//   ...initialState,
-//     user: userData,
-//     feed: feedData,
-// }
-
-// const store = configureStore(userData)
-
-// storiesOf('Timeline', module)
-//   // .addDecorator(withProvider)
-//   .addDecorator(story =>
-//     <MemoryRouter initialEntries={['/timeline']}>{story()}</MemoryRouter>
-//   ))
-//   .add('Timeline', () => <Timeline user={userData}/>);
+const Timeline: FC<TimelineStoryProps> = ({ user, userFeed, trendFeed }) => (
+  <div className="ui container">
+    <div className="ui grid">
+      <div className="five wide column">
+        <PostScreen user={user} />
+      </div>
+      <div className="five wide column">
+        <HomeFeed feed={userFeed} />
+      </div>
+      <div className="five wide column">
+        <TrendFeed feed={trendFeed} />
+      </div>
+    </div>
+  </div>
+)
 
 storiesOf('Timeline', module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .addDecorator(story => <MemoryRouter initialEntries={['/timeline']}>{story()}</MemoryRouter>)
-  .add('Timeline', () => <Timeline user={userData} />)
-
-// export const timelineStory = ({ story }) => <Provider store={store}>{story}</Provider>
-//
-// // export const timelineStory = () => <Timeline user={userData} />
-//
-// timelineStory.story = {
-//   name: 'Timeline',
-// }
+  .add('Timeline', () => (
+    <Timeline user={userData} userFeed={userFeedData} trendFeed={trendFeedData} />
+  ))

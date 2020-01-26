@@ -5,13 +5,7 @@ import { storiesOf } from '@storybook/react'
 import { Activity } from '../../../src/reducers/feed'
 import TrendFeed from '../../../src/components/Timeline/TrendFeed'
 
-export default {
-  title: 'Timeline/TrendFeed',
-  component: TrendFeed,
-  excludeStories: /.*Data$/,
-}
-
-const feedData: Activity[] = [
+export const trendFeedData: Activity[] = [
   {
     id: '26rd5kg3cfsu8pyu9kts',
     userTiny: {
@@ -54,4 +48,4 @@ const feedData: Activity[] = [
 
 storiesOf('Timeline/TrendFeed', module)
   .addDecorator(story => <MemoryRouter initialEntries={['/timeline']}>{story()}</MemoryRouter>)
-  .add('TrendFeed', () => <TrendFeed feed={feedData} />)
+  .add('TrendFeed', () => <TrendFeed feed={trendFeedData} />)

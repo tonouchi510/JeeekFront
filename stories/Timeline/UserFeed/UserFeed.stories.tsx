@@ -5,13 +5,7 @@ import { MemoryRouter } from 'react-router'
 import { Activity } from '../../../src/reducers/feed'
 import UserFeed from '../../../src/components/Timeline/UserFeed'
 
-export default {
-  title: 'Timeline/UserFeed',
-  component: UserFeed,
-  excludeStories: /.*Data$/,
-}
-
-const feedData: Activity[] = [
+export const userFeedData: Activity[] = [
   {
     id: '26rd5kg3cfsu8pyu9kts',
     userTiny: {
@@ -54,4 +48,4 @@ const feedData: Activity[] = [
 
 storiesOf('Timeline/UserFeed', module)
   .addDecorator(story => <MemoryRouter initialEntries={['/timeline']}>{story()}</MemoryRouter>)
-  .add('UserFeed', () => <UserFeed feed={feedData} />)
+  .add('UserFeed', () => <UserFeed feed={userFeedData} />)
