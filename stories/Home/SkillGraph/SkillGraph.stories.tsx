@@ -1,12 +1,7 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import SkillGraph from '../../../src/components/Home/SkillGraph'
 import { ChartData } from '../../../src/services/models/general'
-
-export default {
-  title: 'Home/SkillGraph',
-  component: SkillGraph,
-  excludeStories: /.*Data$/,
-}
 
 const tagsData: string[] = ['React', 'Next']
 const pointsData: number[] = [60, 30]
@@ -23,8 +18,4 @@ export const dataSetsData: ChartData = {
   ],
 }
 
-export const skillGraph = () => <SkillGraph data={dataSetsData} />
-
-skillGraph.story = {
-  name: 'SkillGraph',
-}
+storiesOf('Home/SkillGraph', module).add('SkillGraph', () => <SkillGraph data={dataSetsData} />)

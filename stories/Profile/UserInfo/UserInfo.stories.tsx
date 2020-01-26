@@ -1,4 +1,5 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import UserInfo from '../../../src/components/Profile/UserInfo'
 import { AuthUserState } from '../../../src/reducers/auth'
 import { FollowState } from '../../../src/reducers/follows'
@@ -39,10 +40,6 @@ export const followsData: FollowState = {
 
 const descriptionData = 'フロントエンドエンジニアです。'
 
-export const userInfoStory = () => (
+storiesOf('Profile/UserInfo', module).add('UserInfo', () => (
   <UserInfo user={userData} follows={followsData} description={descriptionData} />
-)
-
-userInfoStory.story = {
-  name: 'userInfo',
-}
+))

@@ -1,13 +1,5 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import News from '../../../src/components/Home/News'
 
-export default {
-  title: 'Home/News',
-  component: News,
-}
-
-export const news = () => <News />
-
-news.story = {
-  name: 'News',
-}
+storiesOf('Home/News', module).add('News', () => <News />)

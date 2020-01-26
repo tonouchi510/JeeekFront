@@ -1,14 +1,9 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import Profile from '../../src/components/Profile'
 import { AuthUserState } from '../../src/reducers/auth'
 import { CareerState } from '../../src/reducers/career'
 import { FollowState } from '../../src/reducers/follows'
-
-export default {
-  title: 'Profile',
-  component: Profile,
-  excludeStories: /.*Data$/,
-}
 
 export const careerData: CareerState = {
   education: [
@@ -59,10 +54,6 @@ export const followsData: FollowState = {
   ],
 }
 
-export const profileStory = () => (
-  <Profile user={userData} career={careerData} follows={followsData} />
-)
-
-profileStory.story = {
-  name: 'profile',
-}
+storiesOf('Profile', module).add('Profile', () => (
+  <Profile user={userData} follows={followsData} career={careerData} />
+))

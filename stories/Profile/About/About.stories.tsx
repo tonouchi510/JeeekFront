@@ -1,12 +1,7 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import About from '../../../src/components/Profile/About'
 import { CareerState } from '../../../src/reducers/career'
-
-export default {
-  title: 'Profile/About',
-  component: About,
-  excludeStories: /.*Data$/,
-}
 
 export const uidData = 'ggg'
 
@@ -33,10 +28,6 @@ export const careerData: CareerState = {
 
 const isEditModeData = false
 
-export const about = () => <About uid={uidData} career={careerData} isEditMode={isEditModeData} />
-
-about.story = {
-  name: 'about',
-}
-
-// editStart?: (param?: string) => void
+storiesOf('Profile/About', module).add('About', () => (
+  <About uid={uidData} career={careerData} isEditMode={isEditModeData} />
+))

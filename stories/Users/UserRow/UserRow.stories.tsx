@@ -1,12 +1,7 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import UserRow from '../../../src/components/Users/UserRow'
 import { UserTiny } from '../../../src/reducers/follows'
-
-export default {
-  title: 'Users/UserRow',
-  component: UserRow,
-  excludeStories: /.*Data$/,
-}
 
 const userData: UserTiny = {
   uid: 'akkynv4v3v8d5evx',
@@ -17,10 +12,6 @@ const userData: UserTiny = {
 const followingData = true
 const followerData = true
 
-export const userRowStory = () => (
-  <UserRow user={userData} following={followingData} follower={followerData} />
-)
-
-userRowStory.story = {
-  name: 'UserRow',
-}
+storiesOf('Users/UserRow', module).add('UserRow', () => (
+  <UserRow user={userData} follower={followerData} following={followingData} />
+))

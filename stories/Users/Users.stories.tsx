@@ -1,12 +1,7 @@
 import React from 'react'
+import { storiesOf } from '@storybook/react'
 import Users from '../../src/components/Users'
 import { UserTiny, FollowState } from '../../src/reducers/follows'
-
-export default {
-  title: 'Users',
-  component: Users,
-  excludeStories: /.*Data$/,
-}
 
 const followsData: FollowState = {
   followings: [
@@ -51,10 +46,6 @@ const usersData: UserTiny[] = [
   },
 ]
 
-export const usersStory = () => (
+storiesOf('Users', module).add('Users', () => (
   <Users follows={followsData} searchedResult={usersData} searchUserAction={null} />
-)
-
-usersStory.story = {
-  name: 'Users',
-}
+))
