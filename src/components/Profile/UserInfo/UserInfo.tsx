@@ -48,7 +48,7 @@ const UserInfo: FC<UserInfoProps> = ({ user = null, follows = null, description 
     </div>
     <div className="extra content">
       <div className="mini ui button" css={editButton}>
-        edit
+        編集
       </div>
     </div>
   </div>

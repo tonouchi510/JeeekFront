@@ -7,6 +7,16 @@ const headerBackgroundStyle = css`
   width: 100%;
 `
 
+const header = css`
+  margin-top: 15px;
+  margin-left: 10px;
+`
+
+const underLine = css`
+  margin-left: 10px;
+  width: 100%;
+`
+
 interface AboutProps {
   uid: string
   career?: CareerState
@@ -21,17 +31,18 @@ const About: FC<AboutProps> = ({
   editStart = () => {},
 }) => (
   <div className="content">
-    <h2 className="ui left floated header" style={{ marginLeft: '10px', marginTop: '10px' }}>
-      About
-    </h2>
+    <div className="content" css={header}>
+      <h3 className="ui left floated header">About</h3>
+    </div>
     <button
       className="mini ui button"
       type="button"
       onClick={() => editStart(uid)}
-      style={{ marginLeft: '10px', marginTop: '10px' }}
+      style={{ marginLeft: '10px' }}
     >
       編集
     </button>
+    <hr css={underLine} />
     <div className="content">
       <h3
         className="ui dividing teal header"
