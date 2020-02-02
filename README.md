@@ -16,14 +16,28 @@ $ npm install
 $ npm run start
 ```
 
+## 技術スタック
+- React/Redux
+- Redux-Saga
+- Firebase
+- Storybook/StoryShot
+- CircleCI
+
 
 ## ディレクトリ構成
 ```
-./src/
-├── actions             # actionを置く。塊ごとにファイルを分ける
-├── components          # Presentation Componentの置き場
-├── containers          # Container Componentの置き場
-├── reducers            # reducerを置く。塊ごとにファイルを分ける
-└── App.tsx             # ルートに当たるファイル。routingなどを担当
+.
+├── .circleci           # circleciの設定ファイル。CI/CDについて書いてある。
+├── .storybook          # storybookの設定ファイル
+├── npm-script          # シードデータ投入スクリプトなど
+├── public              # html/imagesなどの静的ファイル
+└── src
+    ├── actions         # actionを置く
+    ├── components      # presentatinal componnetの置き場
+    ├── containers      # container componnetの置き場
+    ├── reducers        # reducerを置く
+    ├── sagas           # sagaファイルを置く
+    ├── services        # 外部とのインターフェース
+    └── stories         # storybook用のコード置き場
 ```
 
