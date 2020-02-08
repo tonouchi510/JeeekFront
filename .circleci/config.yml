@@ -21,7 +21,9 @@ commands:
             - v1-dependencies-
       - run:
           name: install node packages
-          command: npm i
+          command: |
+            npm i
+            cd functions && npm i
       - save_cache:
           paths:
             - node_modules
