@@ -17,36 +17,35 @@ admin.initializeApp({
 const db = admin.firestore()
 const storage = new Storage()
 
-export const helloWorld = functions.region('asia-northeast1').https.onRequest((request, response) => {
-  response.send('Hello from Firebase!')
-})
-
 const userRegister = async () => {
   const ref = db.collection('users')
   // Downloads the file
-  const options = { destination: 'seeds.csv' }
-  await storage
+  const csvstr = await storage
     .bucket('jeeek-dev-firestore-seed')
     .file('jeeek_dev_users.csv')
-    .download(options)
-    .catch(err => console.log(err))
+    .download()
+    .then(buf => {
+      return buf.toString()
+    })
 
   const userDocs = await csv2json({ nullObject: false })
-    .fromFile('seeds.csv')
+    .fromString(csvstr)
     .then(jsonObj => {
       return jsonObj.map((record: User) => ({
         ...record,
       }))
     })
-  // Downloads the file
-  await storage
+
+  const csvstr2 = await storage
     .bucket('jeeek-dev-firestore-seed')
     .file('jeeek_dev_activities.csv')
-    .download(options)
-    .catch(err => console.log(err))
+    .download()
+    .then(buf => {
+      return buf.toString()
+    })
 
   const activityDocs = await csv2json()
-    .fromFile('seeds.csv')
+    .fromString(csvstr2)
     .then(jsonObj => {
       return jsonObj.map((record: Activity) => ({
         ...record,
@@ -55,7 +54,8 @@ const userRegister = async () => {
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       }))
     })
-  for await (const userDoc of userDocs) {
+
+  for (const userDoc of userDocs) {
     // null itemの削除
     userDoc.followers = userDoc.followers.filter(elem => elem.uid !== '')
     userDoc.followings = userDoc.followings.filter(elem => elem.uid !== '')
@@ -68,7 +68,7 @@ const userRegister = async () => {
     const followUserActivities = activityDocs.filter(
       elem => followUserUIDs.indexOf(elem.userTiny.uid) >= 0,
     )
-    for await (const doc of followUserActivities) {
+    for (const doc of followUserActivities) {
       // null itemの削除
       doc.tags = doc.tags.filter(elem => elem)
       doc.favorites = doc.favorites.filter(elem => elem)
@@ -85,26 +85,29 @@ const userRegister = async () => {
       }
     }
   }
-  return true
+  return 'OK'
 }
+
 const careerRegister = async () => {
   const ref = db.collection('careers')
   // Downloads the file
-  const options = { destination: 'seeds.csv' }
-  await storage
+  const csvstr = await storage
     .bucket('jeeek-dev-firestore-seed')
     .file('jeeek_dev_careers.csv')
-    .download(options)
-    .catch(err => console.log(err))
+    .download()
+    .then(buf => {
+      return buf.toString()
+    })
 
   const docs = await csv2json()
-    .fromFile('seeds.csv')
+    .fromString(csvstr)
     .then(jsonObj => {
       return jsonObj.map((record: Career) => ({
         ...record,
       }))
     })
-  for await (const doc of docs) {
+
+  for (const doc of docs) {
     // null itemの削除
     doc.education = doc.education.filter(elem => elem.period !== '')
     doc.workExperience = doc.workExperience.filter(elem => elem.period !== '')
@@ -116,41 +119,44 @@ const careerRegister = async () => {
       await ref.doc(uid).set(docWithoutId)
     }
   }
-  return true
+  return 'OK'
 }
+
 const skillStackRegister = async () => {
   const ref = db.collection('skillStacks')
   // Downloads the file
-  const options = { destination: 'seeds.csv' }
-  await storage
+  const csvstr = await storage
     .bucket('jeeek-dev-firestore-seed')
     .file('jeeek_dev_skills.csv')
-    .download(options)
-    .catch(err => console.log(err))
+    .download()
+    .then(buf => {
+      return buf.toString()
+    })
 
   const docs = await csv2json()
-    .fromFile('seeds.csv')
+    .fromString(csvstr)
     .then(jsonObj => {
       return jsonObj.map((record: SkillStacks) => ({
         ...record,
       }))
     })
-  for await (const doc of docs) {
+
+  for (const doc of docs) {
     // null itemの削除
     doc.skills = doc.skills.filter(elem => elem.tag !== '')
     // eslint-disable-next-line no-plusplus
     for (const skill of doc.skills) {
       skill.point = Number(skill.point)
     }
-    const { uid } = doc
-    const docWithoutId = { ...doc }
+    const {uid} = doc
+    const docWithoutId = {...doc}
     delete docWithoutId.uid
     if (uid !== null) {
       await ref.doc(uid).set(docWithoutId)
     }
     const ref2 = db.collection('skillTags')
     if (!doc.skills) continue
-    for await (const skill of doc.skills) {
+    for (const skill of doc.skills) {
       // skill_tagの存在確認
       const tag = await ref2.doc(skill.tag).get()
       if (tag.exists) {
@@ -158,36 +164,40 @@ const skillStackRegister = async () => {
           .doc(skill.tag)
           .collection('skillHolders')
           .doc(uid)
-          .update({ point: skill.point })
+          .update({point: skill.point})
       } else {
         await ref2
           .doc(skill.tag)
           .collection('skillHolders')
           .doc(uid)
-          .set({ point: skill.point })
+          .set({point: skill.point})
       }
     }
   }
-  return true
+  return 'OK'
 }
+
 const externalServiceRegister = async () => {
   const ref = db.collection('externalServices')
   // Downloads the file
-  const options = { destination: 'seeds.csv' }
-  await storage
+  const csvstr = await storage
     .bucket('jeeek-dev-firestore-seed')
-    .file('jeeek_dev_external_services.csv')
-    .download(options)
-    .catch(err => console.log(err))
+    .file('jeeek_dev_extServices.csv')
+    .download()
+    .then(buf => {
+      return buf.toString()
+
+    })
 
   const docs = await csv2json()
-    .fromFile('seeds.csv')
+    .fromString(csvstr)
     .then(jsonObj => {
       return jsonObj.map((record: ExternalServices) => ({
         ...record,
       }))
     })
-  for await (const doc of docs) {
+
+  for (const doc of docs) {
     // null itemの削除
     doc.services = doc.services.filter(elem => elem.name !== '')
     const { uid } = doc
@@ -197,7 +207,7 @@ const externalServiceRegister = async () => {
       await ref.doc(uid).set(docWithoutId)
     }
   }
-  return true
+  return 'OK'
 }
 
 export const recursiveDelete = functions.region('asia-northeast1').runWith({
@@ -225,9 +235,9 @@ export const recursiveDelete = functions.region('asia-northeast1').runWith({
 })
 
 export const initializeFirestore = functions.region('asia-northeast1').https.onRequest((request, response) => {
-  userRegister().then(r => console.log(r)).catch(err => console.log(err))
-  careerRegister().then(r => console.log(r)).catch(err => console.log(err))
-  skillStackRegister().then(r => console.log(r)).catch(err => console.log(err))
-  externalServiceRegister().then(r => console.log(r)).catch(err => console.log(err))
+  userRegister().then(r => console.log('users: ' + r)).catch(err => console.log(err))
+  careerRegister().then(r => console.log('careers: ' + r)).catch(err => console.log(err))
+  skillStackRegister().then(r => console.log('skills: ' + r)).catch(err => console.log(err))
+  externalServiceRegister().then(r => console.log('externalServices: ' + r)).catch(err => console.log(err))
   response.send('OK')
 })
