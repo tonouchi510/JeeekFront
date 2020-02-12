@@ -139,7 +139,7 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
     <hr />
     <div css={backGroundGrey}>
       <div className="grid" css={marginTopSmall}>
-        <div className="one wide column" style={{ marginLeft: '20%' }}>
+        <div className="one wide column" style={{ marginLeft: '10%' }}>
           <img className="image" src={user.photoUrl} alt="userIcon" css={imgIcon} />
         </div>
         <div className="two wide column" css={username}>
@@ -148,7 +148,7 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
       </div>
       <div>
         <form action="http://localhost:5000" method="post">
-          <div className="content" style={{ marginLeft: '20%' }}>
+          <div className="content" style={{ marginLeft: '10%' }}>
             <CategoryForm />
             <SubjectForm />
             <CommentForm />
