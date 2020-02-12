@@ -18,7 +18,6 @@ const commentField = css`
 const imgIcon = css`
   width: 48px;
   height: 48px;
-  margin-left: 1em;
   margin-top: 1em;
 `
 
@@ -124,6 +123,7 @@ const TagForm: FC = () => (
 const UrlForm: FC = () => (
   <div className="field" css={field}>
     <b>URL</b>
+    <br />
     <div className="ui input focus" css={inputField}>
       <input type="text" name="url" placeholder="https://jeeek.com" />
     </div>
@@ -139,7 +139,7 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
     <hr />
     <div css={backGroundGrey}>
       <div className="grid" css={marginTopSmall}>
-        <div className="one wide column">
+        <div className="one wide column" style={{ marginLeft: '10%' }}>
           <img className="image" src={user.photoUrl} alt="userIcon" css={imgIcon} />
         </div>
         <div className="two wide column" css={username}>
@@ -148,7 +148,7 @@ const PostScreen: FC<PostScreenProps> = ({ user }) => (
       </div>
       <div>
         <form action="http://localhost:5000" method="post">
-          <div className="content" style={{ marginLeft: '20%' }}>
+          <div className="content" style={{ marginLeft: '10%' }}>
             <CategoryForm />
             <SubjectForm />
             <CommentForm />
