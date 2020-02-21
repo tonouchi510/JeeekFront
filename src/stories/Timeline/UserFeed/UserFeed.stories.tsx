@@ -23,7 +23,7 @@ export const userFeedData: Activity[] = [
     tags: ['python'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
   {
     id: '26rd5kg3cfsu8pyu9kts',
@@ -42,7 +42,7 @@ export const userFeedData: Activity[] = [
     tags: ['aws'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
 ]
 

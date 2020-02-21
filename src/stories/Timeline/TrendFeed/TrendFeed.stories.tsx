@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router'
 import { storiesOf } from '@storybook/react'
 import { Activity } from '../../../reducers/feed'
 import TrendFeed from '../../../components/Timeline/TrendFeed'
+import {dataSetsData} from "../../Home/SkillGraph/SkillGraph.stories";
 
 export const trendFeedData: Activity[] = [
   {
@@ -23,7 +24,7 @@ export const trendFeedData: Activity[] = [
     tags: ['python'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
   {
     id: 'rv37zmbjmxys5hbw',
@@ -42,7 +43,7 @@ export const trendFeedData: Activity[] = [
     tags: ['JavaScript'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
 ]
 
