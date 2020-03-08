@@ -1,0 +1,35 @@
+diff --git a/node_modules/chart.js/dist/Chart.js b/node_modules/chart.js/dist/Chart.js
+index e8d937c..52f91af 100644
+--- a/node_modules/chart.js/dist/Chart.js
++++ b/node_modules/chart.js/dist/Chart.js
+@@ -7734,12 +7734,15 @@ var platform_dom$2 = {
+ 	},
+ 
+ 	acquireContext: function(item, config) {
+-		if (typeof item === 'string') {
+-			item = document.getElementById(item);
+-		} else if (item.length) {
+-			// Support for array based queries (such as jQuery)
+-			item = item[0];
+-		}
++
++        if (item != null) {
++            if (typeof item === 'string') {
++                item = document.getElementById(item);
++            } else if (item.length) {
++                // Support for array based queries (such as jQuery)
++                item = item[0];
++            }
++        }
+ 
+ 		if (item && item.canvas) {
+ 			// Support for any object associated to a canvas (including a context2d)
+@@ -9349,7 +9352,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
+ 			// the chart initialization but after setting basic chart / controller properties that
+ 			// can help to figure out that the chart is not valid (e.g chart.canvas !== null);
+ 			// https://github.com/chartjs/Chart.js/issues/2807
+-			console.error("Failed to create chart: can't acquire context from the given item");
++			// console.error("Failed to create chart: can't acquire context from the given item");
+ 			return;
+ 		}
+ 
