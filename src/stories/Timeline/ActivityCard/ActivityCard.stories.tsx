@@ -28,7 +28,7 @@ const activityData: Activity = {
   tags: ['python'],
   favorites: [],
   gifts: [],
-  updatedAt: firestore.Timestamp.now(),
+  updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
 }
 
 storiesOf('Timeline/ActivityCard', module)

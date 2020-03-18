@@ -7,7 +7,7 @@ import UserFeed from '../../../components/Timeline/UserFeed'
 
 export const userFeedData: Activity[] = [
   {
-    id: '26rd5kg3cfsu8pyu9kts',
+    id: 'kdwt55yd8w9647qk',
     userTiny: {
       name: 'コースケ',
       photoUrl: 'https://cyclestyle.net/feature/img18/223.jpg',
@@ -23,7 +23,7 @@ export const userFeedData: Activity[] = [
     tags: ['python'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
   {
     id: '26rd5kg3cfsu8pyu9kts',
@@ -42,7 +42,7 @@ export const userFeedData: Activity[] = [
     tags: ['aws'],
     favorites: [],
     gifts: [],
-    updatedAt: firestore.Timestamp.now(),
+    updatedAt: firestore.Timestamp.fromDate(new Date('December 10, 1815')),
   },
 ]
 
